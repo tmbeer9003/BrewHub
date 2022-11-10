@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="card border-dark mx-auto mt-5 col-md-5">
+      <div class="card-body">
+        <h5 class="card-title border-bottom pb-1 mb-3">新規会員登録</h5>
+        
+        <%= form_with model: @member, url: member_registration_path do |f| %>
+          <%= render "public/shared/error_messages", resource: resource %>
+          <div class="form-group my-2">
+            <%= f.text_field :account_name, autofocus: true, autocomplete: "account_name", placeholder: "アカウント名（英数字）", class: "form-control rounded-pill" %>
+          </div>
+          
+          <div class="form-group my-2">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control rounded-pill" %>
+          </div>
+          
+          <div class="form-group my-2">
+            <%= f.text_field :date_of_birth, autofocus: true, onfocus: "type='date'", onfocusout: "type='text'", autocomplete: "date_of_birth", placeholder: "生年月日", class: "form-control rounded-pill" %>
+          </div>
+          
+          <div class="form-group my-2">
+            <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード（#{@minimum_password_length}文字以上）", class: "form-control rounded-pill" %>
+          </div>
+          
+          <div class="form-group my-2">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード（確認）", class: "form-control rounded-pill" %>
+          </div>
+          
+          <div class="actions text-center py-3">
+            <%= f.submit "登録", class: "btn btn-success px-4 rounded-pill" %>
+          </div>
+        <% end %>
+        
+        <%= render "public/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>

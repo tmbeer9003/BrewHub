@@ -1,2 +1,27 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.pagination>li>a {
+  border: none;
+  color: #696969;
+}
+
+.pagination>.active>a {
+  border-radius: 15px;
+}
+
+.page-item.active .page-link {
+  background-color: #c0c0c0;
+}
+
+.pagination>li>a:hover {
+  color: #000000;
+  border-radius: 15px;
+}
+
+body {
+  background-image: url('/images/top_bg.jpg');
+  background-color: rgba(255, 255, 255, 0.7);
+  background-blend-mode:lighten;
+  background-size:cover;
+}

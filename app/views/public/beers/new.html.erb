@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="card border-dark mx-auto mt-3 col-md-6">
+      <div class="card-body">
+        <h5 class="card-title border-bottom pb-1 mb-3">ビール情報登録</h5>
+        
+        <%= form_with model: @beer do |f| %>
+          <div class="row form-group my-2">
+            <div class="col-md-4">
+              <%= f.label :ビール名 %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ビール名", class: "form-control rounded-pill" %>
+            </div>
+          </div>
+          
+          <div class="row form-group my-2">
+            <div class="col-md-4">
+               <%= f.label :ブルワリー %>
+            </div>
+            <div class="col-md-8">
+              <%= f.collection_select :brewery_id, @breweries, :id, :name, {prompt: '--選択してください--'}, class: 'form-control item_genre' %>
+            </div>
+          </div>
+          
+          <div class="row form-group my-2">
+            <div class="col-md-4">
+              <%= f.label :ビアスタイル %>
+            </div>
+            <div class="col-md-8">
+              <%= f.collection_select :beer_style_id, @beer_styles, :id, :name, {prompt: '--選択してください--'}, class: 'form-control item_genre' %>
+            </div>
+          </div>
+          
+          <div class="row form-group my-2">
+            <div class="col-md-4">
+              <%= f.label :ABV（アルコール度数） %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_field :abv, autofocus: true, autocomplete: "abv", placeholder: "ABV（アルコール度数）", class: "form-control rounded-pill" %>
+            </div>
+          </div>
+          
+          <div class="row form-group my-2">
+            <div class="col-md-4">
+              <%= f.label :IBU（国際苦味単位） %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_field :ibu, autofocus: true, autocomplete: "ibu", placeholder: "IBU（国際苦味単位）", class: "form-control rounded-pill" %>
+            </div>
+          </div>
+          
+          <div class="row form-group my-2">
+            <div class="col-md-4">
+              <%= f.label :ビールの説明 %>
+            </div>
+              <%= f.text_area :description, autofocus: true, placeholder: "ビールの説明", class: "form-control rounded-pill" %>
+            </div>
+          </div>
+          
+          <div class="actions text-center py-3">
+            <%= f.submit "登録", class: "btn btn-success px-4 rounded-pill" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

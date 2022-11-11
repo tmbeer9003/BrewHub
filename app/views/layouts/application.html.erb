@@ -29,7 +29,7 @@
               <li class="nav-item btn btn-light mx-2"><%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "text-reset" %></li>
             <% elsif admin_signed_in? %>
               <li class="nav-item btn btn-light mx-2"><%= link_to "ビアスタイル管理", admin_beer_styles_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2">ブルワリー管理</li>
+              <li class="nav-item btn btn-light mx-2"><%= link_to "ブルワリー管理", admin_breweries_path, class: "text-reset" %></li>
               <li class="nav-item btn btn-light mx-2">ビール管理</li>
               <li class="nav-item btn btn-light mx-2">投稿管理</li>
               <li class="nav-item btn btn-light mx-2">ユーザー管理</li>

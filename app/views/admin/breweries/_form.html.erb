@@ -23,7 +23,7 @@
     </div>
 
     <div class="form-group my-2">
-      <%= f.select :location, Brewery.locations.keys.to_a, {}, class: "form-control"%>
+      <%= f.select :location, Brewery.locations.keys.to_a, {prompt: '--所在地を選択--'}, class: "form-control"%>
     </div>
 
     <div class="form-group my-2">

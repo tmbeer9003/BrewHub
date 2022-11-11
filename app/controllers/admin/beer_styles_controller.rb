@@ -1,7 +1,4 @@
 class Admin::BeerStylesController < ApplicationController
-  def new
-    @beer_style = BeerStyle.new
-  end
 
   def create
     @beer_style = BeerStyle.new(beer_style_params)
@@ -21,10 +18,6 @@ class Admin::BeerStylesController < ApplicationController
     end
   end
 
-  def edit
-    @beer_style = BeerStyle.find(params[:id])
-  end
-
   def update
     @beer_style = BeerStyle.find(params[:id])
     if @beer_style.update(beer_style_params)
@@ -40,6 +33,8 @@ class Admin::BeerStylesController < ApplicationController
     @beer_styles = BeerStyle.page(params[:page]).per(10)
     @beer_style.destroy
   end
+  
+  private
   
   def beer_style_params
     params.require(:beer_style).permit(:name, :category)

@@ -7,7 +7,6 @@
 }
 
 .pagination>.active>a {
-  border-radius: 15px;
 }
 
 .page-item.active .page-link {
@@ -16,7 +15,6 @@
 
 .pagination>li>a:hover {
   color: #000000;
-  border-radius: 15px;
 }
 
 body {
@@ -24,4 +22,8 @@ body {
   background-color: rgba(255, 255, 255, 0.7);
   background-blend-mode:lighten;
   background-size:cover;
+}
+
+.table-white {
+  background-color: #FFFFFF;
 }

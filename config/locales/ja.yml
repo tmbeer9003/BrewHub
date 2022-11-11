@@ -1,0 +1,6 @@
+ja:
+  enums:
+    beer_style:
+      category:
+        lager: "ラガー"
+        ale: "エール"

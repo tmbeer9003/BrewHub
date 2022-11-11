@@ -1,2 +1,28 @@
-<h1>Public::Beers#show</h1>
-<p>Find me in app/views/public/beers/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 mx-auto">
+      <div class="card border-dark my-3">
+        <div class="card-body row pr-0">
+          <div class="col">
+           <div class="card-title mb-0">
+              <h4 class="font-weight-bold d-inline-block mb-0">
+               <i class="fas fa-beer fa-lg"></i><%= @beer.name %></h4>
+              <h5 class="d-inline-block mb-0"> / <%= @beer.brewery.name %></h5>
+            </div>
+            <div class="border-bottom">
+              <span><%= @beer.beer_style.name %></span><br>
+              <span>ADV : <%= @beer.abv %> / IBU : <%= @beer.ibu %></span><br>
+              <span><%= @beer.description %></span>
+            </div>
+            
+            <div class="text-center">★★★★☆ 4.0　(3件の投稿)</div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <span class="btn btn-success px-4 rounded-pill">このビールについて投稿する</span>
+        <%= link_to "戻る", :back, class: "btn btn-primary px-4 rounded-pill" %>
+      </div>
+    </div>
+  </div>
+</div>

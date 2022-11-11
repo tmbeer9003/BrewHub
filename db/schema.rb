@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_11_064513) do
+ActiveRecord::Schema.define(version: 2022_11_11_074335) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,6 +60,20 @@ ActiveRecord::Schema.define(version: 2022_11_11_064513) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "beers", force: :cascade do |t|
+    t.integer "beer_style_id", null: false
+    t.integer "brewery_id", null: false
+    t.string "name", null: false
+    t.float "abv"
+    t.float "ibu"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["beer_style_id"], name: "index_beers_on_beer_style_id"
+    t.index ["brewery_id"], name: "index_beers_on_brewery_id"
+    t.index ["name"], name: "index_beers_on_name", unique: true
+  end
+
   create_table "breweries", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -86,4 +100,6 @@ ActiveRecord::Schema.define(version: 2022_11_11_064513) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "beers", "beer_styles"
+  add_foreign_key "beers", "breweries"
 end

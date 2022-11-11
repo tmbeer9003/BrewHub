@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'breweries/create'
-    get 'breweries/index'
-    get 'breweries/update'
-    get 'breweries/destroy'
-  end
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -21,6 +15,7 @@ Rails.application.routes.draw do
   }
 
   scope module: :public do
+    resources :beers, except: [:edit, :update, :destroy]
   end
 
   root 'public/homes#top'

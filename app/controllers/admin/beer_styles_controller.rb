@@ -34,6 +34,10 @@ class Admin::BeerStylesController < ApplicationController
     @beer_style.destroy
   end
   
+  def edit
+    @beer_style = BeerStyle.find(params[:id])
+  end
+  
   private
   
   def beer_style_params

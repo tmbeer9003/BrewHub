@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :beer_styles, except: [:new, :edit, :show]
+    post 'beer_styles/:id' => 'beer_styles#edit'
     resources :breweries, except: [:new, :edit]
   end
 

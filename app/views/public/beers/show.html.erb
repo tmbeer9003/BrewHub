@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="text-center">
-        <span class="btn btn-success px-4 rounded-pill">このビールについて投稿する</span>
+        <%= link_to "このビールについて投稿する", new_post_path(selected_beer: @beer.id), class: "btn btn-success px-4 rounded-pill" %>
         <%= link_to "戻る", :back, class: "btn btn-primary px-4 rounded-pill" %>
       </div>
     </div>

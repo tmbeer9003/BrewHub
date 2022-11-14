@@ -11,28 +11,28 @@
     <% end %>
     </u></h5>
   </div>
-    
+
   <%= form_with model: [:admin, beer_style], local: false do |f| %>
     <% if params[:id] != nil %>
       <div class="text-center">
         選択中のビアスタイルID：<%= beer_style.id %>
-      </div> 
+      </div>
     <% end %>
     <div class="form-group my-2">
       <%= f.text_field :name, placeholder: "ビアスタイル名", class: "form-control" %>
     </div>
-  
-    <div class="text-center my-2">  
+
+    <div class="text-center my-2">
       <div class="form-check form-check-inline">
-        <%= f.radio_button :category, "lager", class: "form-check-input" %>
-        <%= f.label :ラガー, class: "form-check-label" %>
+        <%= f.radio_button :category, :lager, class: "form-check-input" %>
+        <%= f.label :category_lager, "ラガー", class: "form-check-label" %>
       </div>
       <div class="form-check form-check-inline">
-        <%= f.radio_button :category, "ale", class: "form-check-input" %>
-        <%= f.label :エール, class: "form-check-label" %>
+        <%= f.radio_button :category, :ale, class: "form-check-input" %>
+        <%= f.label :category_ale, "エール", class: "form-check-label" %>
       </div>
     </div>
-  
+
     <div class="form-group my-2 text-center">
       <% if params[:id] == nil %>
         <%= f.submit "新規登録", class: "btn btn-success p-2" %>

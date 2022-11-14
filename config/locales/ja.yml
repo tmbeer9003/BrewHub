@@ -4,3 +4,9 @@ ja:
       category:
         lager: "ラガー"
         ale: "エール"
+    post:
+      serving_style:
+        draft: "ドラフト"
+        can: "缶"
+        bottle: "ボトル"
+        others: "その他"

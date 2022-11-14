@@ -1,0 +1,113 @@
+<div class="row form-group my-2">
+  <div class="col-md-3">
+    <span>ビール名</span><span class="text-danger">*</span>
+  </div>
+  <div class="col-md-9">
+    <% if @beer == nil %>
+      <span>ビールが選択されていません</span>
+    <% else %>
+      <span class="font-weight-bold"><%= beer.name %></span>
+    <% end %>
+  </div>
+</div>
+
+<% if @beer == nil %>
+  <div class="text-center py-3">
+    <%= link_to "ビールを探す", beers_path, class: "btn btn-success px-4 rounded-pill" %>
+  </div>
+<% else %>
+  <%= form_with model: post do |f| %>
+    <%= f.hidden_field :beer_id, :value => beer.id %>
+    <div class="row form-group my-2">
+      <div class="col-md-3">
+        <%= f.label :post_image, "画像", class: "col-form-label" %><span class="text-danger">*</span>
+      </div>
+      <div class="col-md-9">
+        <%= f.file_field :post_image, accept: "image/*", class: "form-control-file" %>
+      </div>
+    </div>
+
+    <div class="row form-group my-2">
+      <div class="col-md-3">
+         <%= f.label :evaluation, "評価", class: "col-form-label" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.text_field :evaluation, autofocus: true, class: "form-control rounded-pill" %>
+      </div>
+    </div>
+
+    <div class="row form-group my-2">
+      <div class="col-md-3">
+         <%= f.label :serving_style, "サービング", class: "col-form-label" %>
+      </div>
+      <div class="col-md-9 form-control border-0">
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :serving_style, :draft, class: "form-check-input" %>
+          <%= f.label :serving_style_draft, "ドラフト", class: "form-check-label" %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :serving_style, :can, class: "form-check-input" %>
+          <%= f.label :serving_style_can, "缶", class: "form-check-label" %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :serving_style, :bottle, class: "form-check-input" %>
+          <%= f.label :serving_style_bottle, "ボトル", class: "form-check-label" %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :serving_style, :others, class: "form-check-input" %>
+          <%= f.label :serving_style_others, "その他", class: "form-check-label" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group my-2">
+      <div class="col-md-3">
+        <%= f.label :content, "キャプション", class: "col-form-label" %>
+      </div>
+      <div class="col-md-9">
+        <%= f.text_area :content, autofocus: true, rows: 5, placeholder: "飲んだ感想などを自由に記入してください！", class: "form-control" %>
+      </div>
+    </div>
+
+    <div id="bars-and-shops">
+     <%= render "bars_and_shops", bars: @bars, shops: @shops, f: f %>
+    </div>
+
+    <div class="actions text-center py-3">
+      <% if params[:id] == nil %>
+        <%= f.submit "登録", class: "btn btn-success px-4 rounded-pill" %>
+      <% else %>
+        <%= f.submit "更新", class: "btn btn-success px-4 rounded-pill" %>
+      <% end %>
+      <%= link_to "戻る", :back, class: "btn btn-primary px-4 rounded-pill" %>
+    </div>
+  <% end %>
+
+    <h6 class="border-bottom pb-1 my-3">お店情報追加<span class="small"> ※一覧にない場合はこちらから追加してください</span></h6>
+    <%= form_with model: @bar, local: false do |bar| %>
+      <div class="row my-2">
+        <div class="col-md-6 pr-0">
+          <%= bar.text_field :name, autofocus: true, placeholder: "飲んだお店名", class: "form-control rounded-pill" %>
+        </div>
+        <div class="col-md-4">
+          <%= bar.select :location, Bar.locations.keys.to_a, {prompt: '--所在地--'}, class: "form-control rounded-pill"%>
+        </div>
+        <div class="col-md-2">
+          <%= bar.submit "追加", class: "btn btn-secondary px-3 " %>
+        </div>
+      </div>
+    <% end %>
+    <%= form_with model: @shop, local: false do |shop| %>
+      <div class="row my-2">
+        <div class="col-md-6 pr-0">
+          <%= shop.text_field :name, autofocus: true, placeholder: "買ったお店名", class: "form-control rounded-pill" %>
+        </div>
+        <div class="col-md-4">
+          <%= shop.select :location, Bar.locations.keys.to_a, {prompt: '--所在地--'}, class: "form-control rounded-pill"%>
+        </div>
+        <div class="col-md-2">
+          <%= shop.submit "追加", class: "btn btn-secondary px-3" %>
+        </div>
+      </div>
+    <% end %>
+<% end %>

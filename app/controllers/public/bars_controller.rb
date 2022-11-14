@@ -1,7 +1,9 @@
 class Public::BarsController < ApplicationController
   def create
     @bar = Bar.new(bar_params)
-    unless @bar.save
+    if @bar.save
+      redirect_to request.referrer
+    else
       render "error"
     end
   end

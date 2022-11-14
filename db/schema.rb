@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_12_125349) do
+ActiveRecord::Schema.define(version: 2022_11_12_130712) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -96,13 +96,29 @@ ActiveRecord::Schema.define(version: 2022_11_12_125349) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "account_name", null: false
-    t.string "display_name"
+    t.string "display_name", null: false
     t.date "date_of_birth", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_name"], name: "index_members_on_account_name", unique: true
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "beer_id", null: false
+    t.integer "bar_id"
+    t.integer "shop_id"
+    t.text "content"
+    t.float "evaluation"
+    t.integer "serving_style", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bar_id"], name: "index_posts_on_bar_id"
+    t.index ["beer_id"], name: "index_posts_on_beer_id"
+    t.index ["member_id"], name: "index_posts_on_member_id"
+    t.index ["shop_id"], name: "index_posts_on_shop_id"
   end
 
   create_table "shops", force: :cascade do |t|
@@ -116,4 +132,8 @@ ActiveRecord::Schema.define(version: 2022_11_12_125349) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "beers", "beer_styles"
   add_foreign_key "beers", "breweries"
+  add_foreign_key "posts", "bars"
+  add_foreign_key "posts", "beers"
+  add_foreign_key "posts", "members"
+  add_foreign_key "posts", "shops"
 end

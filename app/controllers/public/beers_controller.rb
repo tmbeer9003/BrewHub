@@ -22,9 +22,9 @@ class Public::BeersController < ApplicationController
   def show
     @beer = Beer.find(params[:id])
   end
-  
+
   private
-  
+
   def beer_params
     params.require(:beer).permit(:brewery_id, :beer_style_id, :name, :abv, :ibu, :description)
   end

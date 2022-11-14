@@ -1,14 +1,16 @@
 class Public::ShopsController < ApplicationController
   def create
     @shop = Shop.new(shop_params)
-    unless @shop.save
+    if @shop.save
+      redirect_to request.referrer
+    else
       render "error"
     end
   end
 
   private
 
-  def bar_params
+  def shop_params
     params.require(:shop).permit(:name, :location)
   end
 end

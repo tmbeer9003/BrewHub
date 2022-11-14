@@ -54,6 +54,15 @@ class Public::PostsController < ApplicationController
     @post.destroy
     redirect_to request.referer
   end
+  
+  def cheers_already?
+    @post = Post.find(params[:post_id])
+    if Cheer.exists?(member_id: current_member_id, post_id: @post.id)
+      "true"
+    else
+      "false"
+    end
+  end
 
   private
 

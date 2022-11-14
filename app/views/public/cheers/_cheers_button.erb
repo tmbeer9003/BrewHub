@@ -1,0 +1,15 @@
+ <% if post.cheers_already?(current_member) %>
+  <%= link_to post_cheer_path(post), method: :delete, remote: true do %>
+    <span class="text-warning font-weight-bold">
+      <i class="fas fa-glass-cheers fa-lg"></i>
+      <%= post.cheers.count %>Cheers
+    </span>
+  <% end %>
+<% else %>
+  <%= link_to post_cheer_path(post), method: :post, remote: true do %>
+    <span class="text-dark font-weight-bold">
+      <i class="fas fa-glass-cheers fa-lg"></i>
+      <%= post.cheers.count %>Cheers
+    </span>
+  <% end %>
+<% end %>

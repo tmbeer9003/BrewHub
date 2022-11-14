@@ -1,10 +1,10 @@
 class Public::PostsController < ApplicationController
   def index
-    if params[:post_word] == nil
+    post_search = params[:post_search]
+    if post_search == nil
       @posts = Post.all
     else
-      @post_word = params[:post_word]
-      @posts = Post.where("content like ?", "%#{@post_word}%")
+      @posts = Post.where("content like ?", "%#{post_search}%")
     end
   end
 

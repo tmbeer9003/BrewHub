@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-7 mx-auto">
+    <div class="col-md-8 mx-auto">
+      <%= render "beer_search", breweries: @breweries, beer_styles: @beer_styles %>
       <% @beers.each do |beer| %>
       <div class="card border-dark mt-3">
         <div class="card-body row pr-0">

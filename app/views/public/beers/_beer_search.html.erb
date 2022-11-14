@@ -1,0 +1,35 @@
+<div class="form-row mt-3">
+
+  <div class="col-md-4 pb-0">
+    <%= form_with url: beers_path, method: :get do |f| %>
+      <div class="form-group input-group border border-secondary rounded-pill bg-white mb-1">
+        <%= f.text_field :beer_search, placeholder: "ビール名で検索", class: "form-control form-control-sm input-group-prepend border-0 bg-transparent" %>
+        <span class="input-group-btn">
+          <%= f.button type: "submit", class: "border-0 form-control form-control-sm bg-transparent" do %><i class="fas fa-search"></i><% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-4 pb-0">
+    <%= form_with url: beers_path, method: :get do |f| %>
+      <div class="form-group input-group form-check pl-0 border border-secondary rounded-pill bg-white mb-1">
+        <%= f.collection_select :refine_brewery, breweries, :id, :name, {prompt: 'ブルワリーから探す'}, class: 'form-control form-control-sm input-group-prepend border-0 bg-transparent' %>
+        <span class="input-group-btn">
+         <%= f.button type: "submit", class: "border-0 form-control form-control-sm bg-transparent" do %><i class="fas fa-search"></i><% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-4 pb-0">
+    <%= form_with url: beers_path, method: :get do |f| %>
+      <div class="form-group input-group form-check pl-0 border border-secondary rounded-pill bg-white mb-1">
+        <%= f.collection_select :refine_beer_style, beer_styles, :id, :name, {prompt: 'ビアスタイルから探す'}, class: 'form-control form-control-sm input-group-prepend border-0 bg-transparent' %>
+        <span class="input-group-btn">
+         <%= f.button type: "submit", class: "border-0 form-control form-control-sm bg-transparent" do %><i class="fas fa-search"></i><% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>

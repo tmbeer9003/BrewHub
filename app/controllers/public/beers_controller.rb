@@ -16,7 +16,20 @@ class Public::BeersController < ApplicationController
   end
 
   def index
-    @beers = Beer.all
+    @breweries = Brewery.all
+    @beer_styles = BeerStyle.all
+    beer_search = params[:beer_search]
+    refine_brewery = params[:refine_brewery]
+    refine_beer_style = params[:refine_beer_style]
+    if beer_search != nil
+      @beers = Beer.where("name like ?", "%#{beer_search}%")
+    elsif refine_brewery != nil
+      @beers = Beer.where(brewery_id: refine_brewery)
+    elsif refine_beer_style != nil
+      @beers = Beer.where(beer_style_id: refine_beer_style)
+    else
+      @beers = Beer.all
+    end
   end
 
   def show

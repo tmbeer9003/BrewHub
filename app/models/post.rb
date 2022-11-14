@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   belongs_to :beer
   belongs_to :bar, optional: true
   belongs_to :shop, optional: true
+  has_many :cheers, dependent: :destroy
 
   has_one_attached :post_image
 
@@ -14,5 +15,9 @@ class Post < ApplicationRecord
       post_image.attach(io: File.open(file_path), filename: 'post-default-image.jpg', content_type: 'image/jpeg')
     end
     post_image.variant(resize_to_limit: [width, height]).processed
+  end
+  
+  def cheers_already?(member)
+    cheers.exists?(member_id: member.id)
   end
 end

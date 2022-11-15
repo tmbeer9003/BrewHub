@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'cheers/create'
-    get 'cheers/destroy'
-  end
-  get 'cheers/create'
-  get 'cheers/destroy'
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -25,6 +19,7 @@ Rails.application.routes.draw do
     resources :beers, except: [:edit, :update, :destroy]
     resources :posts do
       resource :cheer, only:[:create, :destroy]
+      resources :post_comments, only:[:create, :destroy]
     end
     resources :bars, only: [:create]
     resources :shops, only: [:create]

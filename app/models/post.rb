@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :bar, optional: true
   belongs_to :shop, optional: true
   has_many :cheers, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
 
   has_one_attached :post_image
 
@@ -16,7 +17,7 @@ class Post < ApplicationRecord
     end
     post_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   def cheers_already?(member)
     cheers.exists?(member_id: member.id)
   end

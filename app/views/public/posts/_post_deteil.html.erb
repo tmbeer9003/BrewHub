@@ -1,5 +1,5 @@
 <div class="row card-text border-bottom mb-0 d-flex align-items-center">
-  <%= image_tag post.member.get_member_image(30,30) %>
+  <%= image_tag post.member.get_member_image(35,35), class: "rounded-circle" %>
   <h6 class="ml-1 mb-0"><%= post.member.display_name %></h6>
   <span class="small ml-2"><%= post.created_at.to_s(:datetime_jp) %></span>
   <div class="flex-grow-1 text-right small mr-2">
@@ -30,13 +30,23 @@
     <% end %>
   </span>
 </div>
+
 <div class="row">
   <span><%= post.content %></span>
 </div>
+
 <div class="row small mt-auto">
   <div id="cheers_button<%= post.id %>">
     <%= render "public/cheers/cheers_button", post: post %>
   </div>
+
+  <div>
+    <span class="ml-1">
+      | <i class="fas fa-comments"></i>コメント
+      <%= post.post_comments.count %>件
+    </span>
+  </div>
+
   <% if post.bar != nil %>
     <span class="ml-1">
       | 飲んだお店：<%= post.bar.name %>

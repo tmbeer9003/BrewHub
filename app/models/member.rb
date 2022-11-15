@@ -6,6 +6,7 @@ class Member < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :cheers, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
 
   has_one_attached :member_image
 

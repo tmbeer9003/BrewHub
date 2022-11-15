@@ -10,6 +10,8 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @post_comment = PostComment.new
+    @post_comments = @post.post_comments.order("id DESC").page(params[:page]).per(5)
   end
 
   def new
@@ -53,15 +55,6 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to request.referer
-  end
-  
-  def cheers_already?
-    @post = Post.find(params[:post_id])
-    if Cheer.exists?(member_id: current_member_id, post_id: @post.id)
-      "true"
-    else
-      "false"
-    end
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_14_121927) do
+ActiveRecord::Schema.define(version: 2022_11_14_155620) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -114,6 +114,16 @@ ActiveRecord::Schema.define(version: 2022_11_14_121927) do
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
+  create_table "post_comments", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "post_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_post_comments_on_member_id"
+    t.index ["post_id"], name: "index_post_comments_on_post_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer "member_id", null: false
     t.integer "beer_id", null: false
@@ -143,6 +153,8 @@ ActiveRecord::Schema.define(version: 2022_11_14_121927) do
   add_foreign_key "beers", "breweries"
   add_foreign_key "cheers", "members"
   add_foreign_key "cheers", "posts"
+  add_foreign_key "post_comments", "members"
+  add_foreign_key "post_comments", "posts"
   add_foreign_key "posts", "bars"
   add_foreign_key "posts", "beers"
   add_foreign_key "posts", "members"

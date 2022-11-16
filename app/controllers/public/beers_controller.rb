@@ -34,6 +34,8 @@ class Public::BeersController < ApplicationController
 
   def show
     @beer = Beer.find(params[:id])
+    @breweries = Brewery.all
+    @beer_styles = BeerStyle.all
   end
 
   private

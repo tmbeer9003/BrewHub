@@ -1,5 +1,5 @@
 <div class="row card-text border-bottom mb-0 d-flex align-items-center">
-  <%= image_tag post.member.get_member_image(35,35), class: "rounded-circle" %>
+  <%= image_tag post.member.get_member_image(50,50), class: "rounded-circle image-fit" %>
   <h6 class="ml-1 mb-0"><%= post.member.display_name %></h6>
   <span class="small ml-2"><%= post.created_at.to_s(:datetime_jp) %></span>
   <div class="flex-grow-1 text-right small mr-2">
@@ -9,6 +9,7 @@
   <% end %>
   </div>
 </div>
+
 <div class="row">
   <div class="mt-1 mb-0 card-title">
     <h5 class="font-weight-bold d-inline-block mb-0">
@@ -16,12 +17,13 @@
     <h6 class="d-inline-block mb-0"> / <%= post.beer.brewery.name %></h6>
   </div>
 </div>
+
 <div class="row">
   ★★★★☆ 4.0
   <span class="ml-2">
     <% if post.serving_style == "draft" %>
       <i class="fas fa-beer"></i>ドラフト
-    <% elsif post.serving_style == "can" %>>
+    <% elsif post.serving_style == "can" %>
       <i class="fas fa-database"></i>缶
     <% elsif post.serving_style == "bottle" %>
       <i class="fas fa-wine-bottle"></i>ボトル

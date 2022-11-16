@@ -19,8 +19,11 @@ class Public::BeersController < ApplicationController
     @breweries = Brewery.all
     @beer_styles = BeerStyle.all
     beer_search = params[:beer_search]
+    # ビール（キーワード）検索で受け取った値を代入
     refine_brewery = params[:refine_brewery]
+    # ブルワリー検索で受け取った値を代入
     refine_beer_style = params[:refine_beer_style]
+    # ビアスタイル検索で受け取った値を代入
     if beer_search != nil
       @beers = Beer.where("name like ?", "%#{beer_search}%")
     elsif refine_brewery != nil

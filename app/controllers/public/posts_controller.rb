@@ -1,15 +1,21 @@
 class Public::PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+
   def index
     post_search = params[:post_search]
-    if post_search == nil
-      @posts = Post.all
+    # 投稿検索で受け取った値を代入
+    member = params[:member_id]
+    # ユーザーIDで絞り込まれた際に受け取った値を代入
+    if post_search != nil
+      @posts = Post.where("content like ?", "%#{post_search}%").order(id: :desc)
+    elsif member != nil
+      @posts = Post.where(member_id: member).order(id: :desc)
     else
-      @posts = Post.where("content like ?", "%#{post_search}%")
+      @posts = Post.all.order(id: :desc)
     end
   end
 
   def show
-    @post = Post.find(params[:id])
     @post_comment = PostComment.new
     @post_comments = @post.post_comments.order("id DESC").page(params[:page]).per(5)
   end
@@ -34,7 +40,6 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
     @beer = @post.beer
     @bar = Bar.new
     @shop = Shop.new
@@ -43,7 +48,6 @@ class Public::PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to posts_path
     else
@@ -52,7 +56,6 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to request.referer
   end
@@ -61,5 +64,9 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:member_id, :beer_id, :bar_id, :shop_id, :content, :evaluation, :serving_style, :post_image)
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 end

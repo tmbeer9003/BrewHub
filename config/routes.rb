@@ -28,6 +28,8 @@ Rails.application.routes.draw do
       get 'followings'=> 'relationships#followings'
       get 'followers'=> 'relationships#followers'
     end
+    get 'mypage'=> 'homes#timeline'
+    get 'mypage/cheers_list'=> 'homes#cheers_list'
   end
 
   root 'public/homes#top'

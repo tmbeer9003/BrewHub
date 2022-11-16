@@ -1,19 +1,9 @@
-<div class="col-md-10 mx-auto">
-<%= render "public/members/member_search" %>
   <% if current_page?(controller: "members", action: "index") %>
     <div class="mt-2"></div>
   <% elsif current_page?(controller: "relationships", action: "followings") %>
-    <div class="col">
-      <h5 class="mr-2 d-inline-block font-weight-bold">フォロー</h6>
-      <span class="mr-2">|</span>
-      <u><%= link_to "フォロワー",member_followers_path(member_id: params[:member_id]), class: "text-reset" %></u>
-    </div>
+   
   <% elsif current_page?(controller: "relationships", action: "followers") %>
-    <div class="col">
-      <u><%= link_to "フォロー",member_followings_path(member_id: params[:member_id]), class: "mr-2 text-reset" %></u>
-      <span class="mr-2">|</span>
-      <h5 class="d-inline-block font-weight-bold">フォロワー</h6>
-    </div>
+    
   <% else %>
   <% end %>
 
@@ -46,4 +36,3 @@
   </div>
 </div>
 <% end %>
-</div>

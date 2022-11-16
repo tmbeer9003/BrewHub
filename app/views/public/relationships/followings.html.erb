@@ -1,0 +1,10 @@
+<% if @member.followings.exists? %>
+  <%= render "public/members/index", members: @members %>
+<% else %>
+<div class="text-center mt-3">
+  <span>フォローしているユーザーがいません<span>
+  <% if @member == current_member %>
+    <br><u><%= link_to "ユーザーを探してフォローしましょう！", members_path, class: "text-reset" %></u>
+  <% end %>
+</div>
+<% end %>

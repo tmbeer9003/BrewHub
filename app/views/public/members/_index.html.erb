@@ -1,0 +1,49 @@
+<div class="col-md-10 mx-auto">
+<%= render "public/members/member_search" %>
+  <% if current_page?(controller: "members", action: "index") %>
+    <div class="mt-2"></div>
+  <% elsif current_page?(controller: "relationships", action: "followings") %>
+    <div class="col">
+      <h5 class="mr-2 d-inline-block font-weight-bold">フォロー</h6>
+      <span class="mr-2">|</span>
+      <u><%= link_to "フォロワー",member_followers_path(member_id: params[:member_id]), class: "text-reset" %></u>
+    </div>
+  <% elsif current_page?(controller: "relationships", action: "followers") %>
+    <div class="col">
+      <u><%= link_to "フォロー",member_followings_path(member_id: params[:member_id]), class: "mr-2 text-reset" %></u>
+      <span class="mr-2">|</span>
+      <h5 class="d-inline-block font-weight-bold">フォロワー</h6>
+    </div>
+  <% else %>
+  <% end %>
+
+<% members.each do |member| %>
+
+<div class="card border-dark mt-1 px-2">
+  <div class="card-body row">
+
+    <div class="col-1 px-1 d-flex align-items-center">
+      <%= image_tag member.get_member_image(50,50), class: "rounded-circle image-fit" %>
+    </div>
+
+    <div class="card-title col-8 mb-0 pl-1">
+      <h5 class="font-weight-bold d-inline-block mb-0">
+        <%= link_to member_path(member), class: "text-reset" do %><%= member.display_name %><% end %></h5>
+      <span class="d-inline-block mb-0">@<%= member.account_name %></span>
+      <div><i class="fas fa-beer text-warning mr-1"></i><%= member.posts.count %> Beers</div>
+    </div>
+
+    <% unless member == current_member %>
+    <div class="card-text col-3 d-flex align-items-center">
+      <% if current_member.followed_already?(member) %>
+        <%= link_to "フォロー解除", member_relationship_path(member), method: :delete, class: "btn btn-danger" %>
+      <% else %>
+        <%= link_to "フォローする", member_relationship_path(member), method: :post, class: "btn btn-info" %>
+      <% end %>
+    </div>
+    <% end %>
+
+  </div>
+</div>
+<% end %>
+</div>

@@ -1,4 +1,5 @@
 class Admin::BreweriesController < ApplicationController
+  layout "application_no_sidebar"
 
   def create
     @brewery = Brewery.new(brewery_params)

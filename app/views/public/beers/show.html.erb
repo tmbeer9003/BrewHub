@@ -1,28 +1,30 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 mx-auto">
-      <div class="card border-dark my-3">
-        <div class="card-body row pr-0">
-          <div class="col">
-           <div class="card-title mb-0">
-              <h4 class="font-weight-bold d-inline-block mb-0">
-               <i class="fas fa-beer fa-lg"></i><%= @beer.name %></h4>
-              <h5 class="d-inline-block mb-0"> / <%= @beer.brewery.name %></h5>
-            </div>
-            <div class="border-bottom">
-              <span><%= @beer.beer_style.name %></span><br>
-              <span>ADV : <%= @beer.abv %> / IBU : <%= @beer.ibu %></span><br>
-              <span><%= @beer.description %></span>
-            </div>
-            
-            <div class="text-center">★★★★☆ 4.0　(3件の投稿)</div>
-          </div>
-        </div>
+<%= render "beer_search", breweries: @breweries, beer_styles: @beer_styles %>
+<div class="row">
+  <div class="card border-dark my-3 mx-auto col-md-10">
+    <div class="card-body">
+      <div class="card-title mb-0">
+        <h4 class="font-weight-bold d-inline-block mb-0">
+          <%= @beer.name %>
+        </h4>
+        <h5 class="d-inline-block mb-0"> / <%= @beer.brewery.name %></h5>
       </div>
+      
+      <div class="border-bottom">
+        <div><%= @beer.beer_style.name %></div>
+        <div>ADV : <%= @beer.abv %> / IBU : <%= @beer.ibu %></div>
+        <div><%= @beer.description %></div>
+      </div>
+        
       <div class="text-center">
-        <%= link_to "このビールについて投稿する", new_post_path(selected_beer: @beer.id), class: "btn btn-success px-4 rounded-pill" %>
-        <%= link_to "戻る", :back, class: "btn btn-primary px-4 rounded-pill" %>
+        ★★★★☆ 4.0　(3件の投稿)
       </div>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="mx-auto">
+    <%= link_to "このビールについて投稿する", new_post_path(selected_beer: @beer.id), class: "btn btn-success px-4 rounded-pill" %>
+    <%= link_to "戻る", :back, class: "btn btn-primary px-4 rounded-pill" %>
   </div>
 </div>

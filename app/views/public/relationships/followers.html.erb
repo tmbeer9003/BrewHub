@@ -1,0 +1,7 @@
+<% if @member.followers.exists? %>
+  <%= render "public/members/index", members: @members %>
+<% else %>
+  <div class="text-center mt-3">
+    <span>フォロワーがいません<span>
+  </div>
+<% end %>

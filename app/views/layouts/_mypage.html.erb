@@ -8,9 +8,20 @@
       <div class="col-6">
         <div class="font-weight-bold"><%= current_member.display_name %></div>
         <div class="small">@<%= current_member.account_name %></div>
-        <div><i class="fas fa-beer text-warning mr-1"></i><%= current_member.posts.count %>Beers</div>
-        <div class="small">フォロー</div>
-        <div class="small">フォロワー</div>
+        <div><i class="fas fa-beer text-warning"></i>
+          <%= current_member.posts.count %>
+          <span>Beers</span>
+        </div>
+        <div>
+          <%= link_to member_followings_path(member_id: current_member.id), class: "text-reset" do %>
+          <%= current_member.followings.count %><span class="small">フォロー</span>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to member_followers_path(member_id: current_member.id), class: "text-reset" do %>
+          <%= current_member.followers.count %><span class="small">フォロワー</span>
+          <% end %>
+        </div>
       </div>
     </div>
 
@@ -24,13 +35,13 @@
       <span class="col-5 btn btn-secondary m-2">メッセージ</span>
       <span class="col-5 btn btn-secondary m-2">設定</span>
     </div>
-    
-     
+
+
     <% if current_member.posts.exists? %>
       <div class="row pt-2 pl-3">
         <u class="small text-secondary"><%= link_to "全ての投稿を見る", posts_path(member_id: current_member.id), class: "text-reset" %></u>
       </div>
-      
+
       <div class="row p-2">
       <% current_member.posts.order(id: :desc).limit(9).each do |post| %>
         <div class="col-4 p-1">
@@ -40,13 +51,13 @@
         </div>
         <% end %>
       </div>
-      
+
     <% else %>
       <div class="row pt-2 pl-3">
         <span class="small">まだ投稿がありません<br>
         <u><%= link_to "ビールを探して投稿しましょう！", beers_path, class: "text-reset" %></u>
       </div>
     <% end %>
-    
+
   </div>
 </div>

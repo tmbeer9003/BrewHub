@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_14_155620) do
+ActiveRecord::Schema.define(version: 2022_11_16_054037) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -140,6 +140,16 @@ ActiveRecord::Schema.define(version: 2022_11_14_155620) do
     t.index ["shop_id"], name: "index_posts_on_shop_id"
   end
 
+  create_table "relationships", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "follow_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["follow_id"], name: "index_relationships_on_follow_id"
+    t.index ["member_id", "follow_id"], name: "index_relationships_on_member_id_and_follow_id", unique: true
+    t.index ["member_id"], name: "index_relationships_on_member_id"
+  end
+
   create_table "shops", force: :cascade do |t|
     t.string "name", null: false
     t.integer "location", default: 0, null: false
@@ -159,4 +169,6 @@ ActiveRecord::Schema.define(version: 2022_11_14_155620) do
   add_foreign_key "posts", "beers"
   add_foreign_key "posts", "members"
   add_foreign_key "posts", "shops"
+  add_foreign_key "relationships", "members"
+  add_foreign_key "relationships", "members", column: "follow_id"
 end

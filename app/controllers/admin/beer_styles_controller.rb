@@ -1,4 +1,5 @@
 class Admin::BeerStylesController < ApplicationController
+  layout "application_no_sidebar"
 
   def create
     @beer_style = BeerStyle.new(beer_style_params)

@@ -9,7 +9,13 @@
         <h6 class="d-inline-block mb-0"> / <%= beer.brewery.name %></h6>
       </div>
       <div class="border-bottom small"><%= beer.beer_style.name %></div>
-      <div>★★★★☆ 4.0　(3件の投稿)</div>
+      <div>
+        <% if beer.evaluation == nil %>
+          <span>未評価</span>
+        <% else %>
+          <%= beer.evaluation.round(2) %>
+        <% end %>  
+      </div>
     </div>
     <div class="col-md-3 d-flex align-items-center">
       <%= link_to "投稿", new_post_path(selected_beer: beer.id), class: "btn btn-success px-4 rounded-pill" %>

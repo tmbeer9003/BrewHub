@@ -33,6 +33,8 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.member_id = current_member.id
     if @post.save
+      evaluation = @post.beer.beer_evaluation
+      @post.beer.update(evaluation: evaluation)
       redirect_to posts_path
     else
       render "error"
@@ -49,6 +51,8 @@ class Public::PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
+      evaluation = @post.beer.beer_evaluation
+      @post.beer.update(evaluation: evaluation)
       redirect_to posts_path
     else
       render "error"
@@ -57,6 +61,8 @@ class Public::PostsController < ApplicationController
 
   def destroy
     @post.destroy
+    evaluation = @post.beer.beer_evaluation
+    @post.beer.update(evaluation: evaluation)
     redirect_to request.referer
   end
 
@@ -69,4 +75,5 @@ class Public::PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
+
 end

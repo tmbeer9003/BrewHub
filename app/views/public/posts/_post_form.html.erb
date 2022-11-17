@@ -18,11 +18,12 @@
 <% else %>
   <%= form_with model: post do |f| %>
     <%= f.hidden_field :beer_id, :value => beer.id %>
+    <%= f.hidden_field :beer_id, :value => beer.id %>
     <div class="row form-group my-2">
       <div class="col-md-3">
         <%= f.label :post_image, "画像", class: "col-form-label" %><span class="text-danger">*</span>
       </div>
-      <div class="col-md-9">
+      <div class="col-md-9 d-flex align-items-center">
         <%= f.file_field :post_image, accept: "image/*", class: "form-control-file" %>
       </div>
     </div>
@@ -31,8 +32,7 @@
       <div class="col-md-3">
          <%= f.label :evaluation, "評価", class: "col-form-label" %>
       </div>
-      <div class="col-md-9">
-        <%= f.text_field :evaluation, autofocus: true, class: "form-control rounded-pill" %>
+      <div class="col-md-9 d-flex align-items-center", id="stars">
       </div>
     </div>
 
@@ -111,3 +111,18 @@
       </div>
     <% end %>
 <% end %>
+
+<script>
+  $('#stars').empty();
+  $("#stars").raty({
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    scoreName: 'post[evaluation]',
+    half: true,
+    <% if post.evaluation != nil %>
+      score: <%= post.evaluation %>,
+      readOnly: false,
+    <% end %>
+  });
+  </script>

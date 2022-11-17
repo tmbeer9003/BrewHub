@@ -14,13 +14,21 @@
   <div class="mt-1 mb-0 card-title">
     <h5 class="font-weight-bold d-inline-block mb-0">
       <%= link_to post.beer.name, beer_path(post.beer), class: "text-reset" %></h5>
-    <h6 class="d-inline-block mb-0"> / <%= post.beer.brewery.name %></h6>
+    <h6 class="d-inline-block mb-0">
+      <span class="ml-1">/</span>
+      <%= post.beer.brewery.name %>
+    </h6>
   </div>
 </div>
 
-<div class="row">
-  ★★★★☆ 4.0
-  <span class="ml-2">
+<div class="row small">
+  <span class="mr-1">Served</span>
+  <span class="mr-1">
+    <% if post.serving_style == "draft" %>on
+    <% else %>by
+    <% end %>
+  </span>
+  <span>
     <% if post.serving_style == "draft" %>
       <i class="fas fa-beer"></i>ドラフト
     <% elsif post.serving_style == "can" %>
@@ -31,6 +39,17 @@
       <i class="fas fa-question"></i></i>その他
     <% end %>
   </span>
+</div>
+
+<div class="row align-items-center d-flex px-0">
+  <% if post.evaluation != nil %>
+    <span id="stars-rate<%= post.id %>">
+      <%= render "public/posts/rate_display" , post: post %>
+    </span>
+    <h5 class="font-weight-bold mx-2 mb-0"><%= post.evaluation %></h5>
+  <% else %>
+    <span>未評価</span>
+  <% end %>
 </div>
 
 <div class="row">

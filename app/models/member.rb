@@ -15,6 +15,8 @@ class Member < ApplicationRecord
   # 逆の関係（フォローされている人から見た、フォロワーのidを取り行く）
   has_many :followers, through: :inverse_relationships, source: :member
   # followから見たフォロワー（memmber）
+  has_many :cheers_posts, through: :cheers, source: :post
+  # cheersしている投稿
 
   has_one_attached :member_image
 
@@ -40,9 +42,11 @@ class Member < ApplicationRecord
   def followed_already?(member)
     relationships.exists?(follow_id: member.id)
   end
-  
+  #自分が相手を既にフォローしているか確認するメソッド
+
   def followed_me?(member)
     self.relationships.exists?(follow_id: member.id)
   end
+  #自分が相手からフォローされているか確認するメソッド
 
 end

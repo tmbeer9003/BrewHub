@@ -40,5 +40,9 @@ class Member < ApplicationRecord
   def followed_already?(member)
     relationships.exists?(follow_id: member.id)
   end
+  
+  def followed_me?(member)
+    self.relationships.exists?(follow_id: member.id)
+  end
 
 end

@@ -43,7 +43,8 @@
       </div>
 
       <div class="row p-2">
-      <% current_member.posts.order(id: :desc).limit(9).each do |post| %>
+      <% my_posts.each do |post| %>
+       <%# @my_postsはアプリケーションコントローラで定義 %>
         <div class="col-4 p-1">
           <%= link_to post_path(post) do %>
             <%= image_tag post.get_post_image(150,150), class: "image-fit rounded" %>

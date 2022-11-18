@@ -12,4 +12,5 @@ class Beer < ApplicationRecord
     #平均値を算出
   end
   
+  
 end

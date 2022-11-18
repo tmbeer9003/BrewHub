@@ -1,23 +1,55 @@
 <%= render "beer_search", breweries: @breweries, beer_styles: @beer_styles %>
-<% @beers.each do |beer| %>
+<% @beers.each.with_index(1) do |beer, index| %>
 <div class="card border-dark mt-3">
-  <div class="card-body row pr-0">
-    <div class="col-md-9">
+  <div class="card-body row">
+    <div class="col-9">
       <div class="card-title mb-0">
         <h5 class="font-weight-bold d-inline-block mb-0">
-          <%= link_to beer_path(beer), class: "text-reset" do %><i class="fas fa-beer fa-lg"></i><%= beer.name %><% end %></h5>
+          <% case index when 1 %>
+            <span class="fa-layers">
+              <i class="fas fa-crown fa-lg text-warning", data-fa-transform="left-4 up-1"></i>
+              <span class="fa-layers-text", data-fa-transform="shrink-4">
+                <%= index %>
+              </span>
+            </span>
+          <% when 2 %>
+            <span class="fa-layers">
+              <i class="fas fa-crown fa-lg text-secondary", data-fa-transform="left-4 up-1"></i>
+              <span class="fa-layers-text", data-fa-transform="shrink-4">
+                <%= index %>
+              </span>
+            </span>
+          <% when 3 %>
+            <span class="fa-layers">
+              <i class="fas fa-crown fa-lg", data-fa-transform="left-4 up-1", style='color: orange;'></i>
+              <span class="fa-layers-text", data-fa-transform="shrink-4">
+                <%= index %>
+              </span>
+            </span>
+          <% end %>
+          <%= link_to beer_path(beer), class: "text-reset" do %>
+            <%= beer.name %>
+          <% end %></h5>
         <h6 class="d-inline-block mb-0"> / <%= beer.brewery.name %></h6>
       </div>
       <div class="border-bottom small"><%= beer.beer_style.name %></div>
-      <div>
+      <div class="d-flex align-items-end">
         <% if beer.evaluation == nil %>
           <span>未評価</span>
         <% else %>
-          <%= beer.evaluation.round(2) %>
-        <% end %>  
+          <span id="beers-rate<%= beer.id %>">
+            <%= render "public/beers/beer_rate_display", beer: beer %>
+          </span>
+          <span class="ml-2 font-weight-bold ">
+            <%= beer.evaluation.round(2) %>
+          </span>
+        <% end %>
+        <small>
+          （<%= beer.posts.count %>件の投稿）
+        </small>
       </div>
     </div>
-    <div class="col-md-3 d-flex align-items-center">
+    <div class="col-3 d-flex align-items-center justify-content-center">
       <%= link_to "投稿", new_post_path(selected_beer: beer.id), class: "btn btn-success px-4 rounded-pill" %>
     </div>
   </div>

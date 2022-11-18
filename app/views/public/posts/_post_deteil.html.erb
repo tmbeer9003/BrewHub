@@ -44,7 +44,7 @@
 <div class="row align-items-center d-flex px-0">
   <% if post.evaluation != nil %>
     <span id="stars-rate<%= post.id %>">
-      <%= render "public/posts/rate_display" , post: post %>
+      <%= render "public/posts/post_rate_display" , post: post %>
     </span>
     <h5 class="font-weight-bold mx-2 mb-0"><%= post.evaluation %></h5>
   <% else %>

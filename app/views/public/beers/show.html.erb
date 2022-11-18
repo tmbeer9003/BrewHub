@@ -15,8 +15,20 @@
         <div><%= @beer.description %></div>
       </div>
         
-      <div class="text-center">
-        ★★★★☆ 4.0　(3件の投稿)
+      <div class="d-flex align-items-center justify-content-center mt-2">
+        <% if @beer.evaluation == nil %>
+          <span>未評価</span>
+        <% else %>
+          <span id="beers-rate<%= @beer.id %>">
+            <%= render "public/beers/beer_rate_display", beer: @beer %>
+          </span>
+          <span class="ml-2 font-weight-bold ">
+            <%= @beer.evaluation.round(2) %>
+          </span>
+          <span>
+            （<%= @beer.posts.count %>件の投稿）
+          </span>
+        <% end %>  
       </div>
     </div>
   </div>

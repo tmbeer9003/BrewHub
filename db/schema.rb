@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_17_053511) do
+ActiveRecord::Schema.define(version: 2022_11_18_060803) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -95,8 +95,49 @@ ActiveRecord::Schema.define(version: 2022_11_17_053511) do
     t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id", "post_id"], name: "index_cheers_on_member_id_and_post_id", unique: true
     t.index ["member_id"], name: "index_cheers_on_member_id"
     t.index ["post_id"], name: "index_cheers_on_post_id"
+  end
+
+  create_table "group_post_comments", force: :cascade do |t|
+    t.integer "group_post_id", null: false
+    t.integer "member_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_post_id"], name: "index_group_post_comments_on_group_post_id"
+    t.index ["member_id"], name: "index_group_post_comments_on_member_id"
+  end
+
+  create_table "group_posts", force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "member_id", null: false
+    t.string "title", null: false
+    t.text "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_posts_on_group_id"
+    t.index ["member_id"], name: "index_group_posts_on_member_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.integer "owner_id", null: false
+    t.string "name", null: false
+    t.text "description", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_id"], name: "index_groups_on_owner_id"
+  end
+
+  create_table "groups_members", force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "member_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id", "member_id"], name: "index_groups_members_on_group_id_and_member_id", unique: true
+    t.index ["group_id"], name: "index_groups_members_on_group_id"
+    t.index ["member_id"], name: "index_groups_members_on_member_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -164,6 +205,13 @@ ActiveRecord::Schema.define(version: 2022_11_17_053511) do
   add_foreign_key "beers", "breweries"
   add_foreign_key "cheers", "members"
   add_foreign_key "cheers", "posts"
+  add_foreign_key "group_post_comments", "group_posts"
+  add_foreign_key "group_post_comments", "members"
+  add_foreign_key "group_posts", "groups"
+  add_foreign_key "group_posts", "members"
+  add_foreign_key "groups", "members", column: "owner_id"
+  add_foreign_key "groups_members", "groups"
+  add_foreign_key "groups_members", "members"
   add_foreign_key "post_comments", "members"
   add_foreign_key "post_comments", "posts"
   add_foreign_key "posts", "bars"

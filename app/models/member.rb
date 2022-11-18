@@ -17,6 +17,11 @@ class Member < ApplicationRecord
   # followから見たフォロワー（memmber）
   has_many :cheers_posts, through: :cheers, source: :post
   # cheersしている投稿
+  has_many :groups_members, dependent: :destroy
+  has_many :groups, through: :groups_members, source: :group
+  has_many :own_groups, class_name: 'Group', foreign_key: 'owner_id', dependent: :destroy
+  has_many :group_posts, dependent: :destroy
+  has_many :group_post_comments, dependent: :destroy
 
   has_one_attached :member_image
 
@@ -48,5 +53,10 @@ class Member < ApplicationRecord
     self.relationships.exists?(follow_id: member.id)
   end
   #自分が相手からフォローされているか確認するメソッド
+  
+  def joined_already?(group)
+    self.groups_members.exists?(group_id: group.id)
+  end
+   #グループに参加済から確認するメソッド
 
 end

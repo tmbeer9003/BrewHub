@@ -18,7 +18,6 @@
 <% else %>
   <%= form_with model: post do |f| %>
     <%= f.hidden_field :beer_id, :value => beer.id %>
-    <%= f.hidden_field :beer_id, :value => beer.id %>
     <div class="row form-group my-2">
       <div class="col-md-3">
         <%= f.label :post_image, "画像", class: "col-form-label" %><span class="text-danger">*</span>

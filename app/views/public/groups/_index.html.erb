@@ -1,0 +1,39 @@
+<% groups.each do |group| %>
+
+<div class="card border-dark mt-1 px-2">
+  <div class="card-body row">
+
+    <div class="col-1 px-1 d-flex align-items-center">
+      <%= image_tag group.get_group_image(50,50), class: "rounded image-fit" %>
+    </div>
+
+    <div class="card-title col-5 mb-0 pl-1">
+      <h5 class="font-weight-bold d-inline-block mb-0">
+        <%= link_to group_path(group), class: "text-reset" do %><%= group.name %><% end %></h5>
+      <div>
+        <span><i class="fas fa-users mr-1"></i><%= group.members.count %>人のメンバー</span>
+      </div>
+    </div>
+    
+    <div class="col-6 d-flex align-items-center justify-content-end">
+      <div class="card-text mr-2">
+        <% if group.owner == current_member %>
+        <% elsif current_member.joined_already?(group) %>
+          <small class="text-secondary">参加済み</small>
+        <% end %>
+      </div>
+      
+      <div class="card-text">
+        <% if group.owner == current_member %>
+          <small class="text-secondary">管理しているグループ</small>
+        <% elsif current_member.joined_already?(group) %>
+          <%= link_to "退会する", group_groups_member_path(group), method: :delete, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
+        <% else %>
+          <%= link_to "参加する", group_groups_member_path(group), method: :post, class: "btn btn-info" %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+<% end %>

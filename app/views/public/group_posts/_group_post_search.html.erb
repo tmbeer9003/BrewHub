@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-between mt-3 mb-2">
+  <span class="btn btn-light border-dark">
+    <%= link_to "トピック作成", new_group_group_post_path(group.id), class:"text-reset" %>
+  </span>
+    
+  <div class="mr-1">
+    <%= form_with url: group_path(group.id), method: :get do |f| %>
+      <div class="input-group border border-secondary rounded-pill bg-white mb-1">
+        <%= f.text_field :group_post_search, placeholder: "トピックで検索", class: "form-control form-control-sm input-group-prepend border-0 bg-transparent" %>
+        <span class="input-group-btn">
+          <%= f.button type: "submit",class: "border-0 form-control form-control-sm bg-transparent" do %><i class="fas fa-search"></i><% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>

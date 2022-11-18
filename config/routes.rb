@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'groups_members/create'
+    get 'groups_members/destroy'
+  end
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -28,8 +32,15 @@ Rails.application.routes.draw do
       get 'followings'=> 'relationships#followings'
       get 'followers'=> 'relationships#followers'
     end
+    resources :groups do
+      resource :groups_member, only: [:create, :destroy]
+      resources :group_posts do
+        resource :group_post_comment, only: [:create, :destroy]
+      end
+    end
     get 'mypage'=> 'homes#timeline'
     get 'mypage/cheers_list'=> 'homes#cheers_list'
+    
   end
 
   root 'public/homes#top'

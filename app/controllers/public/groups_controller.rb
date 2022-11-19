@@ -4,9 +4,11 @@ class Public::GroupsController < ApplicationController
   def index
     group_search = params[:group_search]
     if group_search == nil
-      @groups = Group.all
+      groups = Group.includes(:members).sort {|a,b| b.members.size <=> a.members.size}
+      @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)
     else
-      @groups = Group.where("name like ?", "%#{group_search}%")
+      groups = Group.where("name like ?", "%#{group_search}%").includes(:members).sort {|a,b| b.members.size <=> a.members.size}
+      @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)
     end
   end
 
@@ -23,9 +25,9 @@ class Public::GroupsController < ApplicationController
   def show
     group_post_search = params[:group_post_search]
     if group_post_search == nil
-      @group_posts = @group.group_posts.all.order(id: :desc)
+      @group_posts = @group.group_posts.all.order(id: :desc).page(params[:page]).per(5)
     else
-      @group_posts = @group.group_posts.where("title like ?", "%#{group_post_search}%").order(id: :desc)
+      @group_posts = @group.group_posts.where("title like ?", "%#{group_post_search}%").order(id: :desc).page(params[:page]).per(5)
     end
   end
 

@@ -14,12 +14,11 @@
           </span>
         </span>
         <span class="text-right small ml-1">
-          <% if(post_comment.member == current_member) && (defined? group) %>
-            <%= link_to "削除", group_group_post_group_post_comment_path(group, post, post_comment), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？", class: "text-secondary text-right" %>
-          <% elsif post_comment.member == current_member %>
+          <% if(post_comment.member == current_member) && (group == nil) %>
             <%= link_to "削除", post_post_comment_path(post, post_comment), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？", class: "text-secondary text-right" %>
+          <% elsif(post_comment.member == current_member) && (group != nil) %>
+            <%= link_to "削除", group_group_post_group_post_comment_path(group, post, post_comment), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？", class: "text-secondary text-right" %>
           <% end %>
-          <%# posts/showとgroup_posts/showで同一のパーシャルを使用するため、変数"group"が定義されているかどうかで削除ボタンの中身を分岐させる %>
         </span>
         <div>
         <%= post_comment.content %>

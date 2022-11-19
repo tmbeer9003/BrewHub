@@ -13,6 +13,8 @@ class Public::GroupPostsController < ApplicationController
   end
 
   def show
+    @group_post_comment = GroupPostComment.new
+    @group_post_comments = @group_post.group_post_comments.order(id: :desc).page(params[:page]).per(5)
   end
 
   def new

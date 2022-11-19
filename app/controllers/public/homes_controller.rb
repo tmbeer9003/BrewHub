@@ -30,5 +30,18 @@ class Public::HomesController < ApplicationController
       @posts = cheers_posts.order(id: :desc)
     end
   end
+  
+  def group_list
+    group_search = params[:group_search]
+    # グループ検索で受け取った値を代入
+    if group_search != nil
+    #検索から遷移したら
+      groups = current_member.groups.where("name like ?", "%#{group_search}%").includes(:members).sort {|a,b| b.members.size <=> a.members.size}
+      @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)
+    else
+      groups = current_member.groups.includes(:members).sort {|a,b| b.members.size <=> a.members.size}
+      @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)
+    end
+  end
 
 end

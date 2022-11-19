@@ -24,7 +24,9 @@
     </div>
     
     <div>
-      <h5 class="font-weight-bold mb-0 mt-1"><i class="fas fa-feather-alt fa-sm"></i><%= group_post.title %></h5>
+      <%= link_to group_group_post_path(group, group_post), class:"text-reset" do %>
+        <h5 class="font-weight-bold mb-0 mt-1"><i class="fas fa-feather-alt fa-sm"></i><%= group_post.title %></h5>
+      <% end %>
       <span><%= group_post.content %></span>
     </div>
   </div>

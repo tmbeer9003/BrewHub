@@ -35,11 +35,12 @@ Rails.application.routes.draw do
     resources :groups do
       resource :groups_member, only: [:create, :destroy]
       resources :group_posts do
-        resource :group_post_comment, only: [:create, :destroy]
+        resources :group_post_comments, only: [:create, :destroy]
       end
     end
     get 'mypage'=> 'homes#timeline'
     get 'mypage/cheers_list'=> 'homes#cheers_list'
+    get 'mypage/group_list'=> 'homes#group_list'
     
   end
 

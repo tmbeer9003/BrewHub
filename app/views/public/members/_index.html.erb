@@ -1,12 +1,3 @@
-  <% if current_page?(controller: "members", action: "index") %>
-    <div class="mt-2"></div>
-  <% elsif current_page?(controller: "relationships", action: "followings") %>
-   
-  <% elsif current_page?(controller: "relationships", action: "followers") %>
-    
-  <% else %>
-  <% end %>
-
 <% members.each do |member| %>
 
 <div class="card border-dark mt-1 px-2">

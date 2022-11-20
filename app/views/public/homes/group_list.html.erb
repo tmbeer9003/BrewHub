@@ -1,21 +1,19 @@
-<div class="col-md-10 mx-auto">
-  <div class="d-flex justify-content-between mt-3 mb-2">
-    <h5 class="font-weight-bold pt-2 ml-3 mb-0">
-      参加中のグループ一覧
-    </h5>
+<div class="d-flex justify-content-between mt-3 mb-2">
+  <h5 class="font-weight-bold pt-2 ml-3 mb-0">
+    参加中のグループ一覧
+  </h5>
 
 
-    <div class="mr-1">
-      <%= form_with url: mypage_group_list_path, method: :get do |f| %>
-        <div class="input-group border border-secondary rounded-pill bg-white mb-1">
-          <%= f.text_field :group_search, placeholder: "グループ名で検索", class: "form-control form-control-sm input-group-prepend border-0 bg-transparent" %>
-          <span class="input-group-btn">
-            <%= f.button type: "submit",class: "border-0 form-control form-control-sm bg-transparent" do %><i class="fas fa-search"></i><% end %>
-          </span>
-        </div>
-      <% end %>
-    </div>
+  <div class="mr-1">
+    <%= form_with url: mypage_group_list_path, method: :get do |f| %>
+      <div class="input-group border border-secondary rounded-pill bg-white mb-1">
+        <%= f.text_field :group_search, placeholder: "グループ名で検索", class: "form-control form-control-sm input-group-prepend border-0 bg-transparent" %>
+        <span class="input-group-btn">
+          <%= f.button type: "submit",class: "border-0 form-control form-control-sm bg-transparent" do %><i class="fas fa-search"></i><% end %>
+        </span>
+      </div>
+    <% end %>
   </div>
-
-  <%= render "public/groups/index", groups: @groups %>
 </div>
+
+<%= render "public/groups/index", groups: @groups %>

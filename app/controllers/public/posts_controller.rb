@@ -7,11 +7,11 @@ class Public::PostsController < ApplicationController
     member = params[:member_id]
     # ユーザーIDで絞り込まれた際に受け取った値を代入
     if post_search != nil
-      @posts = Post.where("content like ?", "%#{post_search}%").order(id: :desc)
+      @posts = Post.where("content like ?", "%#{post_search}%").order(id: :desc).page(params[:page]).per(7)
     elsif member != nil
-      @posts = Post.where(member_id: member).order(id: :desc)
+      @posts = Post.where(member_id: member).order(id: :desc).page(params[:page]).per(7)
     else
-      @posts = Post.all.order(id: :desc)
+      @posts = Post.all.order(id: :desc).page(params[:page]).per(7)
     end
   end
 

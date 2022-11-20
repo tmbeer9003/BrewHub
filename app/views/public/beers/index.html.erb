@@ -55,8 +55,13 @@
   </div>
 </div>
 <% end %>
+
 <div class="text-center mt-2">
 <%= link_to new_beer_path, class: "text-reset" do %>
   <u>投稿したいビールが見つかりませんか？<br>こちらから情報を追加しましょう！</u>
 <% end %>
+</div>
+
+<div class="d-flex justify-content-center mt-2">
+  <%= paginate @beers %>
 </div>

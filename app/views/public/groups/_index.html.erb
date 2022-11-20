@@ -14,7 +14,7 @@
         <span><i class="fas fa-users mr-1"></i><%= group.members.count %>人のメンバー</span>
       </div>
     </div>
-    
+
     <div class="col-6 d-flex align-items-center justify-content-end">
       <div class="card-text mr-2">
         <% if group.owner == current_member %>
@@ -22,7 +22,7 @@
           <small class="text-secondary">参加済み</small>
         <% end %>
       </div>
-      
+
       <div class="card-text">
         <% if group.owner == current_member %>
           <small class="text-secondary">管理しているグループ</small>
@@ -37,3 +37,7 @@
   </div>
 </div>
 <% end %>
+
+<div class="d-flex justify-content-center mt-2">
+  <%= paginate groups %>
+</div>

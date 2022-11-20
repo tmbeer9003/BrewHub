@@ -2,7 +2,7 @@
   <div class="card border-dark mt-3 p-3">
     <div class="row">
       <div class="col-6">
-        <%= image_tag current_member.get_member_image(200,200), class: "rounded-circle image-fit" %>
+        <%= image_tag current_member.get_member_image(150,150), class: "rounded-circle image-fit" %>
       </div>
 
       <div class="col-6">
@@ -32,19 +32,19 @@
 
     <div class="row py-2">
       <div class="col">
-      こんにちは！
+        <%= current_member.introduction %>
       </div>
     </div>
 
     <div class="row d-flex justify-content-center border-bottom">
-      <span class="col-5 btn btn-secondary m-2">メッセージ</span>
-      <span class="col-5 btn btn-secondary m-2">設定</span>
+      <span class="col btn btn-secondary m-2">メッセージ</span>
+      <%= link_to "設定", edit_member_path(current_member), class:"col btn btn-secondary m-2" %>
     </div>
 
 
     <% if current_member.posts.exists? %>
       <div class="row pt-2 pl-3">
-        <u class="small text-secondary"><%= link_to "全ての投稿を見る", posts_path(member_id: current_member.id), class: "text-reset" %></u>
+        <u class="small text-secondary"><%= link_to "全ての投稿を見る", member_path(current_member.id), class: "text-reset" %></u>
       </div>
 
       <div class="row p-2">

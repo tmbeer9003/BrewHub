@@ -12,9 +12,9 @@ class Public::HomesController < ApplicationController
     # 投稿検索で受け取った値を代入
     if post_search != nil
     #検索から遷移したら
-      @posts = timeline_posts.where("content like ?", "%#{post_search}%").order(id: :desc)
+      @posts = timeline_posts.where("content like ?", "%#{post_search}%").order(id: :desc).page(params[:page]).per(7)
     else
-      @posts = timeline_posts.order(id: :desc)
+      @posts = timeline_posts.order(id: :desc).page(params[:page]).per(7)
     end
   end
 
@@ -25,12 +25,12 @@ class Public::HomesController < ApplicationController
     # 投稿検索で受け取った値を代入
     if post_search != nil
     #検索から遷移したら
-      @posts = cheers_posts.where("content like ?", "%#{post_search}%").order(id: :desc)
+      @posts = cheers_posts.where("content like ?", "%#{post_search}%").order(id: :desc).page(params[:page]).per(7)
     else
-      @posts = cheers_posts.order(id: :desc)
+      @posts = cheers_posts.order(id: :desc).page(params[:page]).per(7)
     end
   end
-  
+
   def group_list
     group_search = params[:group_search]
     # グループ検索で受け取った値を代入

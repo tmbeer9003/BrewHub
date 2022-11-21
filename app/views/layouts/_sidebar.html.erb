@@ -1,0 +1,42 @@
+<div class="col-md-2 mx-auto">
+  <div class="card border-dark mt-3 p-2">
+    <div class="font-weight-bold mx-auto my-2">
+      Top Beers
+    </div>
+
+    <div class="pb-2" >
+      <div class="small mb-1 pl-1">
+        ■全ビール
+      </div>
+      <div class="d-flex">
+        <div class="d-inline-box">
+          <span class="fa-layers mt-2">
+            <i class="fas fa-crown fa-2x text-warning", data-fa-transform="up-3"></i>
+            <span class="fa-layers-text font-weight-bold", data-fa-transform="right-11 up-3">
+              1
+            </span>
+          </span>
+        </div>
+        <div class="d-inline-box text-middle ml-4">
+          <%= link_to top_beer_all.name, beer_path(top_beer_all), class: "text-reset" %>
+        </div>
+      </div>
+      <div class="d-flex align-items-end border-bottoms">
+        <% if top_beer_all.evaluation == nil %>
+          <span>未評価</span>
+        <% else %>
+          <span class="beers-rate-sidebar<%= top_beer_all.id %>">
+            <%= render "public/beers/beer_rate_display", beer: top_beer_all %>
+          </span>
+          <span class="ml-2 font-weight-bold ">
+            <%= top_beer_all.evaluation.round(2) %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+      <%= render "layouts/sidebar_content", top_beer: top_beer_1 %>
+      <%= render "layouts/sidebar_content", top_beer: top_beer_2 %>
+      <%= render "layouts/sidebar_content", top_beer: top_beer_3 %>
+      <%= render "layouts/sidebar_content", top_beer: top_beer_4 %>
+  </div>
+</div>

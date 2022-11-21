@@ -1,0 +1,27 @@
+<%= render "public/members/show", member: @member %>
+
+<% if @member.followers.exists? %>
+  <div class="form-row mt-3 d-flex justify-content-end mr-1">
+    <%= form_with url: member_followers_path, method: :get do |f| %>
+    <div class="input-group border border-secondary rounded-pill bg-white mb-1">
+      <%= f.text_field :member_search, placeholder: "アカウント名で検索", class: "form-control form-control-sm input-group-prepend border-0 bg-transparent" %>
+      <span class="input-group-btn">
+       <%= f.button type: "submit",class: "border-0 form-control form-control-sm bg-transparent" do %><i class="fas fa-search"></i><% end %>
+      </span>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="col">
+    <u><%= link_to "フォロー",member_followings_path(member_id: params[:member_id]), class: "mr-2 text-reset" %></u>
+    <span class="mr-2">|</span>
+    <h5 class="d-inline-block font-weight-bold">フォロワー</h6>
+  </div>
+
+    <%= render "public/members/index", members: @members %>
+
+<% else %>
+  <div class="text-center mt-3">
+    <span>フォロワーがいません<span>
+  </div>
+<% end %>

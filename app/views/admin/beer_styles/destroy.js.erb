@@ -1,0 +1,2 @@
+$("#beer_style_list").html("<%= j(render 'admin/beer_styles/index', beer_styles: @beer_styles) %>");
+$("#error-message").html("<%= j(render 'layouts/errors', obj: @beer_style) %>");

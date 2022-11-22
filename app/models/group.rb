@@ -9,10 +9,10 @@ class Group < ApplicationRecord
 
   def get_group_image(width, height)
     unless group_image.attached?
-      file_path = Rails.root.join('app/assets/images/post-no-image.jpg')
+      file_path = Rails.root.join('public/images/post-no-image.jpg')
       group_image.attach(io: File.open(file_path), filename: 'post-default-image.jpg', content_type: 'image/jpeg')
     end
     group_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
 end

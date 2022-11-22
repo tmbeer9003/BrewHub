@@ -27,7 +27,7 @@ class Member < ApplicationRecord
 
   def get_member_image(width, height)
     unless member_image.attached?
-      file_path = Rails.root.join('app/assets/images/member-no-image.jpg')
+      file_path = Rails.root.join('public/images/member-no-image.jpg')
       member_image.attach(io: File.open(file_path), filename: 'member-default-image.jpg', content_type: 'image/jpeg')
     end
     member_image.variant(resize_to_limit: [width, height]).processed

@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 2022_11_20_131436) do
     t.integer "group_id", null: false
     t.integer "member_id", null: false
     t.string "title", null: false
-    t.text "content", null: false
+    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_group_posts_on_group_id"

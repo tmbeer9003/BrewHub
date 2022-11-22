@@ -8,6 +8,7 @@
       <div class="small mb-1 pl-1">
         ■全ビール
       </div>
+      
       <% if top_beer_all != nil %>
         <div class="d-flex">
           <div class="d-inline-box">
@@ -22,6 +23,7 @@
             <%= link_to top_beer_all.name, beer_path(top_beer_all), class: "text-reset" %>
           </div>
         </div>
+        
         <div class="d-flex align-items-end border-bottoms">
           <% if top_beer_all.evaluation == nil %>
             <span>未評価</span>
@@ -34,7 +36,13 @@
             </span>
           <% end %>
         </div>
+
+      <% else %>
+        <div class="small mb-1 pl-1">
+          ビール情報がありません
+        </div>
       <% end %>
+      
     </div>
       <%= render "layouts/sidebar_content", top_beer: top_beer_1 %>
       <%= render "layouts/sidebar_content", top_beer: top_beer_2 %>

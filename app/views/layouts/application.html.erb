@@ -13,27 +13,31 @@
   <body>
     <header class="sticky-top">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-          <span class="navbar-brand"><%= link_to "Brew Hub", root_path, class: "text-reset" %></span>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-            <% if member_signed_in? %>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "マイページ", mypage_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "ビールを探す", beers_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "投稿を探す", posts_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "ユーザーを探す", members_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "グループを探す", groups_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "text-reset" %></li>
-            <% else %>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "ビールを探す", beers_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "ログイン", new_member_session_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "会員登録", new_member_registration_path, class: "text-reset" %></li>
-            <% end %>
-            </ul>
-          </div>
+        <span class="navbar-brand ml-3">
+          <%= link_to root_path, class: "text-reset" do %>
+            <%= image_tag '/images/logo.png',size: '200x44', class: "border border-dark m-0 p-0" %>
+          <% end %>
+        </span>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+          <% if member_signed_in? %>
+            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "マイページ", mypage_path, class: "text-reset" %></li>
+            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ビールを探す", beers_path, class: "text-reset" %></li>
+            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "投稿を探す", posts_path, class: "text-reset" %></li>
+            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ユーザーを探す", members_path, class: "text-reset" %></li>
+            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "グループを探す", groups_path, class: "text-reset" %></li>
+            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "text-reset" %></li>
+          <% else %>
+            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ビールを探す", beers_path, class: "text-reset" %></li>
+            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ログイン", new_member_session_path, class: "text-reset" %></li>
+            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "会員登録", new_member_registration_path, class: "text-reset" %></li>
+          <% end %>
+          </ul>
         </div>
       </nav>
     </header>

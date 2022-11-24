@@ -4,7 +4,7 @@ class Beer < ApplicationRecord
   has_many :posts, dependent: :destroy
 
   validates :name, presence:true, uniqueness: true, length:{maximum:20}
-  validates :location, numericality: true, allow_nil: true
+  validates :abv, numericality: true, allow_nil: true
   validates :ibu, numericality: true, allow_nil: true
   validates :description, length:{maximum: 500}
 

@@ -1,5 +1,6 @@
 class Public::MembersController < ApplicationController
   before_action :authenticate_member!
+  before_action :ensure_guest, only: [:edit, :update]
 
   def index
     member_search = params[:member_search]
@@ -36,5 +37,11 @@ class Public::MembersController < ApplicationController
 
   def member_params
     params.require(:member).permit(:account_name, :display_name, :email, :member_image, :introduction)
+  end
+
+  def ensure_guest
+    if current_member.account_name == "guestuser"
+      redirect_to mypage_path, alert: "権限がありません"
+    end
   end
 end

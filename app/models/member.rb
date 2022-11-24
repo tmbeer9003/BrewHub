@@ -72,4 +72,12 @@ class Member < ApplicationRecord
   end
    #グループに参加済か確認するメソッド
 
+  def self.guest
+    find_or_create_by!(account_name: 'guestuser', display_name: 'ゲストユーザー', email: 'guest@example.com', date_of_birth: '2000-01-01') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.account_name = "guestuser"
+    end
+  end
+
+
 end

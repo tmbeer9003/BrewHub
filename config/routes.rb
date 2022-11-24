@@ -34,11 +34,14 @@ Rails.application.routes.draw do
         resources :group_post_comments, only: [:create, :destroy]
       end
     end
+    devise_scope :member do
+      post 'guest_sign_in', to: 'members/sessions#guest_sign_in'
+    end
     get 'mypage'=> 'homes#timeline'
     get 'mypage/cheers_list'=> 'homes#cheers_list'
     get 'mypage/group_list'=> 'homes#group_list'
     get 'mypage/edit'=> 'members#edit'
-    
+
   end
 
   root 'public/homes#top'

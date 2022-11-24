@@ -1,11 +1,11 @@
-<div class="row">
-  <div class="card border-dark mx-auto mt-3 col-md-10">
+<%= render "public/groups/show", group: @group %>
+
+  <div class="card border-dark">
     <div class="card-body">
       <div class="d-flex border-bottom align-items-end pb-1 mb-3">
-        <h5 class="card-title mb-0">トピック新規作成<small>（グループ名：<%= @group.name %>）</small></h5>
+        <h5 class="card-title mb-0">トピック新規作成</h5>
         <span class="small text-danger mb-0 ml-1">*は必須項目です</span>
       </div>
       <%= render "group_post_form", group: @group, group_post: @group_post %>
     </div>
   </div>
-</div>

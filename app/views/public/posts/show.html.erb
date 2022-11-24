@@ -11,19 +11,21 @@
 </div>
 
 <div class="card border-dark mt-2 px-2">
-  <div class="card-row mx-1 mt-2 d-flex align-items-center">
+  <div id="error-message" class="mt-2">
+    <%= render "layouts/errors", obj: @post_comment %>
+  </div>
+
+  <div class="card-row mx-1 d-flex align-items-center">
     <%= image_tag current_member.get_member_image(35,35), class: "rounded-circle image-fit" %>
     <h6 class="ml-1 mb-0"><%= current_member.display_name %></h6>
   </div>
   <%= form_with model: [@post, @post_comment], local: false do |f| %>
-    <div class="border-bottom">
-      <div class="row border rounded-pill mx-1 mt-0 mb-1">
-        <div class="col-11 pr-0">
-          <%= f.text_area :content, autofocus: true, placeholder: "コメントを追加", class: "form-control bg-transparent border-0 mr-0", style: "resize: none" %>
-        </div>
-        <div class="col-1 d-flex align-items-center pl-0">
-          <%= f.submit "送信", class: "btn btn-secondary rounded-pill px-2 py-1" %>
-        </div>
+    <div class="row border rounded-pill mx-1 mt-0 mb-1">
+      <div class="col-11 pr-0">
+        <%= f.text_area :content, autofocus: true, placeholder: "コメントを追加", class: "form-control bg-transparent border-0 mr-0", style: "resize: none" %>
+      </div>
+      <div class="col-1 d-flex align-items-center pl-0">
+        <%= f.submit "送信", class: "btn btn-secondary rounded-pill px-2 py-1" %>
       </div>
     </div>
   <% end %>

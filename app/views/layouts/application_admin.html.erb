@@ -44,5 +44,21 @@
     <footer class="fixed-bottom bg-dark py-2">
       <p class="text-center text-white">Copyright © 2022 Brew Hub All Rights Reserved.</p>
     </footer>
+
+    <% unless flash.empty? %>
+      <script>
+        toastr.options = {
+          "positionClass": "toast-top-left",
+          "closeButton": true,
+        };
+        <% flash.each do |type, msg| %>
+          <% type = 'info' if type == 'notice' %>
+          <% type = 'error' if type == 'alert' %>
+          <% type = 'success' if type == 'success' %>
+          toastr['<%= type %>']('<%= msg %>');
+        <% end %>
+      </script>
+    <% end %>
+
   </body>
 </html>

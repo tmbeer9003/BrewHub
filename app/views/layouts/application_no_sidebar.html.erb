@@ -24,8 +24,8 @@
               <li class="nav-item btn btn-light mx-2"><%= link_to "マイページ", mypage_path, class: "text-reset" %></li>
               <li class="nav-item btn btn-light mx-2"><%= link_to "ビールを探す", beers_path, class: "text-reset" %></li>
               <li class="nav-item btn btn-light mx-2"><%= link_to "投稿を探す", posts_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2">ユーザーを探す</li>
-              <li class="nav-item btn btn-light mx-2">グループを探す</li>
+              <li class="nav-item btn btn-light mx-2"><%= link_to "ユーザーを探す", members_path, class: "text-reset" %></li>
+              <li class="nav-item btn btn-light mx-2"><%= link_to "グループを探す", groups_path, class: "text-reset" %></li>
               <li class="nav-item btn btn-light mx-2"><%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "text-reset" %></li>
             <% elsif admin_signed_in? %>
               <li class="nav-item btn btn-light mx-2"><%= link_to "ビアスタイル管理", admin_beer_styles_path, class: "text-reset" %></li>
@@ -36,7 +36,7 @@
               <li class="nav-item btn btn-light mx-2">グループ管理</li>
               <li class="nav-item btn btn-light mx-2"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-reset" %></li>
             <% else %>
-              <li class="nav-item btn btn-light mx-2">ビールを探す</li>
+              <li class="nav-item btn btn-light mx-2"><%= link_to "ビールを探す", beers_path, class: "text-reset" %></li>
               <li class="nav-item btn btn-light mx-2"><%= link_to "ログイン", new_member_session_path, class: "text-reset" %></li>
               <li class="nav-item btn btn-light mx-2"><%= link_to "会員登録", new_member_registration_path, class: "text-reset" %></li>
             <% end %>
@@ -57,5 +57,21 @@
     <footer class="fixed-bottom bg-dark py-2">
       <p class="text-center text-white">Copyright © 2022 Brew Hub All Rights Reserved.</p>
     </footer>
+
+    <% unless flash.empty? %>
+      <script>
+        toastr.options = {
+          "positionClass": "toast-top-left",
+          "closeButton": true,
+        };
+        <% flash.each do |type, msg| %>
+          <% type = 'info' if type == 'notice' %>
+          <% type = 'error' if type == 'alert' %>
+          <% type = 'success' if type == 'success' %>
+          toastr['<%= type %>']('<%= msg %>');
+        <% end %>
+      </script>
+    <% end %>
+
   </body>
 </html>

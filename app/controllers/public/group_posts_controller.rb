@@ -1,12 +1,15 @@
 class Public::GroupPostsController < ApplicationController
+  before_action :authenticate_member!
+  before_action :set_group
   before_action :set_group_post, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_group_member
+  before_action :ensure_contributer, only: [:edit, :update, :destroy]
 
   def create
-    @group = Group.find(params[:group_id])
     @group_post = @group.group_posts.new(group_post_params)
     @group_post.member_id = current_member.id
     if @group_post.save
-      redirect_to group_path(@group)
+      redirect_to group_path(@group), success: "トピックを投稿しました"
     else
       render "error"
     end
@@ -18,7 +21,6 @@ class Public::GroupPostsController < ApplicationController
   end
 
   def new
-    @group = Group.find(params[:group_id])
     @group_post = @group.group_posts.new
   end
 
@@ -27,7 +29,7 @@ class Public::GroupPostsController < ApplicationController
 
   def update
     if @group_post.update(group_post_params)
-      redirect_to group_path(@group)
+      redirect_to group_group_post_path(@group, @group_post), success: "トピックを更新しました"
     else
       render "error"
     end
@@ -35,6 +37,7 @@ class Public::GroupPostsController < ApplicationController
 
   def destroy
     @group_post.destroy
+    redirect_to group_path(@group), alert: "トピックを削除しました"
   end
 
   private
@@ -43,8 +46,25 @@ class Public::GroupPostsController < ApplicationController
     params.require(:group_post).permit(:member_id, :group_id, :title, :content)
   end
 
-  def set_group_post
+  def set_group
     @group = Group.find(params[:group_id])
+  end
+
+  def set_group_post
     @group_post = GroupPost.find(params[:id])
   end
+
+  def ensure_group_member
+    unless current_member.joined_already?(@group)
+      redirect_to groups_path
+    end
+  end
+  # グループに加入していない会員がURLからアクションを起こそうとしたとき、グループ一覧画面へリダイレクトさせる
+
+  def ensure_contributer
+    unless @group_post.member == current_member
+    redirect_to group_path(@group), alert: "権限がありません"
+    end
+  end
+
 end

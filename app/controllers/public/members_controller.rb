@@ -1,4 +1,5 @@
 class Public::MembersController < ApplicationController
+  before_action :authenticate_member!
 
   def index
     member_search = params[:member_search]
@@ -30,9 +31,9 @@ class Public::MembersController < ApplicationController
       render "edit"
     end
   end
-  
+
   private
-  
+
   def member_params
     params.require(:member).permit(:account_name, :display_name, :email, :member_image, :introduction)
   end

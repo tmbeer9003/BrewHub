@@ -1,10 +1,11 @@
 class Admin::BreweriesController < ApplicationController
+  before_action :authenticate_admin!
   layout "application_no_sidebar"
 
   def create
     @brewery = Brewery.new(brewery_params)
     if @brewery.save
-      redirect_to request.referer
+      redirect_to admin_breweries_path, success: "ブルワリー情報を登録しました"
     else
       render "error"
     end
@@ -23,7 +24,7 @@ class Admin::BreweriesController < ApplicationController
     @brewery = Brewery.find(params[:id])
     if @brewery.update(brewery_params)
       params[:id] = nil
-      redirect_to admin_breweries_path
+      redirect_to admin_breweries_path, success: "ブルワリー情報を更新しました"
     else
       render "error"
     end

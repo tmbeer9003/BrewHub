@@ -33,6 +33,8 @@
 </div>
 
 <div class="d-flex justify-content-center">
-  <%= link_to "このビールについて投稿する", new_post_path(selected_beer: @beer.id), class: "btn btn-success px-4 rounded-pill mr-2" %>
+  <% if member_signed_in? %>
+    <%= link_to "このビールについて投稿する", new_post_path(selected_beer: @beer.id), class: "btn btn-success px-4 rounded-pill mr-2" %>
+  <% end %>
   <%= link_to "戻る", beers_path, class: "btn btn-primary px-4 rounded-pill" %>
 </div>

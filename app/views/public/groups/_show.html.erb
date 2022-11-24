@@ -20,9 +20,9 @@
         <div class="card-text">
           <% if group.owner == current_member %>
             <%= link_to "編集", edit_group_path(group), class: "btn btn-success" %>
-            <%= link_to "削除", group_path(group), method: :delete, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
+            <%= link_to "削除", group_path(group), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
           <% elsif current_member.joined_already?(group) %>
-            <%= link_to "退会する", group_groups_member_path(group), method: :delete, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
+            <%= link_to "退会する", group_groups_member_path(group), method: :delete, "data-confirm" => "本当に退会しますか？", class: "btn btn-warning text-white" %>
           <% else %>
             <%= link_to "参加する", group_groups_member_path(group), method: :post, class: "btn btn-info" %>
           <% end %>

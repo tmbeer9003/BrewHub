@@ -1,0 +1,48 @@
+ja:
+  activerecord:
+    models:
+    attributes:
+      beer:
+        name: ビール名
+        beer_style: ビアスタイル
+        brewery: ブルワリー
+        abv: ABV
+        ibu: IBU
+      post:
+        content: キャプション
+        serving_style: サービング
+      bar:
+        name: 飲んだお店名
+        location: 所在地
+      shop:
+        name: 買ったお店名
+        location: 所在地
+      post_comment:
+        content: コメント内容
+      group:
+        name: グループ名
+        description: グループの説明
+      group_post:
+        title: トピック名
+        content: 本文
+      group_post_comment:
+        content: コメント内容
+      brewery:
+        name: ブルワリー名
+        location: 所在地
+        description: ブルワリー説明
+      beer_style:
+        name: ビアスタイル名
+        category: 区分
+
+    errors:
+      models:
+        shop:
+          attributes:
+            location:
+              blank: を選択してください
+        bar:
+          attributes:
+            location:
+              blank: を選択してください
+

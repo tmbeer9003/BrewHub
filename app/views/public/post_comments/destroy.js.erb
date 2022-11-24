@@ -1,1 +1,2 @@
 $("#post-comments-index").html("<%= j(render "public/post_comments/post_comments_index", post_comments: @post_comments, post: @post) %>");
+$("#error-message").html("<%= j(render 'layouts/errors', obj: @post_comment) %>");

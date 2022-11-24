@@ -13,6 +13,8 @@ import "bootstrap"
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
 import "./raty"
+import toastr from 'toastr';
+window.toastr = toastr;
 
 Rails.start()
 Turbolinks.start()

@@ -5,7 +5,11 @@
         <span class="small text-danger"> *は必須項目です</span>
       </h5>
 
-      <%= form_with model: @beer do |f| %>
+      <div id="error-message">
+        <%= render "layouts/errors", obj: @beer %>
+      </div>
+
+      <%= form_with model: @beer, local: false do |f| %>
         <div class="row form-group my-2">
           <div class="col-md-3 pr-0">
             <%= f.label :name, "ビール名", class: "col-form-label" %><span class="text-danger">*</span>
@@ -63,7 +67,7 @@
 
         <div class="text-center py-3">
           <%= f.submit "登録", class: "btn btn-success px-4 rounded-pill" %>
-          <%= link_to "戻る", :back, class: "btn btn-primary px-4 rounded-pill" %>
+          <%= link_to "戻る", beers_path, class: "btn btn-primary px-4 rounded-pill" %>
         </div>
       <% end %>
     </div>

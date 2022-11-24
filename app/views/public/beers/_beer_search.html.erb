@@ -1,6 +1,6 @@
 <div class="form-row mt-3">
   <div class="col-md-4 pb-0">
-    <%= form_with url: beers_path, method: :get do |f| %>
+    <%= form_with url: beers_path, method: :get, local: false do |f| %>
       <div class="form-group input-group border border-secondary rounded-pill bg-white mb-1">
         <%= f.text_field :beer_search, placeholder: "ビール名で検索", class: "form-control form-control-sm input-group-prepend border-0 bg-transparent" %>
         <span class="input-group-btn">
@@ -11,7 +11,7 @@
   </div>
 
   <div class="col-md-4 pb-0">
-    <%= form_with url: beers_path, method: :get do |f| %>
+    <%= form_with url: beers_path, method: :get, local: false do |f| %>
       <div class="form-group input-group form-check pl-0 border border-secondary rounded-pill bg-white mb-1">
         <%= f.collection_select :refine_brewery, breweries, :id, :name, {prompt: 'ブルワリーから探す'}, class: 'form-control form-control-sm input-group-prepend border-0 bg-transparent' %>
         <span class="input-group-btn">
@@ -22,7 +22,7 @@
   </div>
 
   <div class="col-md-4 pb-0">
-    <%= form_with url: beers_path, method: :get do |f| %>
+    <%= form_with url: beers_path, method: :get, local: false do |f| %>
       <div class="form-group input-group form-check pl-0 border border-secondary rounded-pill bg-white mb-1">
         <%= f.collection_select :refine_beer_style, beer_styles, :id, :name, {prompt: 'ビアスタイルから探す'}, class: 'form-control form-control-sm input-group-prepend border-0 bg-transparent' %>
         <span class="input-group-btn">

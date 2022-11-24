@@ -1,5 +1,7 @@
 class Public::GroupsController < ApplicationController
+    before_action :authenticate_member!
     before_action :set_group, only: [:show, :edit, :update, :destroy]
+    before_action :ensure_owner, only: [:edit, :update, :destroy]
 
   def index
     group_search = params[:group_search]
@@ -16,7 +18,7 @@ class Public::GroupsController < ApplicationController
     @group = current_member.groups.new(group_params)
     @group.owner_id = current_member.id
     if current_member.save
-      redirect_to group_path(@group)
+      redirect_to group_path(@group), success: "グループを作成しました"
     else
       render "error"
     end
@@ -40,7 +42,7 @@ class Public::GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-     redirect_to group_path(@group)
+     redirect_to group_path(@group), success: "グループ情報を更新しました"
     else
       render "error"
     end
@@ -48,7 +50,7 @@ class Public::GroupsController < ApplicationController
 
   def destroy
     @group.destroy
-    redirect_to groups_path
+    redirect_to groups_path, alert: "グループを削除しました"
   end
 
   private
@@ -59,6 +61,12 @@ class Public::GroupsController < ApplicationController
 
   def set_group
     @group = Group.find(params[:id])
+  end
+
+  def ensure_owner
+    unless @group.owner == current_member
+    redirect_to group_path(@group)
+    end
   end
 
 end

@@ -1,4 +1,5 @@
 class Public::BeersController < ApplicationController
+  before_action :authenticate_member!, except: [:index, :show]
 
   def new
     @beer = Beer.new
@@ -9,7 +10,7 @@ class Public::BeersController < ApplicationController
   def create
     @beer = Beer.new(beer_params)
     if @beer.save
-      redirect_to request.referer
+      redirect_to beer_path(@beer), flash: {success: "ビール情報を登録しました"}
     else
       render "error"
     end
@@ -18,18 +19,18 @@ class Public::BeersController < ApplicationController
   def index
     @breweries = Brewery.all
     @beer_styles = BeerStyle.all
-    beer_search = params[:beer_search]
+    @beer_search = params[:beer_search]
     # ビール（キーワード）検索で受け取った値を代入
-    refine_brewery = params[:refine_brewery]
+    @refine_brewery = params[:refine_brewery]
     # ブルワリー検索で受け取った値を代入
-    refine_beer_style = params[:refine_beer_style]
+    @refine_beer_style = params[:refine_beer_style]
     # ビアスタイル検索で受け取った値を代入
-    if beer_search != nil
-      @beers = Beer.where("name like ?", "%#{beer_search}%").order(evaluation: :desc).page(params[:page]).per(10)
-    elsif refine_brewery != nil
-      @beers = Beer.where(brewery_id: refine_brewery).order(evaluation: :desc).page(params[:page]).per(10)
-    elsif refine_beer_style != nil
-      @beers = Beer.where(beer_style_id: refine_beer_style).order(evaluation: :desc).page(params[:page]).per(10)
+    if @beer_search != nil
+      @beers = Beer.where("name like ?", "%#{@beer_search}%").order(evaluation: :desc).page(params[:page]).per(10)
+    elsif @refine_brewery != nil
+      @beers = Beer.where(brewery_id: @refine_brewery).order(evaluation: :desc).page(params[:page]).per(10)
+    elsif @refine_beer_style != nil
+      @beers = Beer.where(beer_style_id: @refine_beer_style).order(evaluation: :desc).page(params[:page]).per(10)
     else
       @beers = Beer.order(evaluation: :desc).page(params[:page]).per(10)
     end

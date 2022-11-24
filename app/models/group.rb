@@ -6,6 +6,8 @@ class Group < ApplicationRecord
 
   has_one_attached :group_image
 
+  validates :name, presence:true, uniqueness: true, length:{maximum:20}
+  validates :description, presence:true, length:{maximum:200}
 
   def get_group_image(width, height)
     unless group_image.attached?

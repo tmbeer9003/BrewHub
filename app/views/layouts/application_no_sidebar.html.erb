@@ -19,32 +19,93 @@
           <% end %>
         </span>
 
+        <% if member_signed_in? %>
+          <div class="ml-auto">
+            <li class="nav-item dropdown list-unstyled">
+                <a class="nav-link dropdown-toggle bg-transparent text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= image_tag current_member.get_member_image(40,40), class: "rounded-circle image-fit" %>
+                  @<%= current_member.account_name %>
+                </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <%= link_to "マイページ", mypage_path, class: "dropdown-item" %>
+                <%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "dropdown-item" %>
+              </div>
+            </li>
+          </div>
+        <% elsif admin_signed_in? %>
+          <div class="ml-auto">
+            <li class="nav-item dropdown list-unstyled">
+                <a class="nav-link dropdown-toggle bg-transparent text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  管理者としてログイン中
+                </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "dropdown-item" %>
+              </div>
+            </li>
+          </div>
+        <% end %>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
-          <% if member_signed_in? %>
-            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "マイページ", mypage_path, class: "text-reset" %></li>
-            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ビールを探す", beers_path, class: "text-reset" %></li>
-            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "投稿を探す", posts_path, class: "text-reset" %></li>
-            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ユーザーを探す", members_path, class: "text-reset" %></li>
-            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "グループを探す", groups_path, class: "text-reset" %></li>
-            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "text-reset" %></li>
-          <% elsif admin_signed_in? %>
-            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ビアスタイル管理", admin_beer_styles_path, class: "text-reset" %></li>
-            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ブルワリー管理", admin_breweries_path, class: "text-reset" %></li>
-            <li class="nav-item btn btn-light mx-2 my-1">ビール管理</li>
-            <li class="nav-item btn btn-light mx-2 my-1">投稿管理</li>
-            <li class="nav-item btn btn-light mx-2 my-1">ユーザー管理</li>
-            <li class="nav-item btn btn-light mx-2 my-1">グループ管理</li>
-            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-reset" %></li>
-          <% else %>
-            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ビールを探す", beers_path, class: "text-reset" %></li>
-            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "ログイン", new_member_session_path, class: "text-reset" %></li>
-            <li class="nav-item btn btn-light mx-2 my-1"><%= link_to "会員登録", new_member_registration_path, class: "text-reset" %></li>
-          <% end %>
+            <% if member_signed_in? %>
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%= link_to beers_path, class: "text-reset" do %><i class="fas fa-beer"></i>ビールを探す
+              </li><% end %>
+
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%= link_to posts_path, class: "text-reset" do %><i class="fas fa-feather-alt"></i>投稿を探す
+              </li><% end %>
+
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%= link_to members_path, class: "text-reset" do %><i class="fas fa-user"></i>ユーザーを探す
+              </li><% end %>
+
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%= link_to groups_path, class: "text-reset" do %><i class="fas fa-users"></i>グループを探す
+              </li><% end %>
+
+            <% elsif admin_signed_in? %>
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%= link_to admin_beer_styles_path, class: "text-reset" do %><i class="fas fa-wine-bottle"></i>ビアスタイル管理
+              </li><% end %>
+
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%= link_to admin_breweries_path, class: "text-reset" do %><i class="fas fa-industry"></i>ブルワリー管理
+              </li><% end %>
+
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%#= link_to admin_breweries_path, class: "text-reset" do %><i class="fas fa-beer"></i>ビール管理
+              </li><%# end %>
+
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%#= link_to admin_breweries_path, class: "text-reset" do %><i class="fas fa-feather-alt"></i>投稿管理
+              </li><%# end %>
+
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%#= link_to admin_breweries_path, class: "text-reset" do %><i class="fas fa-user"></i>ユーザー管理
+              </li><%# end %>
+
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%#= link_to admin_breweries_path, class: "text-reset" do %><i class="fas fa-users"></i>グループ管理
+              </li><%# end %>
+
+            <% else %>
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%= link_to beers_path, class: "text-reset" do %><i class="fas fa-beer"></i>ビールを探す
+              </li><% end %>
+
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%= link_to new_member_session_path, class: "text-reset" do %><i class="fas fa-sign-in-alt"></i>ログイン
+              </li><% end %>
+
+              <li class="nav-item mx-2 my-1 text-white text-center">
+                <%= link_to new_member_registration_path, class: "text-reset" do %><i class="fas fa-user-plus"></i>会員登録
+              </li><% end %>
+            <% end %>
           </ul>
         </div>
       </nav>

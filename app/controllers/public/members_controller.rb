@@ -4,6 +4,7 @@ class Public::MembersController < ApplicationController
 
   def index
     member_search = params[:member_search]
+    # 会員検索で受け取った値を代入
     if member_search == nil
       @members = Member.all.page(params[:page]).per(10)
     else

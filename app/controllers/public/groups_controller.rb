@@ -17,11 +17,7 @@ class Public::GroupsController < ApplicationController
   def create
     @group = current_member.groups.new(group_params)
     @group.owner_id = current_member.id
-    if current_member.save
-      redirect_to group_path(@group), success: "グループを作成しました"
-    else
-      render "error"
-    end
+    current_member.save ? (redirect_to group_path(@group), success: "グループを作成しました") : (render "error")
   end
 
   def show
@@ -41,11 +37,7 @@ class Public::GroupsController < ApplicationController
   end
 
   def update
-    if @group.update(group_params)
-     redirect_to group_path(@group), success: "グループ情報を更新しました"
-    else
-      render "error"
-    end
+    @group.update(group_params) ? (redirect_to group_path(@group), success: "グループ情報を更新しました") : (render "error")
   end
 
   def destroy

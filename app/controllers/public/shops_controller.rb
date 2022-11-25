@@ -3,11 +3,7 @@ class Public::ShopsController < ApplicationController
 
   def create
     @shop = Shop.new(shop_params)
-    if @shop.save
-      redirect_to request.referer, success: "お店情報を登録しました"
-    else
-      render "error"
-    end
+    @shop.save ? (redirect_to request.referer, success: "お店情報を登録しました") : (render "error")
   end
 
   private

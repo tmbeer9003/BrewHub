@@ -8,11 +8,7 @@ class Public::GroupPostsController < ApplicationController
   def create
     @group_post = @group.group_posts.new(group_post_params)
     @group_post.member_id = current_member.id
-    if @group_post.save
-      redirect_to group_path(@group), success: "トピックを投稿しました"
-    else
-      render "error"
-    end
+    @group_post.save ? (redirect_to group_path(@group), success: "トピックを投稿しました") : (render "error")
   end
 
   def show
@@ -28,11 +24,8 @@ class Public::GroupPostsController < ApplicationController
   end
 
   def update
-    if @group_post.update(group_post_params)
-      redirect_to group_group_post_path(@group, @group_post), success: "トピックを更新しました"
-    else
-      render "error"
-    end
+    @group_post.update(group_post_params) ?
+    (redirect_to group_group_post_path(@group, @group_post), success: "トピックを更新しました") : (render "error")
   end
 
   def destroy

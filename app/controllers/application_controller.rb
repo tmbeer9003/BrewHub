@@ -14,19 +14,19 @@ class ApplicationController < ActionController::Base
   end
 
   def top_beer_1
-    Beer.where(beer_style_id: 26).order(evaluation: :desc).first
+    Beer.where(beer_style_id: current_member.my_beer_style1_id).order(evaluation: :desc).first
   end
 
   def top_beer_2
-    Beer.where(beer_style_id: 2).order(evaluation: :desc).first
+    Beer.where(beer_style_id: current_member.my_beer_style2_id).order(evaluation: :desc).first
   end
 
   def top_beer_3
-    Beer.where(beer_style_id: 3).order(evaluation: :desc).first
+    Beer.where(beer_style_id: current_member.my_beer_style3_id).order(evaluation: :desc).first
   end
 
   def top_beer_4
-    Beer.where(beer_style_id: 21).order(evaluation: :desc).first
+    Beer.where(beer_style_id: current_member.my_beer_style4_id).order(evaluation: :desc).first
   end
 
 end

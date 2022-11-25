@@ -1,0 +1,55 @@
+<div class="card border-dark border-top-0 rounded-0">
+  <div class="card-body">
+    <h5 class="card-title border-bottom pb-1 mb-3">会員情報編集（マイビアスタイル）</h5>
+    <p class="text-danger">*ここで登録したビアスタイルがTop Beersに表示されます</p>
+    <%= form_with model: member do |f| %>
+      <div class="form-group row my-2">
+        <div class="col-4">
+          <%= f.label :my_beer_style1_id, "マイビアスタイル①", class: "col-form-label" %>
+        </div>
+        <div class="col-8">
+          <div class="form-check pl-0 mb-1">
+            <%= f.collection_select :my_beer_style1_id, beer_styles, :id, :name, {prompt: '--未選択--'}, class: 'form-control rounded-pill' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row my-2">
+        <div class="col-4">
+          <%= f.label :my_beer_style2_id, "マイビアスタイル②", class: "col-form-label" %>
+        </div>
+        <div class="col-8">
+          <div class="form-check pl-0 mb-1">
+            <%= f.collection_select :my_beer_style2_id, beer_styles, :id, :name, {prompt: '--未選択--'}, class: 'form-control rounded-pill' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row my-2">
+        <div class="col-4">
+          <%= f.label :my_beer_style3_id , "マイビアスタイル③", class: "col-form-label" %>
+        </div>
+        <div class="col-8">
+          <div class="form-check pl-0 mb-1">
+            <%= f.collection_select :my_beer_style3_id, beer_styles, :id, :name, {prompt: '--未選択--'}, class: 'form-control rounded-pill' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row my-2">
+        <div class="col-4">
+          <%= f.label :my_beer_style4_id, "マイビアスタイル④", class: "col-form-label" %>
+        </div>
+        <div class="col-8">
+          <div class="form-check pl-0 mb-1">
+            <%= f.collection_select :my_beer_style4_id, beer_styles, :id, :name, {prompt: '--未選択--'}, class: 'form-control rounded-pill' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions text-center py-3">
+        <%= f.submit "変更", class: "btn btn-success px-4 rounded-pill" %>
+      </div>
+    <% end %>
+  </div>
+</div>

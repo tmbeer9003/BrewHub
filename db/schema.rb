@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_20_131436) do
+ActiveRecord::Schema.define(version: 2022_11_25_024929) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -152,8 +152,16 @@ ActiveRecord::Schema.define(version: 2022_11_20_131436) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "introduction"
+    t.integer "my_beer_style1_id"
+    t.integer "my_beer_style2_id"
+    t.integer "my_beer_style3_id"
+    t.integer "my_beer_style4_id"
     t.index ["account_name"], name: "index_members_on_account_name", unique: true
     t.index ["email"], name: "index_members_on_email", unique: true
+    t.index ["my_beer_style1_id"], name: "index_members_on_my_beer_style1_id"
+    t.index ["my_beer_style2_id"], name: "index_members_on_my_beer_style2_id"
+    t.index ["my_beer_style3_id"], name: "index_members_on_my_beer_style3_id"
+    t.index ["my_beer_style4_id"], name: "index_members_on_my_beer_style4_id"
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
@@ -213,6 +221,10 @@ ActiveRecord::Schema.define(version: 2022_11_20_131436) do
   add_foreign_key "groups", "members", column: "owner_id"
   add_foreign_key "groups_members", "groups"
   add_foreign_key "groups_members", "members"
+  add_foreign_key "members", "beer_styles", column: "my_beer_style1_id"
+  add_foreign_key "members", "beer_styles", column: "my_beer_style2_id"
+  add_foreign_key "members", "beer_styles", column: "my_beer_style3_id"
+  add_foreign_key "members", "beer_styles", column: "my_beer_style4_id"
   add_foreign_key "post_comments", "members"
   add_foreign_key "post_comments", "posts"
   add_foreign_key "posts", "bars"

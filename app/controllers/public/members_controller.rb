@@ -25,17 +25,19 @@ class Public::MembersController < ApplicationController
 
   def edit
     @member = current_member
+    @beer_styles = BeerStyle.all
   end
 
   def update
     @member = current_member
+    @beer_styles = BeerStyle.all
     render "edit" if @member.update(member_params)
   end
 
   private
 
   def member_params
-    params.require(:member).permit(:account_name, :display_name, :email, :member_image, :introduction)
+    params.require(:member).permit(:account_name, :display_name, :email, :member_image, :introduction, :my_beer_style1_id, :my_beer_style2_id, :my_beer_style3_id, :my_beer_style4_id)
   end
 
   def ensure_guest

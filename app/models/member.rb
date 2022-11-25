@@ -22,6 +22,10 @@ class Member < ApplicationRecord
   has_many :own_groups, class_name: 'Group', foreign_key: 'owner_id', dependent: :destroy
   has_many :group_posts, dependent: :destroy
   has_many :group_post_comments, dependent: :destroy
+  belongs_to :my_beer_style1, class_name: 'BeerStyle', optional: true
+  belongs_to :my_beer_style2, class_name: 'BeerStyle', optional: true
+  belongs_to :my_beer_style3, class_name: 'BeerStyle', optional: true
+  belongs_to :my_beer_style4, class_name: 'BeerStyle', optional: true
 
   has_one_attached :member_image
 

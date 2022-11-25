@@ -11,7 +11,7 @@ class Public::HomesController < ApplicationController
     # 投稿一覧をフォローしているユーザーと自分の投稿に絞り込み
     post_search = params[:post_search]
     # 投稿検索で受け取った値を代入
-    if post_search != nil
+    unless post_search.nil?
     #検索から遷移したら
       @posts = timeline_posts.where("content like ?", "%#{post_search}%").order(id: :desc).page(params[:page]).per(7)
     else
@@ -24,7 +24,7 @@ class Public::HomesController < ApplicationController
     # 投稿一覧を自分がCheersしている投稿に絞り込み
     post_search = params[:post_search]
     # 投稿検索で受け取った値を代入
-    if post_search != nil
+    unless post_search.nil?
     #検索から遷移したら
       @posts = cheers_posts.where("content like ?", "%#{post_search}%").order(id: :desc).page(params[:page]).per(7)
     else
@@ -35,7 +35,7 @@ class Public::HomesController < ApplicationController
   def group_list
     group_search = params[:group_search]
     # グループ検索で受け取った値を代入
-    if group_search != nil
+    unless group_search.nil?
     #検索から遷移したら
       groups = current_member.groups.where("name like ?", "%#{group_search}%").includes(:members).sort {|a,b| b.members.size <=> a.members.size}
       @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)

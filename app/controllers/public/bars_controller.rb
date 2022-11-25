@@ -3,11 +3,7 @@ class Public::BarsController < ApplicationController
 
   def create
     @bar = Bar.new(bar_params)
-    if @bar.save
-      redirect_to request.referer, success: "お店情報を登録しました"
-    else
-      render "error"
-    end
+    @bar.save ? (redirect_to request.referer, success: "お店情報を登録しました") : (render "error")
   end
 
   private

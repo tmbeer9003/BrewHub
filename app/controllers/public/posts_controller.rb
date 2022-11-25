@@ -1,12 +1,12 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_member!, except: [:index, :show]
+  before_action :authenticate_member!, except: [:index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_member, only: [:edit, :update, :destroy]
 
   def index
     post_search = params[:post_search]
     # 投稿検索で受け取った値を代入
-    if post_search != nil
+    unless post_search.nil?
       @posts = Post.where("content like ?", "%#{post_search}%").order(id: :desc).page(params[:page]).per(7)
     else
       @posts = Post.all.order(id: :desc).page(params[:page]).per(7)
@@ -77,9 +77,7 @@ class Public::PostsController < ApplicationController
   end
 
   def ensure_correct_member
-    unless @post.member == current_member
-      redirect_to mypage_path, alert: "権限がありません"
-    end
+    redirect_to mypage_path, alert: "権限がありません" unless @post.member == current_member
   end
 
 end

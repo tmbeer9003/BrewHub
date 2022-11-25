@@ -6,9 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def my_posts
-    if member_signed_in?
-      current_member.posts.order(id: :desc).limit(9)
-    end
+    current_member.posts.order(id: :desc).limit(9) if member_signed_in?
   end
 
   def top_beer_all

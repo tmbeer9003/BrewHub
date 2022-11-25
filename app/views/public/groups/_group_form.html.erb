@@ -1,4 +1,8 @@
-<%= form_with model: group do |f| %>
+<div id="error-message">
+  <%= render "layouts/errors", obj: @group %>
+</div>
+
+<%= form_with model: group, local: false do |f| %>
   <div class="row form-group my-2">
     <div class="col-md-3">
       <%= f.label :name, "グループ名", class: "col-form-label" %><span class="text-danger">*</span>

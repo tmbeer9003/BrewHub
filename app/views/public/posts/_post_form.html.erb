@@ -1,3 +1,7 @@
+<div id="error-message">
+  <%= render "layouts/errors", obj: @beer %>
+</div>
+
 <div class="row form-group my-2">
   <div class="col-md-3">
     <span>ビール名</span><span class="text-danger">*</span>
@@ -16,11 +20,11 @@
     <%= link_to "ビールを探す", beers_path, class: "btn btn-success px-4 rounded-pill" %>
   </div>
 <% else %>
-  <%= form_with model: post do |f| %>
+  <%= form_with model: post, local: false do |f| %>
     <%= f.hidden_field :beer_id, :value => beer.id %>
     <div class="row form-group my-2">
       <div class="col-md-3">
-        <%= f.label :post_image, "画像", class: "col-form-label" %><span class="text-danger">*</span>
+        <%= f.label :post_image, "画像", class: "col-form-label" %>
       </div>
       <div class="col-md-9 d-flex align-items-center">
         <%= f.file_field :post_image, accept: "image/*", class: "form-control-file" %>
@@ -37,7 +41,7 @@
 
     <div class="row form-group my-2">
       <div class="col-md-3">
-         <%= f.label :serving_style, "サービング", class: "col-form-label" %>
+         <%= f.label :serving_style, "サービング", class: "col-form-label" %><span class="text-danger">*</span>
       </div>
       <div class="col-md-9 form-control border-0">
         <div class="form-check form-check-inline">

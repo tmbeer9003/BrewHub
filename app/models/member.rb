@@ -22,8 +22,25 @@ class Member < ApplicationRecord
   has_many :own_groups, class_name: 'Group', foreign_key: 'owner_id', dependent: :destroy
   has_many :group_posts, dependent: :destroy
   has_many :group_post_comments, dependent: :destroy
+  belongs_to :my_beer_style1, class_name: 'BeerStyle', optional: true
+  belongs_to :my_beer_style2, class_name: 'BeerStyle', optional: true
+  belongs_to :my_beer_style3, class_name: 'BeerStyle', optional: true
+  belongs_to :my_beer_style4, class_name: 'BeerStyle', optional: true
 
   has_one_attached :member_image
+
+  VALID_ACCOUNT_NAME_REGEX = /\A[a-z0-9]+\z/i.freeze
+
+  validates :account_name, presence:true, uniqueness: true, length:{maximum:12}, format: { with: VALID_ACCOUNT_NAME_REGEX, message: 'は半角英数字で入力してください' }
+  validates :display_name, presence:true, length:{maximum:12}
+  validates :date_of_birth, presence:true
+  validate :over_20
+
+  def over_20
+    unless date_of_birth == nil
+      errors.add(:date_of_birth, '：20歳未満の方の登録はできません') if date_of_birth > Date.tomorrow.ago(20.years)
+    end
+  end
 
   def get_member_image(width, height)
     unless member_image.attached?
@@ -53,10 +70,18 @@ class Member < ApplicationRecord
     self.relationships.exists?(follow_id: member.id)
   end
   #自分が相手からフォローされているか確認するメソッド
-  
+
   def joined_already?(group)
     self.groups_members.exists?(group_id: group.id)
   end
-   #グループに参加済から確認するメソッド
+   #グループに参加済か確認するメソッド
+
+  def self.guest
+    find_or_create_by!(account_name: 'guestuser', display_name: 'ゲストユーザー', email: 'guest@example.com', date_of_birth: '2000-01-01') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.account_name = "guestuser"
+    end
+  end
+
 
 end

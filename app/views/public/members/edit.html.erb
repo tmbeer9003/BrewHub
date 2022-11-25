@@ -1,58 +1,27 @@
-<div class="card border-dark mx-auto col-md-10 mt-3">
-  <div class="card-body">
-    <h5 class="card-title border-bottom pb-1 mb-3">会員情報編集</h5>
+<div class="mx-auto col-md-10">
+  <% unless current_member.account_name == "guestuser" %>
+    <ul class="nav nav-tabs nav-justified mt-3 border-bottom-0">
+      <li class="nav-item">
+        <a href="#edit-basic" class="nav-link active text-reset border-dark" data-toggle="tab">基本情報</a>
+      </li>
+      <li class="nav-item">
+        <a href="#edit-beer-styles" class="nav-link text-reset border-dark" data-toggle="tab">マイビアスタイル</a>
+      </li>
+    </ul>
 
-    <%= form_with model: @member do |f| %>
-      <div class="form-group row my-2">
-        <div class="col-4">
-          <label class="col-form-label" for="member_account_name">
-            アカウント名<br>（英数字）</label><span class="text-danger ml-0">*</span>
-        </div>
-        <div class="col-8">
-          <%= f.text_field :account_name, autofocus: true, autocomplete: "account_name", placeholder: "アカウント名（英数字）", class: "form-control rounded-pill" %>
-        </div>
+    <div class="tab-content">
+      <div id="edit-basic", class="tab-pane active">
+        <%= render "edit_basic", member: @member %>
       </div>
 
-      <div class="form-group row my-2">
-        <div class="col-4">
-          <%= f.label :display_name, "表示名", class: "col-form-label" %><span class="text-danger">*</span>
-        </div>
-        <div class="col-8">
-          <%= f.text_field :display_name, autofocus: true, autocomplete: "display_name", placeholder: "表示名", class: "form-control rounded-pill" %>
-        </div>
+      <div id="edit-beer-styles", class="tab-pane">
+        <%= render "edit_beer_style", member: @member, beer_styles: @beer_styles %>
       </div>
+    </div>
 
-      <div class="form-group row my-2">
-        <div class="col-4">
-          <%= f.label :email, "メールアドレス", class: "col-form-label" %><span class="text-danger">*</span>
-        </div>
-        <div class="col-8">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control rounded-pill" %>
-        </div>
-      </div>
-
-      <div class="form-group row my-2">
-        <div class="col-4">
-          <%= f.label :member_image, "プロフィール画像", class: "col-form-label" %><span class="text-danger">*</span>
-        </div>
-        <div class="col-8 d-flex align-items-center">
-          <%= f.file_field :member_image, autofocus: true, class: "form-control-file" %>
-        </div>
-      </div>
-
-      <div class="form-group row my-2">
-        <div class="col-4">
-          <%= f.label :introduction, "自己紹介", class: "col-form-label" %><span class="text-danger">*</span>
-        </div>
-        <div class="col-8">
-          <%= f.text_area :introduction, autofocus: true, placeholder: "自己紹介", rows: 5, class: "form-control rounded" %>
-        </div>
-      </div>
-
-      <div class="actions text-center py-3">
-        <%= f.submit "変更", class: "btn btn-success px-4 rounded-pill" %>
-      </div>
-    <% end %>
-
-  </div>
+  <% else %>
+    <div class="mt-3 border-top border-dark">
+      <%= render "edit_beer_style", member: @member, beer_styles: @beer_styles %>
+    </div>
+  <% end %>
 </div>

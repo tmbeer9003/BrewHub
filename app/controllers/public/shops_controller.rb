@@ -1,11 +1,9 @@
 class Public::ShopsController < ApplicationController
+  before_action :authenticate_member!
+
   def create
     @shop = Shop.new(shop_params)
-    if @shop.save
-      redirect_to request.referrer
-    else
-      render "error"
-    end
+    @shop.save ? (redirect_to request.referer, success: "お店情報を登録しました") : (render "error")
   end
 
   private

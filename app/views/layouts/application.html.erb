@@ -13,27 +13,39 @@
   <body>
     <header class="sticky-top">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-          <span class="navbar-brand"><%= link_to "Brew Hub", root_path, class: "text-reset" %></span>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-            <% if member_signed_in? %>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "マイページ", mypage_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "ビールを探す", beers_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "投稿を探す", posts_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "ユーザーを探す", members_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "グループを探す", groups_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "text-reset" %></li>
-            <% else %>
-              <li class="nav-item btn btn-light mx-2">ビールを探す</li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "ログイン", new_member_session_path, class: "text-reset" %></li>
-              <li class="nav-item btn btn-light mx-2"><%= link_to "会員登録", new_member_registration_path, class: "text-reset" %></li>
-            <% end %>
-            </ul>
+        <span class="navbar-brand ml-3">
+          <%= link_to root_path, class: "text-reset" do %>
+            <%= image_tag '/images/logo.png',size: '200x44', class: "border border-dark m-0 p-0" %>
+          <% end %>
+        </span>
+
+        <% if member_signed_in? %>
+          <div class="ml-auto">
+            <li class="nav-item dropdown list-unstyled">
+                <a class="nav-link dropdown-toggle bg-transparent text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= image_tag current_member.get_member_image(40,40), class: "rounded-circle image-fit" %>
+                  @<%= current_member.account_name %>
+                </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <%= link_to "マイページ", mypage_path, class: "dropdown-item" %>
+                <%= link_to "ログアウト", destroy_member_session_path, method: :delete, class: "dropdown-item" %>
+              </div>
+            </li>
           </div>
+        <% end %>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <% if member_signed_in? %>
+              <%= render "layouts/menu_member" %>
+            <% else %>
+              <%= render "layouts/menu_non_member" %>
+            <% end %>
+          </ul>
         </div>
       </nav>
     </header>
@@ -44,7 +56,7 @@
           <% if member_signed_in? %>
             <%= render "layouts/mypage" %>
           <% end %>
-          <div class="col-md-7">
+          <div class="col-md-7 mx-auto">
             <%= yield %>
           </div>
           <% if member_signed_in? %>
@@ -57,5 +69,21 @@
     <footer class="fixed-bottom bg-dark py-2">
       <p class="text-center text-white">Copyright © 2022 Brew Hub All Rights Reserved.</p>
     </footer>
+
+    <% unless flash.empty? %>
+        <script>
+          toastr.options = {
+            "positionClass": "toast-top-left",
+            "closeButton": true,
+          };
+          <% flash.each do |type, msg| %>
+            <% type = 'info' if type == 'notice' %>
+            <% type = 'error' if type == 'alert' %>
+            <% type = 'success' if type == 'success' %>
+            toastr['<%= type %>']('<%= msg %>');
+          <% end %>
+        </script>
+    <% end %>
+
   </body>
 </html>

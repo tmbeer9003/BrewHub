@@ -43,18 +43,18 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:display_name, :email, :date_of_birth])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:account_name, :display_name, :email, :date_of_birth])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:display_name, :email])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:account_name, :display_name, :email])
   end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    mypage_path
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

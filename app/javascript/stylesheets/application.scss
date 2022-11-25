@@ -1,5 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~toastr/toastr';
+
 
 .pagination>li>a {
   border: none;
@@ -34,4 +36,12 @@ main {
 
 .image-fit {
   max-width: 100%;
+}
+
+.nav-link {
+  background-color: #d3d3d3
+}
+
+.btn-login{
+  width: 150px;
 }

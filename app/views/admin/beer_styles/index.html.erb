@@ -1,16 +1,19 @@
-<div class="container">
-  <div class="row mt-4">
-    <div class="col-md-3", id="beer-style-form">
-      <%= render "form", beer_style: @beer_style %>
+<div class="d-flex mx-auto col-md-10 mt-3">
+  <div class="col-md-3", id="beer-style-form">
+    <%= render "form", beer_style: @beer_style %>
+  </div>
+
+  <div class="col-md-9">
+    <div id="error-message">
+      <%= render "layouts/errors", obj: @beer_style %>
     </div>
 
-    <div class="col-md-9">
-      <div id="beer_style_list">
-        <%= render "index", beer_styles: @beer_styles %>
-      </div>
-      <div class="d-flex justify-content-center">
-        <%= paginate @beer_styles %>
-      </div>
+    <div id="beer_style_list">
+      <%= render "index", beer_styles: @beer_styles %>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <%= paginate @beer_styles %>
     </div>
   </div>
 </div>

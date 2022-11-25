@@ -9,6 +9,9 @@ class Post < ApplicationRecord
 
   has_one_attached :post_image
 
+  validates :content, length:{maximum:500}
+  validates :serving_style, presence:true,length:{maximum:200}
+
   enum serving_style: { draft: 0, can: 1, bottle: 2, others: 3 }
 
   def get_post_image(width, height)

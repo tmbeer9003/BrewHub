@@ -1,12 +1,12 @@
 class Public::PostCommentsController < ApplicationController
+  before_action :authenticate_member!
+
   def create
     @post = Post.find(params[:post_id])
     @post_comment = @post.post_comments.new(post_comment_params)
     @post_comment.member_id = current_member.id
     @post_comments = @post.post_comments.order("id DESC").page(params[:page]).per(5)
-    unless @post_comment.save
-      render "error"
-    end
+    render "error" unless @post_comment.save
   end
 
   def destroy

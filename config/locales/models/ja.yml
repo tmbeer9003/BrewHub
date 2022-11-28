@@ -45,4 +45,8 @@ ja:
           attributes:
             location:
               blank: を選択してください
+        brewery:
+          attributes:
+            location:
+              blank: を選択してください
 

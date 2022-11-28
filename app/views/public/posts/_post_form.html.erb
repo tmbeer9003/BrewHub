@@ -68,7 +68,7 @@
         <%= f.label :content, "キャプション", class: "col-form-label" %>
       </div>
       <div class="col-md-9">
-        <%= f.text_area :content, autofocus: true, rows: 5, placeholder: "飲んだ感想などを自由に記入してください！", class: "form-control" %>
+        <%= f.text_area :content, autofocus: true, rows: 5, placeholder: "飲んだ感想などを自由に記入してください！（省略可）", class: "form-control" %>
       </div>
     </div>
 
@@ -78,7 +78,7 @@
 
     <div class="actions text-center py-3">
       <% if params[:id] == nil %>
-        <%= f.submit "登録", class: "btn btn-success px-4 rounded-pill" %>
+        <%= f.submit "投稿", class: "btn btn-success px-4 rounded-pill" %>
       <% else %>
         <%= f.submit "更新", class: "btn btn-success px-4 rounded-pill" %>
       <% end %>

@@ -3,6 +3,7 @@ class Brewery < ApplicationRecord
   has_many :beers, dependent: :destroy
 
   validates :name, presence:true, uniqueness: true, length:{maximum:20}
+  validates :location, presence:true
   validates :description, length:{maximum:500}
 
   enum location: {

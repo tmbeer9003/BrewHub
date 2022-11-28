@@ -28,10 +28,10 @@
           </div>
         <% end %>
           <div>
-            <span class="btn btn-secondary">メッセージ</span>
+            <!--<span class="btn btn-secondary">メッセージ</span>-->
             <% if member == current_member %>
-              <%= link_to "設定", edit_member_path(current_member), class:"btn btn-secondary ml-2" %>
-            <% end %> 
+              <%= link_to mypage_edit_path, class:"btn btn-secondary ml-2" do %><i class="fas fa-wrench"></i>設定<% end %>
+            <% end %>
           </div>
       </div>
 
@@ -40,7 +40,7 @@
       <div class="col-3 d-flex flex-column align-items-center justify-content-center px-0">
         <div>
           <% if current_member.followed_already?(member) %>
-            <%= link_to "フォロー解除", member_relationship_path(member), method: :delete, class: "btn btn-danger" %>
+            <%= link_to "フォロー解除", member_relationship_path(member), method: :delete, class: "btn btn-warning text-white" %>
           <% elsif member.followed_me?(current_member) %>
             <%= link_to "フォローバック", member_relationship_path(member), method: :post, class: "btn btn-info" %>
           <% else %>

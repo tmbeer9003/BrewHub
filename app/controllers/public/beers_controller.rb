@@ -9,7 +9,7 @@ class Public::BeersController < ApplicationController
 
   def create
     @beer = Beer.new(beer_params)
-    @beer.save ? (redirect_to beer_path(@beer), flash: {success: "ビール情報を登録しました"}) : (render "error")
+    @beer.save ? (redirect_to beer_path(@beer), success: "ビール情報を登録しました") : (render "error")
   end
 
   def index

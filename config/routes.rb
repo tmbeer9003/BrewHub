@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
     resources :bars, only: [:create]
     resources :shops, only: [:create]
-    resources :members, except: [:new, :create, :destroy] do
+    resources :members, only: [:update, :index, :show] do
       resource :relationship, only: [:create, :destroy]
       get 'followings'=> 'relationships#followings'
       get 'followers'=> 'relationships#followers'

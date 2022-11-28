@@ -42,7 +42,7 @@
             <label for="abv", class="col-form-label">ABV<br><span class="small">（アルコール度数）</span></label>
           </div>
           <div class="col-md-2 my-auto pr-0">
-              <%= f.text_field :abv, autofocus: true, autocomplete: "abv", class: "form-control rounded-pill" %>
+              <%= f.text_field :abv, autofocus: true, autocomplete: "abv", placeholder: "省略可", class: "form-control rounded-pill" %>
           </div>
           <div class="col-md-1 pl-0 my-auto text-center">
             <span>%</span>
@@ -52,7 +52,7 @@
             <label for="ibu", class="col-form-label">IBU<br><span class="small">（国際苦味単位）</span></label>
           </div>
           <div class="col-md-3 my-auto">
-            <%= f.text_field :ibu, autofocus: true, autocomplete: "ibu", class: "form-control rounded-pill" %>
+            <%= f.text_field :ibu, autofocus: true, autocomplete: "ibu", placeholder: "省略可", class: "form-control rounded-pill" %>
           </div>
         </div>
 
@@ -61,7 +61,7 @@
             <%= f.label :description, "ビールの説明", class: "col-form-label"  %>
           </div>
           <div class="col-md-9">
-            <%= f.text_area :description, autofocus: true, rows: 5, class: "form-control" %>
+            <%= f.text_area :description, autofocus: true, rows: 5, placeholder: "省略可", class: "form-control" %>
           </div>
         </div>
 

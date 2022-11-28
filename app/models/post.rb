@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   has_one_attached :post_image
 
   validates :content, length:{maximum:500}
-  validates :serving_style, presence:true,length:{maximum:200}
+  validates :serving_style, presence:true
 
   enum serving_style: { draft: 0, can: 1, bottle: 2, others: 3 }
 

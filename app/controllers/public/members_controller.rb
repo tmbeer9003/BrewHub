@@ -30,7 +30,7 @@ class Public::MembersController < ApplicationController
   def update
     @member = current_member
     @beer_styles = BeerStyle.all
-    render "edit" if @member.update(member_params)
+    (redirect_to mypage_edit_path, notice: "会員情報を変更しました") if @member.update(member_params)
   end
 
   private

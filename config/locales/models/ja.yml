@@ -1,6 +1,7 @@
 ja:
   activerecord:
     models:
+      admin: 管理者
     attributes:
       beer:
         name: ビール名
@@ -34,6 +35,10 @@ ja:
       beer_style:
         name: ビアスタイル名
         category: 区分
+      admin:
+        email: メールアドレス
+        password: パスワード
+        account_name: アカウント名
 
     errors:
       models:

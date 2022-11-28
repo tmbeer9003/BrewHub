@@ -8,6 +8,6 @@
 
 Admin.create!(
     email: "test@test.com",
-    password: "aaaaaa",
+    password: "test2022",
     account_name: "admin"
 )

@@ -1,5 +1,6 @@
-class Public::MembersController < ApplicationController
-  before_action :authenticate_member!
+class Admin::MembersController < ApplicationController
+  before_action :authenticate_admin!
+  layout "application_no_sidebar"
 
   def index
     member_search = params[:member_search]
@@ -23,14 +24,18 @@ class Public::MembersController < ApplicationController
   end
 
   def edit
-    @member = current_member
-    @beer_styles = BeerStyle.all
+    @member = Member.find(params[:id])
   end
 
   def update
-    @member = current_member
-    @beer_styles = BeerStyle.all
-    (redirect_to mypage_edit_path, notice: "会員情報を変更しました") if @member.update(member_params)
+    @member = Member.find(params[:id])
+    (redirect_to edit_admin_member_path(@member), notice: "管理者権限で会員情報を変更しました") if @member.update(member_params)
+  end
+
+  def destroy
+    @member = Member.find(params[:id])
+    @member.destroy
+    redirect_to admin_members_path, alert: "管理者権限で会員を削除しました"
   end
 
   private

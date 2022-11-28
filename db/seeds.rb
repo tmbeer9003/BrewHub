@@ -45,8 +45,8 @@ Beer.create!(
     {beer_style_id: 1, brewery_id: 1, name: 'SPACE HAZY', abv: '7.0'},
     {beer_style_id: 2, brewery_id: 2, name: 'Ruta', abv: '6.0', ibu: '15'},
     {beer_style_id: 1, brewery_id: 3, name: 'CIA', abv: '7.0'},
-    {beer_style_id: 4, brewery_id: 4, name: 'ハレの日仙人2020', abv: '10.5'},
-    {beer_style_id: 5, brewery_id: 5, name: 'WINDOW TO VERTERE', abv: '8.0'},
+    {beer_style_id: 3, brewery_id: 4, name: 'ハレの日仙人2020', abv: '10.5'},
+    {beer_style_id: 4, brewery_id: 5, name: 'WINDOW TO VERTERE', abv: '8.0'},
   ]
 )
 

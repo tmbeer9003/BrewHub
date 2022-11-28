@@ -8,6 +8,12 @@ Rails.application.routes.draw do
     resources :beer_styles, except: [:new, :edit, :show]
     post 'beer_styles/:id' => 'beer_styles#edit'
     resources :breweries, except: [:new, :edit]
+    resources :members, except: [:new, :create] do
+      get 'followings'=> 'relationships#followings'
+      get 'followers'=> 'relationships#followers'
+      get 'group_list'=> 'groups#group_list'
+    end
+
   end
 
   devise_for :members, skip: [:passwords], controllers: {

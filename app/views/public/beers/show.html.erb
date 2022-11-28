@@ -10,7 +10,7 @@
 
     <div class="border-bottom">
       <div><%= @beer.beer_style.name %></div>
-      <div>ADV : <%= @beer.abv %> / IBU : <%= @beer.ibu.floor %></div>
+      <div>ADV : <%= @beer.abv %> / IBU : <%= @beer.ibu.floor if @beer.ibu != nil %></div>
       <div><%= @beer.description %></div>
     </div>
 

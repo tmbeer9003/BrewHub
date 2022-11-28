@@ -25,7 +25,7 @@
         </div>
         <div class="mx-2">
           <% if current_member.followed_already?(member) %>
-            <%= link_to "フォロー解除", member_relationship_path(member), method: :delete, class: "btn btn-danger" %>
+            <%= link_to "フォロー解除", member_relationship_path(member), method: :delete, class: "btn btn-warning text-white" %>
           <% elsif member.followed_me?(current_member) %>
             <%= link_to "フォローバック", member_relationship_path(member), method: :post, class: "btn btn-info" %>
           <% else %>

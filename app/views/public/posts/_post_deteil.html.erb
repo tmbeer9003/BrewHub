@@ -70,7 +70,7 @@
     </span>
   <% end %>
 </div>
-<%# 本文 %>
+<%# 本文/一覧画面では120文字以上表示されないようにする %>
 
 <div class="row small mt-auto pt-1">
   <% if member_signed_in? %>
@@ -83,13 +83,17 @@
 
   <div>
     <span class="ml-1">
-      <%= link_to post_path(post), class: "text-reset" do %>
-        <i class="fas fa-comments"></i>コメント
-        <%= post.post_comments.count %>件
+      <% if current_page?(post_path(post)) %>
+        コメント<%= post.post_comments.count %>件
+      <% else %>
+        <%= link_to post_path(post), class: "text-reset" do %>
+          <i class="fas fa-comments"></i>
+          コメント<%= post.post_comments.count %>件
+        <% end %>
       <% end %>
     </span>
   </div>
-  <%# コメント部分 %>
+  <%# コメント部分/詳細画面ではリンクを外す %>
 
   <% unless post.bar.nil? %>
     <span class="ml-1">|</span>

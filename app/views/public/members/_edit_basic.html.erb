@@ -1,6 +1,9 @@
 <div class="card border-dark border-top-0 rounded-0">
   <div class="card-body">
-    <h5 class="card-title border-bottom pb-1 mb-3">会員情報編集（基本情報）</h5>
+    <div class="d-flex border-bottom align-items-end pb-1 mb-3">
+      <h5 class="card-title mb-0">会員情報編集（基本情報）</h5>
+      <span class="small text-danger mb-0 ml-1">*は必須項目です</span>
+    </div>
     <%= form_with model: @member do |f| %>
       <div class="form-group row my-2">
         <div class="col-4">
@@ -32,7 +35,7 @@
 
       <div class="form-group row my-2">
         <div class="col-4">
-          <%= f.label :member_image, "プロフィール画像", class: "col-form-label" %><span class="text-danger">*</span>
+          <%= f.label :member_image, "プロフィール画像", class: "col-form-label" %>
         </div>
         <div class="col-8 d-flex align-items-center">
           <%= f.file_field :member_image, autofocus: true, class: "form-control-file" %>
@@ -41,7 +44,7 @@
 
       <div class="form-group row my-2">
         <div class="col-4">
-          <%= f.label :introduction, "自己紹介", class: "col-form-label" %><span class="text-danger">*</span>
+          <%= f.label :introduction, "自己紹介", class: "col-form-label" %>
         </div>
         <div class="col-8">
           <%= f.text_area :introduction, autofocus: true, placeholder: "自己紹介", rows: 5, class: "form-control rounded" %>

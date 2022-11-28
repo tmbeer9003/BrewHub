@@ -16,4 +16,10 @@
   </div>
 </div>
 
-<%= render "public/groups/index", groups: @groups %>
+<% if current_member.groups.exists? %>
+  <%= render "public/groups/index", groups: @groups %>
+<% else %>
+  <div class="text-center mt-3">
+    <span>グループに参加していません<span>
+  </div>
+<% end %>

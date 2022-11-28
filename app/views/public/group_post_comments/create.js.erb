@@ -1,2 +1,3 @@
 $("#group-post-comments-index").html("<%= j(render "public/post_comments/post_comments_index", post_comments: @group_post_comments, post: @group_post, group: @group) %>");
 $("#group_post_comment_content").val("");
+$("#error-message").html("<%= j(render 'layouts/errors', obj: @group_post_comment) %>");

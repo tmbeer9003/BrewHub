@@ -48,7 +48,7 @@ class Public::GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:owner_id, :name, :description)
+    params.require(:group).permit(:owner_id, :name, :description, :group_image)
   end
 
   def set_group
@@ -57,7 +57,7 @@ class Public::GroupsController < ApplicationController
 
   def ensure_owner
     unless @group.owner == current_member
-    redirect_to group_path(@group)
+    redirect_to group_path(@group), alert: "権限がありません"
     end
   end
 

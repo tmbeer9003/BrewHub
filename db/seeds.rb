@@ -52,11 +52,11 @@ Beer.create!(
 
 Post.create!(
   [
-    {member_id: 1, beer_id: 1, content: 'グレフル強めグラッシーなヘイジー。苦味強め。', evaluation: '4.0', serving_style: '0', post_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")},
-    {member_id: 1, beer_id: 2, content: 'マスカット、洋梨のジューシーさからのレモンの酸味。香りはちょっとバナナ。若干水っぽい。', evaluation: '4.5', serving_style: '0', post_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), filename:"sample-post2.jpg")},
-    {member_id: 1, beer_id: 3, content: 'オレンジ強め。そこそこアルコール感を感じる。後味にバニラくっきり。', evaluation: '4.5', serving_style: '2', post_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")},
-    {member_id: 2, beer_id: 4, content: '黒糖みたいなカラメル感。そんなに重たくない。', evaluation: '4.0', serving_style: '2', post_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post4.jpg"), filename:"sample-post4.jpg")},
-    {member_id: 2, beer_id: 5, content: 'トロピカルシトラス松。お手本的ヘイジー。', evaluation: '5.0', serving_style: '1', post_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post5.jpg"), filename:"sample-post5.jpg")}
+    {member_id: 1, beer_id: 1, content: 'グレフル強めグラッシーなヘイジー。苦味強め。', evaluation: '4.0', serving_style: 2, post_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")},
+    {member_id: 1, beer_id: 2, content: 'マスカット、洋梨のジューシーさからのレモンの酸味。香りはちょっとバナナ。若干水っぽい。', evaluation: '4.5', serving_style: 1, post_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), filename:"sample-post2.jpg")},
+    {member_id: 1, beer_id: 3, content: 'オレンジ強め。そこそこアルコール感を感じる。後味にバニラくっきり。', evaluation: '4.5', serving_style: 2, post_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")},
+    {member_id: 2, beer_id: 4, content: '黒糖みたいなカラメル感。そんなに重たくない。', evaluation: '4.0', serving_style: 2, post_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post4.jpg"), filename:"sample-post4.jpg")},
+    {member_id: 2, beer_id: 5, content: 'トロピカルシトラス松。お手本的ヘイジー。', evaluation: '5.0', serving_style: 1, post_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post5.jpg"), filename:"sample-post5.jpg")}
   ]
 )
 

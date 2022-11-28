@@ -41,4 +41,4 @@
 - IDE：Cloud9
 
 ## 使用素材
-- 使用検討中です。
+- 背景画像：Brent Hofacker/stock.adobe.com

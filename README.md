@@ -32,6 +32,8 @@
 * 好みの合う人同士でコミュニケーションを取りたい、飲み会を企画したいとき
 
 ## 設計書
+### ER図
+https://drive.google.com/file/d/1Djhw-tFunMPjGh9vai5UNgZB1AelHpKq/view?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)

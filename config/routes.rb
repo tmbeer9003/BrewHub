@@ -13,7 +13,10 @@ Rails.application.routes.draw do
       get 'followers'=> 'relationships#followers'
       get 'group_list'=> 'groups#group_list'
     end
-
+    resources :posts, except: [:new, :create] do
+      resources :post_comments, only:[:destroy]
+    end
+    resources :beers
   end
 
   devise_for :members, skip: [:passwords], controllers: {

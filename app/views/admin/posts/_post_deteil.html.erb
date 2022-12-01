@@ -1,6 +1,6 @@
 <div class="row card-text border-bottom mb-0 d-flex align-items-center">
   <%= image_tag post.member.get_member_image(50,50), class: "rounded-circle image-fit" %>
-  <h6 class="ml-1 mb-0"><%= link_to post.member.display_name, member_path(post.member), class: "text-reset" %></h6>
+  <h6 class="ml-1 mb-0"><%= link_to post.member.display_name, admin_member_path(post.member), class: "text-reset" %></h6>
   <span class="small ml-2"><%= post.created_at.to_s(:datetime_jp) %></span>
   <div class="flex-grow-1 text-right small mr-2">
     <%= link_to "編集", edit_admin_post_path(post), class: "text-secondary" %>

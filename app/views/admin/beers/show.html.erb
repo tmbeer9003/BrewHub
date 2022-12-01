@@ -1,0 +1,66 @@
+<div class="col-md-10 mx-auto">
+  <div class="card border-dark my-3">
+    <div class="card-body">
+      <div class="border-bottom row">
+        <div class="col-md-8">
+          <div class="card-title mb-0">
+            <h4 class="font-weight-bold d-inline-block mb-0">
+              <%= @beer.name %>
+            </h4>
+            <h5 class="d-inline-block mb-0"> / <%= @beer.brewery.name %></h5>
+          </div>
+
+          <div>
+            <div><%= @beer.beer_style.name %></div>
+            <div>ADV : <%= @beer.abv %> / IBU : <%= @beer.ibu.floor if @beer.ibu != nil %></div>
+            <div><%= @beer.description %></div>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
+          <%= link_to "編集", edit_admin_beer_path(@beer), class: "btn btn-success" %>
+          <%= link_to "削除", admin_beer_path(@beer), method: :delete, "data-confirm" => "紐づく投稿も削除されます。本当に削除しますか？", class: "btn btn-danger ml-1" %>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center justify-content-center mt-2">
+        <% unless @beer.evaluation %>
+        <%# 評価のカラムがnilの場合 %>
+          <span>未評価</span>
+        <% else %>
+          <span id="beers-rate<%= @beer.id %>">
+            <%= render "public/beers/beer_rate_display", beer: @beer %>
+          </span>
+          <span class="ml-2 font-weight-bold ">
+            <%= @beer.evaluation.round(2) %>
+          </span>
+          <span>
+            （<%= @beer.posts.count %>件の投稿）
+          </span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <%= link_to "戻る", admin_beers_path, class: "btn btn-primary px-4 rounded-pill" %>
+  </div>
+
+  <ul class="nav nav-tabs nav-justified mt-3">
+    <li class="nav-item">
+      <a href="#beer-posts" class="nav-link active text-reset border-dark" data-toggle="tab">このビールについての投稿</a>
+    </li>
+    <li class="nav-item">
+      <a href="#shops-bars-list" class="nav-link text-reset border-dark" data-toggle="tab">お店情報</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="beer-posts", class="tab-pane active">
+      <%= render "admin/posts/index", posts: @posts %>
+    </div>
+
+    <div id="shops-bars-list", class="tab-pane mx-3">
+      <%= render "public/beers/shops_bars_list", bars: @bars, shops: @shops %>
+    </div>
+  </div>
+</div>

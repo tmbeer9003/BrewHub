@@ -1,0 +1,18 @@
+$("#beers-index").html("<%= j(render "public/beers/index", beers: @beers) %>");
+
+if(<%= @beer_search != nil %>){
+  $("#refine_brewery").val("");
+  $("#refine_beer_style").val("");
+}
+
+if(<%= @refine_brewery != nil %>){
+  $("#beer_search").val("");
+  $("#refine_beer_style").val("");
+}
+
+if(<%= @refine_beer_style != nil %>){
+  $("#beer_search").val("");
+  $("#refine_brewery").val("");
+}
+
+<%# 何の検索結果かわかりやすくするため、検索に使用していないフォームをリセットする %>

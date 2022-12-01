@@ -4,10 +4,21 @@
 
 <div class="row form-group my-2">
   <div class="col-md-3">
-    <span>ビール名</span><span class="text-danger">*</span>
+    <span>投稿者</span>
   </div>
   <div class="col-md-9">
-    <span class="font-weight-bold"><%= beer.name %></span>
+    <span>
+      <%= post.member.display_name %>（アカウント名：<%= post.member.account_name %>）
+    </span>
+  </div>
+</div>
+
+<div class="row form-group my-2">
+  <div class="col-md-3">
+    <span>ビール名</span>
+  </div>
+  <div class="col-md-9">
+    <span><%= beer.name %></span>
   </div>
 </div>
 

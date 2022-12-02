@@ -8,6 +8,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.text :content
       t.float :evaluation
       t.integer :serving_style, null: false, default: 0
+      t.boolean :is_closed, null: false, default: false
 
       t.timestamps
     end

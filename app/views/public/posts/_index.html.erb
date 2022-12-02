@@ -3,7 +3,12 @@
   <div class="row no-gutters">
     <div class="col-md-4">
       <%= link_to post_path(post) do %>
-        <%= image_tag post.get_post_image(540,540), class: "image-fit" %>
+        <%# is_closedカラムがtrueなら×マーク画像を表示する %>
+        <% if post.is_closed %>
+          <%= image_tag asset_path("hiding_image.png"), size: "500x500", class: "image-fit height-auto" %>
+        <% else %>
+          <%= image_tag post.get_post_image(540,540), class: "image-fit" %>
+        <% end %>
       <% end %>
     </div>
     <div class="card-body d-flex flex-column col-md-8 pt-2 pl-4 pr-4 pb-3">

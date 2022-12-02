@@ -18,6 +18,11 @@ Rails.application.routes.draw do
     resources :beers
     resources :shops, except: [:show]
     resources :bars, except: [:show]
+    resources :groups, except: [:new, :create] do
+      resources :group_posts, except: [:new, :create] do
+        resources :group_post_comments, only: [:destroy]
+      end
+    end  
   end
 
   devise_for :members, skip: [:passwords], controllers: {

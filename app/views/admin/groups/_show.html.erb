@@ -1,0 +1,32 @@
+<div class="card border-dark my-3 px-2">
+  <div class="card-body pt-2">
+    <div class="row d-flex align-items-center border-bottom pb-1 mb-2">
+      <div class="col-2 mr-0 d-flex align-items-center">
+        <%= image_tag group.get_group_image(90,90), class: "rounded image-fit" %>
+      </div>
+
+      <div class="card-title col-7 mb-0">
+        <h4 class="font-weight-bold  mb-0">
+          <%= group.name %></h4>
+        <div>
+          <span><i class="fas fa-users mr-1"></i><%= group.members.count %>人のメンバー</span>
+        </div>
+        <div>
+          <span><i class="fas fa-crown"></i>管理者：<%= link_to group.owner.display_name, admin_member_path(group.owner), class:"text-reset" %></span>
+        </div>
+      </div>
+
+      <div class="col-3 d-flex flex-column align-items-center">
+        <div class="card-text">
+          <%= link_to "編集", edit_admin_group_path(group), class: "btn btn-success" %>
+          <%= link_to "削除", admin_group_path(group), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <%= group.description %>
+    </div>
+
+  </div>
+</div>

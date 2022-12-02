@@ -1,5 +1,5 @@
 <div id="error-message">
-  <%= render "layouts/errors", obj: @group_post %>
+  <%= render "layouts/errors", obj: group_post %>
 </div>
 
 <%= form_with model: [group, group_post], local: false do |f| %>
@@ -27,6 +27,6 @@
     <% else %>
       <%= f.submit "更新", class: "btn btn-success px-4 rounded-pill" %>
     <% end %>
-    <%= link_to "戻る", :back, class: "btn btn-primary px-4 rounded-pill" %>
+    <%= link_to "戻る", admin_group_group_post_path(group, group_post), class: "btn btn-primary px-4 rounded-pill" %>
   </div>
 <% end %>

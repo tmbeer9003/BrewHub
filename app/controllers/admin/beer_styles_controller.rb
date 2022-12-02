@@ -2,38 +2,43 @@ class Admin::BeerStylesController < ApplicationController
   before_action :authenticate_admin!
   layout "application_no_sidebar"
 
+  def new
+    @beer_style = BeerStyle.new
+  end
+
   def create
     @beer_style = BeerStyle.new(beer_style_params)
-    if @beer_style.save
-      redirect_to admin_beer_styles_path, success: "ビアスタイル情報を登録しました"
-    else
-      render "error"
-    end
+    render "error" unless @beer_style.save
+    @beer_styles = BeerStyle.page(params[:page]).per(10)
+    #非同期通信処理後の一覧表示用の記述
   end
 
   def index
     @beer_styles = BeerStyle.page(params[:page]).per(10)
-    if params[:id] != nil
-      @beer_style = BeerStyle.find(params[:id])
-    else
-      @beer_style = BeerStyle.new
-    end
+    params[:id].nil? ? (@beer_style = BeerStyle.new) : (@beer_style = BeerStyle.find(params[:id]))
+    # params[:id]に値がなければフォームを新規登録に、値があれば編集にする
   end
 
   def update
     @beer_style = BeerStyle.find(params[:id])
-    if @beer_style.update(beer_style_params)
-      params[:id] = nil
-      redirect_to admin_beer_styles_path, success: "ビアスタイル情報を更新しました"
-    else
-      render "error"
-    end
+    render "error" unless @beer_style.update(beer_style_params)
+    #以下は非同期通信のための処理
+    params[:id] = nil
+    @beer_style_new = BeerStyle.new
+    #フォームを新規登録に戻す
+    @beer_styles = BeerStyle.page(params[:page]).per(10)
+    #一覧表示用の記述
   end
 
   def destroy
     @beer_style = BeerStyle.find(params[:id])
-    @beer_styles = BeerStyle.page(params[:page]).per(10)
     @beer_style.destroy
+    #以下は非同期通信のための処理
+    params[:id] = nil
+    @beer_style_new = BeerStyle.new
+    #フォームを新規登録に戻す
+    @beer_styles = BeerStyle.page(params[:page]).per(10)
+    #一覧表示用の記述
   end
 
   def edit

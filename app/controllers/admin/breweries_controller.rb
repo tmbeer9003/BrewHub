@@ -2,38 +2,47 @@ class Admin::BreweriesController < ApplicationController
   before_action :authenticate_admin!
   layout "application_no_sidebar"
 
+  def new
+    @brewery = Brewery.new
+  end
+
   def create
     @brewery = Brewery.new(brewery_params)
-    if @brewery.save
-      redirect_to admin_breweries_path, success: "ブルワリー情報を登録しました"
-    else
-      render "error"
-    end
+    render "error" unless @brewery.save
+    @breweries = Brewery.page(params[:page]).per(10)
+    #非同期通信処理後の一覧表示用の記述
   end
 
   def index
     @breweries = Brewery.page(params[:page]).per(10)
-    if params[:id] != nil
-      @brewery = Brewery.find(params[:id])
-    else
-      @brewery = Brewery.new
-    end
+    params[:id].nil? ? (@brewery = Brewery.new) : (@brewery = Brewery.find(params[:id]))
+    # params[:id]に値がなければフォームを新規登録に、値があれば編集にする
   end
 
   def update
     @brewery = Brewery.find(params[:id])
-    if @brewery.update(brewery_params)
-      params[:id] = nil
-      redirect_to admin_breweries_path, success: "ブルワリー情報を更新しました"
-    else
-      render "error"
-    end
+    render "error" unless @brewery.update(brewery_params)
+    #以下は非同期通信のための記述
+    params[:id] = nil
+    @brewery_new = Brewery.new
+    #フォームを新規登録に戻す
+    @breweries = Brewery.page(params[:page]).per(10)
+    #一覧表示用の記述
   end
 
   def destroy
     @brewery = Brewery.find(params[:id])
-    @breweries = Brewery.page(params[:page]).per(10)
     @brewery.destroy
+    #以下は非同期通信のための記述
+    params[:id] = nil
+    @brewery_new = Brewery.new
+    #フォームを新規登録に戻す
+    @breweries = Brewery.page(params[:page]).per(10)
+    #一覧表示用の記述
+  end
+
+  def edit
+    @brewery = Brewery.find(params[:id])
   end
 
   private

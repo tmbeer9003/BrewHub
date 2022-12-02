@@ -1,0 +1,2 @@
+$("#beer-style-form").html("<%= j(render 'admin/beer_styles/form', beer_style: @beer_style) %>");
+$("#error-message").html("<%= j(render 'layouts/errors', obj: @beer_style) %>");

@@ -1,8 +1,8 @@
 <div id="error-message">
-  <%= render "layouts/errors", obj: @group %>
+  <%= render "layouts/errors", obj: group %>
 </div>
 
-<%= form_with model: group, local: false do |f| %>
+<%= form_with model: [:admin, group], local: false do |f| %>
   <div class="row form-group my-2">
     <div class="col-md-3">
       <%= f.label :name, "グループ名", class: "col-form-label" %><span class="text-danger">*</span>
@@ -31,11 +31,7 @@
   </div>
 
   <div class="actions text-center py-3">
-    <% if params[:id] == nil %>
-      <%= f.submit "作成", class: "btn btn-success px-4 rounded-pill" %>
-    <% else %>
-      <%= f.submit "更新", class: "btn btn-success px-4 rounded-pill" %>
-    <% end %>
-    <%= link_to "戻る", :back, class: "btn btn-primary px-4 rounded-pill" %>
+    <%= f.submit "更新", class: "btn btn-success px-4 rounded-pill" %>
+    <%= link_to "戻る", admin_group_path(group), class: "btn btn-primary px-4 rounded-pill" %>
   </div>
 <% end %>

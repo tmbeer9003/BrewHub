@@ -1,0 +1,15 @@
+<div class="col-md-10 mx-auto">
+  <%= render "admin/groups/show", group: @group %>
+
+  <%= render "admin/group_posts/index", group: @group, group_post: @group_post %>
+
+  <div class="card border-dark my-2 px-2">
+    <div id="group-post-comments-index">
+      <%= render "admin/post_comments/post_comments_index", post: @group_post, post_comments: @group_post_comments, group: @group %>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <%= link_to "戻る", admin_group_path(@group), class: "btn btn-primary px-4 rounded-pill" %>
+  </div>
+</div>

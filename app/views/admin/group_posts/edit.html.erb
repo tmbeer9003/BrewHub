@@ -1,0 +1,13 @@
+<div class="col-md-10 mx-auto">
+  <%= render "admin/groups/show", group: @group %>
+  
+  <div class="card border-dark">
+    <div class="card-body">
+      <div class="d-flex border-bottom align-items-end pb-1 mb-3">
+        <h5 class="card-title mb-0">トピック編集</h5>
+        <span class="small text-danger mb-0 ml-1">*は必須項目です</span>
+      </div>
+      <%= render "group_post_form", group: @group, group_post: @group_post %>
+    </div>
+  </div>
+</div>

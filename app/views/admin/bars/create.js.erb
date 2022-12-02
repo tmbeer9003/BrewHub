@@ -1,0 +1,4 @@
+$("#bar-list").html("<%= j(render 'admin/bars/index', bars: @bars) %>");
+$("#error-message").html("<%= j(render 'layouts/errors', obj: @bar) %>");
+$("#bar_name").val("");
+$("#bar_location").val("");

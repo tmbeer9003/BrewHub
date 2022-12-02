@@ -1,0 +1,23 @@
+<table class="table table-sm table-bordered table-white">
+  <thead class="border-dark">
+    <tr class="table-secondary text-center border-dark">
+      <th>買ったお店ID</th>
+      <th>買ったお店名</th>
+      <th>所在地</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% shops.each do |shop| %>
+      <tr>
+        <td class="align-middle"><%= shop.id %></td>
+        <td class="align-middle"><%= shop.name %></td>
+        <td class="align-middle"><%= shop.location %></td>
+        <td class="text-center align-middle">
+          <%= link_to "編集", edit_admin_shop_path(shop), remote: true, class: 'btn btn-success px-2' %>
+          <%= link_to "削除", admin_shop_path(shop), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？", class: 'btn btn-danger px-2' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

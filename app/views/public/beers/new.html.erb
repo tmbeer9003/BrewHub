@@ -1,75 +1,73 @@
-<div class="row">
-  <div class="card border-dark mx-auto mt-3 col-md-10">
-    <div class="card-body">
-      <h5 class="card-title border-bottom pb-1 mb-3">ビール情報登録
-        <span class="small text-danger"> *は必須項目です</span>
-      </h5>
+<div class="card border-dark mx-auto mt-3 col-md-10">
+  <div class="card-body">
+    <h5 class="card-title border-bottom pb-1 mb-3">ビール情報登録
+      <span class="small text-danger"> *は必須項目です</span>
+    </h5>
 
-      <div id="error-message">
-        <%= render "layouts/errors", obj: @beer %>
+    <div id="error-message">
+      <%= render "layouts/errors", obj: @beer %>
+    </div>
+
+    <%= form_with model: @beer, local: false do |f| %>
+      <div class="row form-group my-2">
+        <div class="col-md-3 pr-0">
+          <%= f.label :name, "ビール名", class: "col-form-label" %><span class="text-danger">*</span>
+        </div>
+        <div class="col-md-9">
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "検索しやすいよう正式名称を入力しましょう！", class: "form-control rounded-pill" %>
+        </div>
       </div>
 
-      <%= form_with model: @beer, local: false do |f| %>
-        <div class="row form-group my-2">
-          <div class="col-md-3 pr-0">
-            <%= f.label :name, "ビール名", class: "col-form-label" %><span class="text-danger">*</span>
-          </div>
-          <div class="col-md-9">
-            <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "検索しやすいよう正式名称を入力しましょう！", class: "form-control rounded-pill" %>
-          </div>
+      <div class="row form-group my-2">
+        <div class="col-md-3 pr-0">
+           <%= f.label :brewery_id, "ブルワリー", class: "col-form-label" %><span class="text-danger">*</span>
+        </div>
+        <div class="col-md-9">
+          <%= f.collection_select :brewery_id, @breweries, :id, :name, {prompt: '--選択してください--'}, class: 'form-control rounded-pill' %>
+        </div>
+      </div>
+
+      <div class="row form-group my-2">
+        <div class="col-md-3 pr-0">
+          <%= f.label :beer_style_id, "ビアスタイル", class: "col-form-label" %><span class="text-danger">*</span>
+        </div>
+        <div class="col-md-9">
+          <%= f.collection_select :beer_style_id, @beer_styles, :id, :name, {prompt: '--選択してください--'}, class: 'form-control rounded-pill' %>
+        </div>
+      </div>
+
+      <div class="row form-group my-2">
+        <div class="col-md-3 pr-0 py-auto">
+          <label for="abv", class="col-form-label">ABV<br><span class="small">（アルコール度数）</span></label>
+        </div>
+        <div class="col-md-2 my-auto pr-0">
+            <%= f.text_field :abv, autofocus: true, autocomplete: "abv", placeholder: "省略可", class: "form-control rounded-pill" %>
+        </div>
+        <div class="col-md-1 pl-0 my-auto text-center">
+          <span>%</span>
         </div>
 
-        <div class="row form-group my-2">
-          <div class="col-md-3 pr-0">
-             <%= f.label :brewery_id, "ブルワリー", class: "col-form-label" %><span class="text-danger">*</span>
-          </div>
-          <div class="col-md-9">
-            <%= f.collection_select :brewery_id, @breweries, :id, :name, {prompt: '--選択してください--'}, class: 'form-control rounded-pill' %>
-          </div>
+        <div class="col-md-3 pr-0">
+          <label for="ibu", class="col-form-label">IBU<br><span class="small">（国際苦味単位）</span></label>
         </div>
-
-        <div class="row form-group my-2">
-          <div class="col-md-3 pr-0">
-            <%= f.label :beer_style_id, "ビアスタイル", class: "col-form-label" %><span class="text-danger">*</span>
-          </div>
-          <div class="col-md-9">
-            <%= f.collection_select :beer_style_id, @beer_styles, :id, :name, {prompt: '--選択してください--'}, class: 'form-control rounded-pill' %>
-          </div>
+        <div class="col-md-3 my-auto">
+          <%= f.text_field :ibu, autofocus: true, autocomplete: "ibu", placeholder: "省略可", class: "form-control rounded-pill" %>
         </div>
+      </div>
 
-        <div class="row form-group my-2">
-          <div class="col-md-3 pr-0 py-auto">
-            <label for="abv", class="col-form-label">ABV<br><span class="small">（アルコール度数）</span></label>
-          </div>
-          <div class="col-md-2 my-auto pr-0">
-              <%= f.text_field :abv, autofocus: true, autocomplete: "abv", placeholder: "省略可", class: "form-control rounded-pill" %>
-          </div>
-          <div class="col-md-1 pl-0 my-auto text-center">
-            <span>%</span>
-          </div>
-
-          <div class="col-md-3 pr-0">
-            <label for="ibu", class="col-form-label">IBU<br><span class="small">（国際苦味単位）</span></label>
-          </div>
-          <div class="col-md-3 my-auto">
-            <%= f.text_field :ibu, autofocus: true, autocomplete: "ibu", placeholder: "省略可", class: "form-control rounded-pill" %>
-          </div>
+      <div class="row form-group my-2">
+        <div class="col-md-3 pr-0">
+          <%= f.label :description, "ビールの説明", class: "col-form-label"  %>
         </div>
-
-        <div class="row form-group my-2">
-          <div class="col-md-3 pr-0">
-            <%= f.label :description, "ビールの説明", class: "col-form-label"  %>
-          </div>
-          <div class="col-md-9">
-            <%= f.text_area :description, autofocus: true, rows: 5, placeholder: "省略可", class: "form-control" %>
-          </div>
+        <div class="col-md-9">
+          <%= f.text_area :description, autofocus: true, rows: 5, placeholder: "省略可", class: "form-control" %>
         </div>
+      </div>
 
-        <div class="text-center py-3">
-          <%= f.submit "登録", class: "btn btn-success px-4 rounded-pill" %>
-          <%= link_to "戻る", beers_path, class: "btn btn-primary px-4 rounded-pill" %>
-        </div>
-      <% end %>
-    </div>
+      <div class="text-center py-3">
+        <%= f.submit "登録", class: "btn btn-success px-4 rounded-pill" %>
+        <%= link_to "戻る", beers_path, class: "btn btn-primary px-4 rounded-pill" %>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -1,23 +1,25 @@
-<li class="nav-item mx-2 my-1 text-white text-center">
-  <%= link_to admin_beer_styles_path, class: "text-reset" do %><i class="fas fa-wine-bottle"></i>ビアスタイル管理
+<li class="nav-item mx-2 my-1 text-white text-center my-auto">
+  <%= link_to admin_posts_path, class: "text-reset" do %><i class="fas fa-feather-alt"></i>投稿管理
 </li><% end %>
 
-<li class="nav-item mx-2 my-1 text-white text-center">
-  <%= link_to admin_breweries_path, class: "text-reset" do %><i class="fas fa-industry"></i>ブルワリー管理
-</li><% end %>
+<li class="nav-item dropdown list-unstyled text-center">
+  <a class="nav-link dropdown-toggle bg-transparent text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-wine-bottle"></i>情報管理
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+    <%= link_to "ビアスタイル", admin_beer_styles_path, class: "dropdown-item" %>
+    <%= link_to "ブルワリー", admin_breweries_path, class: "dropdown-item" %>
+    <%= link_to "お店", admin_shops_path, class: "dropdown-item" %>
+    <%= link_to "ビール", admin_beers_path, class: "dropdown-item" %>
+  </div>
+</li>
 
-<!--li class="nav-item mx-2 my-1 text-white text-center">
-  <%#= link_to admin_breweries_path, class: "text-reset" do %><i class="fas fa-beer"></i>ビール管理
-</li--><%# end %>
-
-<!--li class="nav-item mx-2 my-1 text-white text-center">
-  <%#= link_to admin_breweries_path, class: "text-reset" do %><i class="fas fa-feather-alt"></i>投稿管理
-</li--><%# end %>
-
-<li class="nav-item mx-2 my-1 text-white text-center">
-  <%= link_to admin_members_path, class: "text-reset" do %><i class="fas fa-user"></i>ユーザー管理
-</li><% end %>
-
-<!--li class="nav-item mx-2 my-1 text-white text-center">
-  <%#= link_to admin_breweries_path, class: "text-reset" do %><i class="fas fa-users"></i>グループ管理
-</li--><%# end %>
+<li class="nav-item dropdown list-unstyled text-center">
+  <a class="nav-link dropdown-toggle bg-transparent text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-user"></i>ユーザー管理
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+    <%= link_to "ユーザー", admin_members_path, class: "dropdown-item" %>
+    <%= link_to "グループ", admin_groups_path, class: "dropdown-item" %>
+  </div>
+</li>

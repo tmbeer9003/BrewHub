@@ -5,15 +5,24 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :beer_styles, except: [:new, :edit, :show]
-    post 'beer_styles/:id' => 'beer_styles#edit'
-    resources :breweries, except: [:new, :edit]
+    resources :beer_styles, except: [:show]
+    resources :breweries, except: [:show]
     resources :members, except: [:new, :create] do
       get 'followings'=> 'relationships#followings'
       get 'followers'=> 'relationships#followers'
       get 'group_list'=> 'groups#group_list'
     end
-
+    resources :posts, except: [:new, :create] do
+      resources :post_comments, only:[:destroy]
+    end
+    resources :beers
+    resources :shops, except: [:show]
+    resources :bars, except: [:show]
+    resources :groups, except: [:new, :create] do
+      resources :group_posts, except: [:new, :create] do
+        resources :group_post_comments, only: [:destroy]
+      end
+    end  
   end
 
   devise_for :members, skip: [:passwords], controllers: {

@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 2022_11_25_024929) do
     t.text "content"
     t.float "evaluation"
     t.integer "serving_style", default: 0, null: false
+    t.boolean "is_closed", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bar_id"], name: "index_posts_on_bar_id"

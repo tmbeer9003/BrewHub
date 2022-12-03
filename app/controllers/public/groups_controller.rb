@@ -1,11 +1,11 @@
 class Public::GroupsController < ApplicationController
-    before_action :authenticate_member!
-    before_action :set_group, only: [:show, :edit, :update, :destroy]
-    before_action :ensure_owner, only: [:edit, :update, :destroy]
+  before_action :authenticate_member!
+  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_owner, only: [:edit, :update, :destroy]
 
   def index
     group_search = params[:group_search]
-    if group_search == nil
+    unless group_search
       groups = Group.includes(:members).sort {|a,b| b.members.size <=> a.members.size}
       @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)
     else
@@ -22,7 +22,7 @@ class Public::GroupsController < ApplicationController
 
   def show
     group_post_search = params[:group_post_search]
-    if group_post_search == nil
+    unless group_post_search
       @group_posts = @group.group_posts.all.order(id: :desc).page(params[:page]).per(5)
     else
       @group_posts = @group.group_posts.where("title like ?", "%#{group_post_search}%").order(id: :desc).page(params[:page]).per(5)

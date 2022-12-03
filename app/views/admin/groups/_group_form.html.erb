@@ -1,0 +1,37 @@
+<div id="error-message">
+  <%= render "layouts/errors", obj: group %>
+</div>
+
+<%= form_with model: [:admin, group], local: false do |f| %>
+  <div class="row form-group my-2">
+    <div class="col-md-3">
+      <%= f.label :name, "グループ名", class: "col-form-label" %><span class="text-danger">*</span>
+    </div>
+    <div class="col-md-9">
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control rounded-pill" %>
+    </div>
+  </div>
+
+  <div class="row form-group my-2">
+    <div class="col-md-3">
+      <%= f.label :group_image, "画像", class: "col-form-label" %>
+    </div>
+    <div class="col-md-9 d-flex align-items-center">
+      <%= f.file_field :group_image, accept: "image/*", class: "form-control-file" %>
+    </div>
+  </div>
+
+  <div class="row form-group my-2">
+    <div class="col-md-3">
+      <%= f.label :description, "グループの説明", class: "col-form-label" %><span class="text-danger">*</span>
+    </div>
+    <div class="col-md-9">
+      <%= f.text_area :description, autofocus: true, rows: 5, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="actions text-center py-3">
+    <%= f.submit "更新", class: "btn btn-success px-4 rounded-pill" %>
+    <%= link_to "戻る", admin_group_path(group), class: "btn btn-primary px-4 rounded-pill" %>
+  </div>
+<% end %>

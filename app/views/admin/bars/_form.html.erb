@@ -1,0 +1,35 @@
+<div class="card p-3">
+  <div class="text-center mb-1">
+    <h5><u>
+      <% unless params[:id] %>
+        飲んだお店新規登録
+      <% else %>
+        飲んだお店編集
+      <% end %>
+    </u></h5>
+  </div>
+
+  <%= form_with model: [:admin, bar], local: false do |f| %>
+    <% unless params[:id].nil? %>
+      <div class="text-center">
+        選択中の飲んだお店ID：<%= bar.id %>
+      </div>
+    <% end %>
+    <div class="form-group my-2">
+      <%= f.text_field :name, placeholder: "飲んだお店名", class: "form-control" %>
+    </div>
+
+    <div class="form-group my-2">
+      <%= f.select :location, Bar.locations.keys.to_a, {prompt: '--所在地を選択--'}, class: "form-control"%>
+    </div>
+
+    <div class="form-group my-2 text-center">
+      <% unless params[:id] %>
+        <%= f.submit "新規登録", class: "btn btn-success p-2" %>
+      <% else %>
+        <%= f.submit "編集する", class: 'btn btn-success p-2' %>
+        <%= link_to "戻る", new_admin_bar_path, remote: true, class: 'btn btn-primary p-2' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

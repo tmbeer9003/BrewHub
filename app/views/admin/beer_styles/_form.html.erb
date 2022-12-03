@@ -1,7 +1,7 @@
 <div class="card p-3">
   <div class="text-center mb-1">
     <h5><u>
-    <% if params[:id] == nil %>
+    <% unless params[:id] %>
       ビアスタイル新規登録
     <% else %>
       ビアスタイル編集
@@ -10,7 +10,7 @@
   </div>
 
   <%= form_with model: [:admin, beer_style], local: false do |f| %>
-    <% if params[:id] != nil %>
+    <% unless params[:id].nil? %>
       <div class="text-center">
         選択中のビアスタイルID：<%= beer_style.id %>
       </div>
@@ -31,11 +31,11 @@
     </div>
 
     <div class="form-group my-2 text-center">
-      <% if params[:id] == nil %>
+      <% unless params[:id] %>
         <%= f.submit "新規登録", class: "btn btn-success p-2" %>
       <% else %>
         <%= f.submit "編集する", class: 'btn btn-success p-2' %>
-        <%= link_to "戻る", admin_beer_styles_path , class: 'btn btn-primary p-2' %>
+        <%= link_to "戻る", new_admin_beer_style_path, remote: true, class: 'btn btn-primary p-2' %>
       <% end %>
     </div>
   <% end %>

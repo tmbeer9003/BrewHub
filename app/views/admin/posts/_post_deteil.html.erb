@@ -1,0 +1,109 @@
+<div class="row card-text border-bottom mb-0 d-flex align-items-center">
+  <%= image_tag post.member.get_member_image(50,50), class: "rounded-circle image-fit" %>
+  <h6 class="ml-1 mb-0"><%= link_to post.member.display_name, admin_member_path(post.member), class: "text-reset" %></h6>
+  <span class="small ml-2"><%= post.created_at.to_s(:datetime_jp) %></span>
+  <div class="flex-grow-1 text-right small mr-2">
+    <%= link_to "編集", edit_admin_post_path(post), class: "text-secondary" %>
+    <%= link_to "削除", admin_post_path(post), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？", class: "text-secondary text-right" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="mt-1 mb-0 card-title">
+    <h5 class="font-weight-bold d-inline-block mb-0">
+      <%= link_to post.beer.name, admin_beer_path(post.beer), class: "text-reset" %></h5>
+      <%# ビール名部分 %>
+
+    <h6 class="d-inline-block mb-0">
+      <span class="ml-1">/</span>
+      <%= post.beer.brewery.name %>
+    </h6>
+    <%# ブルワリー名部分 %>
+  </div>
+</div>
+
+<div class="row align-items-center d-flex px-0">
+  <% unless post.evaluation %>
+    <span>未評価</span>
+  <% else %>
+    <span id="stars-rate<%= post.id %>">
+      <%= render "public/posts/post_rate_display", post: post %>
+    </span>
+    <h5 class="font-weight-bold mx-2 mb-0"><%= post.evaluation %></h5>
+  <% end %>
+  <%# レビュー部分 %>
+
+  <div class="small mt-auto">
+    <span>（Served</span>
+    <span>
+      <% if post.serving_style == "draft" %>on
+      <% else %>by
+      <% end %>
+    </span>
+    <span>
+      <% if post.serving_style == "draft" %>
+        <i class="fas fa-beer"></i>ドラフト）
+      <% elsif post.serving_style == "can" %>
+        <i class="fas fa-database"></i>缶）
+      <% elsif post.serving_style == "bottle" %>
+        <i class="fas fa-wine-bottle"></i>ボトル）
+      <% else %>
+        <i class="fas fa-question"></i></i>その他）
+      <% end %>
+    </span>
+  </div>
+  <%# サービング部分 %>
+</div>
+
+<div class="row d-flex">
+  <% if current_page?(admin_post_path(post)) %>
+    <span><%= post.content %></span>
+  <% else %>
+    <span>
+      <%= post.content.truncate(40) %>
+      <% if post.content.size > 40 %>
+        <span class="text-secondary">
+          <%= link_to "続きを読む", admin_post_path(post), class: "text-reset" %>
+        </span>
+      <% end %>
+    </span>
+  <% end %>
+</div>
+<%# 本文/一覧画面では40文字以上表示されないようにする %>
+
+<div class="row small mt-auto pt-1">
+  <span class="text-dark font-weight-bold">
+    <i class="fas fa-glass-cheers fa-lg"></i>
+    <%= post.cheers.count %>Cheers
+  </span>
+  <span class="ml-1">|</span>
+  <%# Cheers部分 %>
+
+  <div>
+    <span class="ml-1">
+      <% if current_page?(admin_post_path(post)) %>
+        コメント<%= post.post_comments.count %>件
+      <% else %>
+        <%= link_to admin_post_path(post), class: "text-reset" do %>
+          <i class="fas fa-comments"></i>
+          コメント<%= post.post_comments.count %>件
+        <% end %>
+      <% end %>
+    </span>
+  </div>
+  <%# コメント部分/詳細画面ではリンクを外す %>
+
+  <% unless post.bar.nil? %>
+    <span class="ml-1">|</span>
+    <span class="ml-1">
+      飲んだお店：<%= post.bar.name %>
+    </span>
+  <% end %>
+  <% unless post.shop.nil? %>
+    <span class="ml-1">|</span>
+    <span class="ml-1">
+      買ったお店：<%= post.shop.name %>
+    </span>
+  <% end %>
+  <%# お店情報部分 %>
+</div>

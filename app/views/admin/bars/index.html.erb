@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="ml-5 mt-3">
+    <u><%= link_to "買ったお店", admin_shops_path, class: "text-reset" %></u>
+    <span class="mr-2">|</span>
+    <h4 class="mr-2 d-inline-block font-weight-bold">飲んだお店</h4>
+  </div>
+</div>
+
+<div class="d-flex row">
+  <div class="col-md-3 mt-2", id="bar-form">
+    <%= render "form", bar: @bar %>
+  </div>
+
+  <div class="col-md-9 mt-2">
+    <div id="error-message">
+      <%= render "layouts/errors", obj: @bar %>
+    </div>
+
+    <div id="bar-list">
+      <%= render "index", bars: @bars %>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <%= paginate @bars %>
+    </div>
+  </div>
+</div>

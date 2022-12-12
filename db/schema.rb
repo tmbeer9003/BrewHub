@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_25_024929) do
+ActiveRecord::Schema.define(version: 2022_11_18_060803) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 2022_11_25_024929) do
     t.float "abv"
     t.float "ibu"
     t.text "description"
+    t.float "evaluation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.float "evaluation"
     t.index ["beer_style_id"], name: "index_beers_on_beer_style_id"
     t.index ["brewery_id"], name: "index_beers_on_brewery_id"
     t.index ["name"], name: "index_beers_on_name", unique: true
@@ -149,13 +149,14 @@ ActiveRecord::Schema.define(version: 2022_11_25_024929) do
     t.string "account_name", null: false
     t.string "display_name", null: false
     t.date "date_of_birth", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.text "introduction"
     t.integer "my_beer_style1_id"
     t.integer "my_beer_style2_id"
     t.integer "my_beer_style3_id"
     t.integer "my_beer_style4_id"
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["account_name"], name: "index_members_on_account_name", unique: true
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["my_beer_style1_id"], name: "index_members_on_my_beer_style1_id"

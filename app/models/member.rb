@@ -8,15 +8,14 @@ class Member < ApplicationRecord
   has_many :cheers, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :relationships, dependent: :destroy
-  # フォローしている人のidを取り行く
-  has_many :followings, through: :relationships, source: :follow
   # memberがフォローしている人（follow）
+  has_many :followings, through: :relationships, source: :follow
+  # relationshipsと逆の関係
   has_many :inverse_relationships, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
-  # 逆の関係（フォローされている人から見た、フォロワーのidを取り行く）
+  # フォローされている人（follow）から見たフォローしている人（member）
   has_many :followers, through: :inverse_relationships, source: :member
-  # followから見たフォロワー（memmber）
-  has_many :cheers_posts, through: :cheers, source: :post
   # cheersしている投稿
+  has_many :cheers_posts, through: :cheers, source: :post
   has_many :groups_members, dependent: :destroy
   has_many :groups, through: :groups_members, source: :group
   has_many :own_groups, class_name: 'Group', foreign_key: 'owner_id', dependent: :destroy
@@ -29,6 +28,7 @@ class Member < ApplicationRecord
 
   has_one_attached :member_image
 
+  # 半角英数字のみ
   VALID_ACCOUNT_NAME_REGEX = /\A[a-z0-9]+\z/i.freeze
 
   validates :account_name, presence:true, uniqueness: true, length:{maximum:12}, format: { with: VALID_ACCOUNT_NAME_REGEX, message: 'は半角英数字で入力してください' }
@@ -41,6 +41,8 @@ class Member < ApplicationRecord
       errors.add(:date_of_birth, '：20歳未満の方の登録はできません') if date_of_birth > Date.tomorrow.ago(20.years)
     end
   end
+
+  enum status: { opened: 0, closed: 1, stopped: 1 }
 
   def get_member_image(width, height)
     unless member_image.attached?

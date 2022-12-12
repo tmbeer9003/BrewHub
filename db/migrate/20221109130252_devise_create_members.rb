@@ -35,6 +35,13 @@ class DeviseCreateMembers < ActiveRecord::Migration[6.1]
       t.string :account_name, null: false
       t.string :display_name, null: false
       t.date :date_of_birth, null: false
+      t.text :introduction
+      t.references :my_beer_style1, foreign_key: { to_table: :beer_styles }
+      t.references :my_beer_style2, foreign_key: { to_table: :beer_styles }
+      t.references :my_beer_style3, foreign_key: { to_table: :beer_styles }
+      t.references :my_beer_style4, foreign_key: { to_table: :beer_styles }
+      t.integer :status, null: false, default: 0
+
       t.timestamps null: false
     end
 

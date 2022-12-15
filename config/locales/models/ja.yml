@@ -13,8 +13,8 @@ ja:
         content: キャプション
         serving_style: サービング
       bar:
-        name: 飲んだお店名
-        location: 所在地
+        category: お店のタイプ
+        place_name: お店情報
       shop:
         name: 買ったお店名
         location: 所在地
@@ -48,8 +48,10 @@ ja:
               blank: を選択してください
         bar:
           attributes:
-            location:
+            category:
               blank: を選択してください
+            place_name:
+              blank: が存在しません
         brewery:
           attributes:
             location:

@@ -7,10 +7,11 @@ class CreateBeers < ActiveRecord::Migration[6.1]
       t.float :abv
       t.float :ibu
       t.text :description
+      t.float :evaluation
 
       t.timestamps
     end
-    
+
     add_index :beers, :name, unique: true
   end
 end

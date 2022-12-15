@@ -22,9 +22,8 @@ class Public::PostsController < ApplicationController
     @post = Post.new
     @beer = Beer.find(params[:selected_beer])
     @bar = Bar.new
-    @shop = Shop.new
-    @bars = Bar.all
-    @shops = Shop.all
+    @bars = Bar.where(category: 0)
+    @shops = Bar.where(category: 1)
   end
 
   def create
@@ -48,9 +47,8 @@ class Public::PostsController < ApplicationController
   def edit
     @beer = @post.beer
     @bar = Bar.new
-    @shop = Shop.new
-    @bars = Bar.all
-    @shops = Shop.all
+    @bars = Bar.where(category: 0)
+    @shops = Bar.where(category: 1)
   end
 
   def update

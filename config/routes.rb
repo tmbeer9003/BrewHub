@@ -16,13 +16,12 @@ Rails.application.routes.draw do
       resources :post_comments, only:[:destroy]
     end
     resources :beers
-    resources :shops, except: [:show]
-    resources :bars, except: [:show]
+    resources :bars, only: [:index, :create, :destroy]
     resources :groups, except: [:new, :create] do
       resources :group_posts, except: [:new, :create] do
         resources :group_post_comments, only: [:destroy]
       end
-    end  
+    end
   end
 
   devise_for :members, skip: [:passwords], controllers: {
@@ -37,7 +36,6 @@ Rails.application.routes.draw do
       resources :post_comments, only:[:create, :destroy]
     end
     resources :bars, only: [:create]
-    resources :shops, only: [:create]
     resources :members, only: [:update, :index, :show] do
       resource :relationship, only: [:create, :destroy]
       get 'followings'=> 'relationships#followings'

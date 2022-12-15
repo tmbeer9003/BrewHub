@@ -54,8 +54,10 @@ ActiveRecord::Schema.define(version: 2022_11_18_060803) do
   end
 
   create_table "bars", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "location", default: 0, null: false
+    t.integer "category", null: false
+    t.string "place_name", null: false
+    t.float "latitude", null: false
+    t.float "longitude", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -203,13 +205,6 @@ ActiveRecord::Schema.define(version: 2022_11_18_060803) do
     t.index ["member_id"], name: "index_relationships_on_member_id"
   end
 
-  create_table "shops", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "location", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "beers", "beer_styles"
@@ -230,9 +225,9 @@ ActiveRecord::Schema.define(version: 2022_11_18_060803) do
   add_foreign_key "post_comments", "members"
   add_foreign_key "post_comments", "posts"
   add_foreign_key "posts", "bars"
+  add_foreign_key "posts", "bars", column: "shop_id"
   add_foreign_key "posts", "beers"
   add_foreign_key "posts", "members"
-  add_foreign_key "posts", "shops"
   add_foreign_key "relationships", "members"
   add_foreign_key "relationships", "members", column: "follow_id"
 end

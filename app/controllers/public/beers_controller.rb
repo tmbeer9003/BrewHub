@@ -41,6 +41,8 @@ class Public::BeersController < ApplicationController
     #@beerが飲まれた（紐づけられた）お店のデータを取得し重複を排除、所在地の昇順で並べ替える
     @shops = @beer.purchased_shops.distinct.order(location: :asc)
     #@beerが買われた（紐づけられた）お店のデータを取得し重複を排除、所在地の昇順で並べ替える
+    gon.bars = @beer.drunk_bars.distinct
+    gon.shops = @beer.purchased_shops.distinct
   end
 
   private

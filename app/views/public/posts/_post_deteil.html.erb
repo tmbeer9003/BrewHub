@@ -110,13 +110,13 @@
     <% unless post.bar.nil? %>
       <span class="ml-1">|</span>
       <span class="ml-1">
-        飲んだお店：<%= post.bar.name %>
+        飲んだお店：<%= post.bar.place_name %>
       </span>
     <% end %>
     <% unless post.shop.nil? %>
       <span class="ml-1">|</span>
       <span class="ml-1">
-        買ったお店：<%= post.shop.name %>
+        買ったお店：<%= post.shop.place_name %>
       </span>
     <% end %>
   </div>

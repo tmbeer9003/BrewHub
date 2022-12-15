@@ -1,35 +1,30 @@
 <div class="card p-3">
   <div class="text-center mb-1">
-    <h5><u>
-      <% unless params[:id] %>
-        飲んだお店新規登録
-      <% else %>
-        飲んだお店編集
-      <% end %>
-    </u></h5>
+    <h5><u>お店新規登録</u></h5>
   </div>
 
   <%= form_with model: [:admin, bar], local: false do |f| %>
-    <% unless params[:id].nil? %>
-      <div class="text-center">
-        選択中の飲んだお店ID：<%= bar.id %>
+    <div class="form-group my-2">
+      <input id="pac-input" class="form-control rounded-pill" type="text" placeholder="お店の名前/住所で検索">
+      <%= f.hidden_field :place_name, id: "place-name_form", value: "" %>
+      <%= f.hidden_field :latitude, id: "latitude_form", value: "" %>
+      <%= f.hidden_field :longitude, id: "longitude_form", value: "" %>
+    </div>
+    
+    <div class="form-group text-center my-2", id="bar_category">
+      <div class="form-check form-check-inline">
+        <%= f.radio_button :category, :bar, checked: true, class: "form-check-input" %>
+        <%= f.label :category_bar, "飲食店", class: "form-check-label" %>
       </div>
-    <% end %>
-    <div class="form-group my-2">
-      <%= f.text_field :name, placeholder: "飲んだお店名", class: "form-control" %>
+      <div class="form-check form-check-inline">
+        <%= f.radio_button :category, :shop, class: "form-check-input" %>
+        <%= f.label :category_shop, "販売店", class: "form-check-label" %>
+      </div>
     </div>
-
-    <div class="form-group my-2">
-      <%= f.select :location, Bar.locations.keys.to_a, {prompt: '--所在地を選択--'}, class: "form-control"%>
-    </div>
-
+      
     <div class="form-group my-2 text-center">
-      <% unless params[:id] %>
-        <%= f.submit "新規登録", class: "btn btn-success p-2" %>
-      <% else %>
-        <%= f.submit "編集する", class: 'btn btn-success p-2' %>
-        <%= link_to "戻る", new_admin_bar_path, remote: true, class: 'btn btn-primary p-2' %>
-      <% end %>
+      <%= f.submit "新規登録", class: "btn btn-success p-2" %>
     </div>
   <% end %>
 </div>
+

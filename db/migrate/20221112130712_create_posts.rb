@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.references :member, null: false, foreign_key: true
       t.references :beer, null: false, foreign_key: true
       t.references :bar, foreign_key: true
-      t.references :shop, foreign_key: true
+      t.references :shop, foreign_key: { to_table: :bars }
       t.text :content
       t.float :evaluation
       t.integer :serving_style, null: false, default: 0

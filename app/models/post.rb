@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   belongs_to :member
   belongs_to :beer
   belongs_to :bar, optional: true
-  belongs_to :shop, optional: true
+  belongs_to :shop, class_name: 'Bar', optional: true
   has_many :cheers, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :cheers_members, through: :cheers, source: :member

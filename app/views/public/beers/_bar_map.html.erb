@@ -1,0 +1,78 @@
+<script>
+  var map_bars;
+  var map_shops;
+  var marker = []; // マーカーを配列化
+  var marker02 = []; // マーカーを配列化
+  var infoWindow = []; // 吹き出しを配列化
+  var infoWindow02 = []; // 吹き出しを配列化
+  var bars = gon.bars; // barsコントローラで定義した変数
+  var shops = gon.shops; // barsコントローラで定義した変数
+
+  function initMap(){
+    map_bars = new google.maps.Map(document.getElementById('map-bars'), {
+    center: {lat: 35.6809591, lng: 139.7673068},
+    zoom: 9,
+    mapTypeControl: false,
+    streetViewControl: false
+    });
+
+    //マーカーをクリックした時の動作
+    function markerEvent(i) {
+      marker[i].addListener('click', function() {
+        for (const j in marker) {
+          //他の吹き出しを閉じる
+          infoWindow[j].close(map_bars, marker[j]);
+        }
+          //クリックしたマーカーの吹き出しを表示
+          infoWindow[i].open(map_bars, marker[i]);
+      });
+    }
+
+    for(var i = 0; i < bars.length; ++i) {
+      //一つずつ経度緯度の情報を取り出してマーカー作成
+      spot = new google.maps.LatLng({lat: bars[i].latitude, lng: bars[i].longitude});
+      marker[i] = new google.maps.Marker({
+        position: spot,
+        map: map_bars
+      });
+      infoWindow[i] = new google.maps.InfoWindow({ // 吹き出しの追加
+        content: bars[i].place_name // 吹き出しの表示内容
+      });
+      markerEvent(i);
+    }
+
+    map_shops = new google.maps.Map(document.getElementById('map-shops'), {
+    center: {lat: 35.6809591, lng: 139.7673068},
+    zoom: 9,
+    mapTypeControl: false,
+    streetViewControl: false
+    });
+
+    //マーカーをクリックした時の動作
+    function markerEvent02(i) {
+      marker02[i].addListener('click', function() {
+        for (const j in marker02) {
+          //他の吹き出しを閉じる
+          infoWindow02[j].close(map_shops, marker02[j]);
+        }
+          //クリックしたマーカーの吹き出しを表示
+          infoWindow02[i].open(map_shops, marker02[i]);
+      });
+    }
+
+    for(var i = 0; i < shops.length; ++i) {
+      //一つずつ経度緯度の情報を取り出してマーカー作成
+      spot02 = new google.maps.LatLng({lat: shops[i].latitude, lng: shops[i].longitude});
+      marker02[i] = new google.maps.Marker({
+        position: spot02,
+        map: map_shops
+      });
+      infoWindow02[i] = new google.maps.InfoWindow({ // 吹き出しの追加
+        content: shops[i].place_name // 吹き出しの表示内容
+      });
+      markerEvent02(i);
+    }
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap&libraries=places&v=weekly"defer></script>

@@ -4,11 +4,15 @@
       <div class="card-title text-center">
         <h6><b>買われたお店</b></h6>
       </div>
-      <% shops.each do |shop| %>
-        <li class="list-unstyled">
-          <%= shop.place_name %>
-        </li>
-      <% end %>
+      <% unless shops.exists? %>
+        <div class="text-center">お店情報がまだありません</div>
+      <% else %>
+        <% shops.each do |shop| %>
+          <li class="list-unstyled">
+            <%= shop.place_name %>
+          </li>
+        <% end %>
+      <% end %>  
     </div>
     <div class="col-md">
       <div id="map-shops", class="mt-2", style="height: 300px"></div>

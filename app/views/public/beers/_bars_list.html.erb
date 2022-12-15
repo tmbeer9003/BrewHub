@@ -4,10 +4,14 @@
       <div class="card-title text-center">
         <h6><b>飲まれたお店</b></h6>
       </div>
-      <% bars.each do |bar| %>
-        <li class="list-unstyled">
-          <%= bar.place_name %>
-        </li>
+      <% unless bars.exists? %>
+        <div class="text-center">お店情報がまだありません</div>
+      <% else %>
+        <% bars.each do |bar| %>
+          <li class="list-unstyled">
+            <%= bar.place_name %>
+          </li>
+        <% end %>
       <% end %>
     </div>
     <div class="col-md">

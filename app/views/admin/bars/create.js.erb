@@ -1,4 +1,7 @@
 $("#bar-list").html("<%= j(render 'admin/bars/index', bars: @bars) %>");
+$("#shop-list").html("<%= j(render 'admin/bars/index', bars: @shops) %>");
 $("#error-message").html("<%= j(render 'layouts/errors', obj: @bar) %>");
-$("#bar_name").val("");
-$("#bar_location").val("");
+$("#pac-input").val("");
+$("#place-name_form").val("");
+$("#latitude_form").val("");
+$("#longitude_form").val("");

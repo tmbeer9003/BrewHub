@@ -10,19 +10,21 @@
 
 <div class="row">
   <div class="mt-1 mb-0 card-title">
+    <%# ビール名部分 %>
     <h5 class="font-weight-bold d-inline-block mb-0">
       <%= link_to post.beer.name, admin_beer_path(post.beer), class: "text-reset" %></h5>
-      <%# ビール名部分 %>
+      
 
+    <%# ブルワリー名部分 %>
     <h6 class="d-inline-block mb-0">
       <span class="ml-1">/</span>
       <%= post.beer.brewery.name %>
     </h6>
-    <%# ブルワリー名部分 %>
   </div>
 </div>
 
 <div class="row align-items-center d-flex px-0">
+  <%# レビュー部分 %>
   <% unless post.evaluation %>
     <span>未評価</span>
   <% else %>
@@ -31,9 +33,9 @@
     </span>
     <h5 class="font-weight-bold mx-2 mb-0"><%= post.evaluation %></h5>
   <% end %>
-  <%# レビュー部分 %>
 
   <div class="small mt-auto">
+    <%# サービング部分 %>
     <span>（Served</span>
     <span>
       <% if post.serving_style == "draft" %>on
@@ -52,10 +54,10 @@
       <% end %>
     </span>
   </div>
-  <%# サービング部分 %>
 </div>
 
 <div class="row d-flex">
+  <%# 本文/一覧画面では40文字以上表示されないようにする %>
   <% if current_page?(admin_post_path(post)) %>
     <span><%= post.content %></span>
   <% else %>
@@ -69,17 +71,17 @@
     </span>
   <% end %>
 </div>
-<%# 本文/一覧画面では40文字以上表示されないようにする %>
 
 <div class="row small mt-auto pt-1">
+  <%# Cheers部分 %>
   <span class="text-dark font-weight-bold">
     <i class="fas fa-glass-cheers fa-lg"></i>
     <%= post.cheers.count %>Cheers
   </span>
   <span class="ml-1">|</span>
-  <%# Cheers部分 %>
 
   <div>
+    <%# コメント部分/詳細画面ではリンクを外す %>
     <span class="ml-1">
       <% if current_page?(admin_post_path(post)) %>
         コメント<%= post.post_comments.count %>件
@@ -91,19 +93,18 @@
       <% end %>
     </span>
   </div>
-  <%# コメント部分/詳細画面ではリンクを外す %>
-
+  
+  <%# お店情報部分 %>
   <% unless post.bar.nil? %>
     <span class="ml-1">|</span>
     <span class="ml-1">
-      飲んだお店：<%= post.bar.name %>
+      飲んだお店：<%= post.bar.place_name %>
     </span>
   <% end %>
   <% unless post.shop.nil? %>
     <span class="ml-1">|</span>
     <span class="ml-1">
-      買ったお店：<%= post.shop.name %>
+      買ったお店：<%= post.shop.place_name %>
     </span>
   <% end %>
-  <%# お店情報部分 %>
 </div>

@@ -73,8 +73,10 @@
     </div>
 
     <div id="bars-and-shops">
-     <%= render "bars_and_shops", bars: @bars, shops: @shops, f: f %>
+      <%= render "bars_and_shops", bars: @bars, shops: @shops, f: f %>
     </div>
+
+    <div id="map"></div>
 
     <div class="actions text-center py-3">
       <% if params[:id] == nil %>
@@ -86,46 +88,24 @@
     </div>
   <% end %>
 
-    <h6 class="border-bottom pb-1 my-3">お店情報追加<span class="small"> ※一覧にない場合はこちらから追加してください</span></h6>
-    <%= form_with model: @bar, local: false do |bar| %>
-      <div class="row my-2">
-        <div class="col-md-6 pr-0">
-          <%= bar.text_field :name, autofocus: true, placeholder: "飲んだお店名", class: "form-control rounded-pill" %>
-        </div>
-        <div class="col-md-4">
-          <%= bar.select :location, Bar.locations.keys.to_a, {prompt: '--所在地--'}, class: "form-control rounded-pill"%>
-        </div>
-        <div class="col-md-2">
-          <%= bar.submit "追加", class: "btn btn-secondary px-3 " %>
-        </div>
+  <h6 class="border-bottom pb-1 my-3">お店情報追加<span class="small"> ※一覧にない場合はこちらから追加してください</span></h6>
+  <%= form_with model: @bar, local: false do |f| %>
+    <div class="row my-2">
+      <div class="col-md-4">
+        <%= f.select :category, Bar.categories_i18n.invert, {prompt: '--お店のタイプ--'}, class: "form-control rounded-pill"%>
       </div>
-    <% end %>
-    <%= form_with model: @shop, local: false do |shop| %>
-      <div class="row my-2">
-        <div class="col-md-6 pr-0">
-          <%= shop.text_field :name, autofocus: true, placeholder: "買ったお店名", class: "form-control rounded-pill" %>
-        </div>
-        <div class="col-md-4">
-          <%= shop.select :location, Bar.locations.keys.to_a, {prompt: '--所在地--'}, class: "form-control rounded-pill"%>
-        </div>
-        <div class="col-md-2">
-          <%= shop.submit "追加", class: "btn btn-secondary px-3" %>
-        </div>
+      <div class="col-md-6 pr-0">
+        <input id="pac-input" class="form-control rounded-pill" type="text" placeholder="お店の名前/住所で検索">
+        <%= f.hidden_field :place_name, id: "place-name_form", value:"" %>
+        <%= f.hidden_field :latitude, id: "latitude_form", value:"" %>
+        <%= f.hidden_field :longitude, id: "longitude_form", value:"" %>
       </div>
-    <% end %>
+      <div class="col-md-2">
+        <%= f.submit "追加", class: "btn btn-secondary px-3 " %>
+      </div>
+    </div>
+  <% end %>
 <% end %>
 
-<script>
-  $('#stars').empty();
-  $("#stars").raty({
-    starOff:  '<%= asset_path('star-off.png') %>',
-    starOn : '<%= asset_path('star-on.png') %>',
-    starHalf: '<%= asset_path('star-half.png') %>',
-    scoreName: 'post[evaluation]',
-    half: true,
-    <% if post.evaluation != nil %>
-      score: <%= post.evaluation %>,
-      readOnly: false,
-    <% end %>
-  });
-  </script>
+<%= render "review", post: post %>
+<%= render "bar_regist" %>

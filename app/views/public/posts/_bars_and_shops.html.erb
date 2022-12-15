@@ -4,10 +4,10 @@
   </div>
   <div class="col-md-9">
     <div class="form-check pl-0 mb-1">
-      <%= f.collection_select :bar_id, bars, :id, :name, {prompt: '--飲んだお店--'}, class: 'form-control rounded-pill' %>
+      <%= f.collection_select :bar_id, bars, :id, :place_name, {prompt: '--飲んだお店--'}, class: 'form-control rounded-pill' %>
     </div>
     <div class="form-check pl-0">
-      <%= f.collection_select :shop_id, shops, :id, :name, {prompt: '--買ったお店--'}, class: 'form-control rounded-pill' %>
+      <%= f.collection_select :shop_id, shops, :id, :place_name, {prompt: '--買ったお店--'}, class: 'form-control rounded-pill' %>
     </div>
   </div>
 </div>

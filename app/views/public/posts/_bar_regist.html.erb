@@ -1,0 +1,26 @@
+<script>
+  let map
+  function initMap() {
+    map = new google.maps.Map(document.getElementById("map"));
+
+    const input = document.getElementById("pac-input");
+    const options = {
+      componentRestrictions: { country: "jp" },
+      fields: ["geometry", "name"],
+      types: ["establishment"],
+    };
+    const autocomplete = new google.maps.places.Autocomplete(input, options);
+
+    autocomplete.addListener("place_changed", () => {
+    const place = autocomplete.getPlace();
+    if (!place.geometry || !place.geometry.location) {
+      alert("お店情報がありません: '" + place.name + "'");
+    }
+
+    document.getElementById('place-name_form').value = place.name;
+    document.getElementById('latitude_form').value = place.geometry.location.lat();
+    document.getElementById('longitude_form').value = place.geometry.location.lng();
+  });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap&libraries=places&v=weekly"defer></script>

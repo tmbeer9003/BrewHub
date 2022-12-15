@@ -1,0 +1,17 @@
+<div class="card border-dark mt-2">
+  <div class="card-body row">
+    <div class=col-md-5>
+      <div class="card-title text-center">
+        <h6><b>飲まれたお店</b></h6>
+      </div>
+      <% bars.each do |bar| %>
+        <li class="list-unstyled">
+          <%= bar.place_name %>
+        </li>
+      <% end %>
+    </div>
+    <div class="col-md">
+      <div id="map-bars", class="mt-2", style="height: 300px"></div>
+    </div>
+  </div>
+</div>

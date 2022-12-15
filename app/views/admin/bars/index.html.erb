@@ -1,27 +1,47 @@
-<div class="row">
-  <div class="ml-5 mt-3">
-    <u><%= link_to "買ったお店", admin_shops_path, class: "text-reset" %></u>
-    <span class="mr-2">|</span>
-    <h4 class="mr-2 d-inline-block font-weight-bold">飲んだお店</h4>
-  </div>
-</div>
-
-<div class="d-flex row">
-  <div class="col-md-3 mt-2", id="bar-form">
+<div class="row mt-3">
+  <div class="col-md-3", id="bar-form">
     <%= render "form", bar: @bar %>
   </div>
 
-  <div class="col-md-9 mt-2">
-    <div id="error-message">
+  <div class="col-md-9">
+    <ul class="nav nav-tabs nav-justified">
+      <li class="nav-item">
+        <a href="#bars-index" class="nav-link active text-reset border-dark" data-toggle="tab">飲食店（飲んだお店）</a>
+      </li>
+      <li class="nav-item">
+        <a href="#shops-index" class="nav-link text-reset border-dark" data-toggle="tab">販売店（買ったお店）</a>
+      </li>
+    </ul>
+
+    <div id="error-message", class="mt-2">
       <%= render "layouts/errors", obj: @bar %>
     </div>
 
-    <div id="bar-list">
-      <%= render "index", bars: @bars %>
-    </div>
+    <div class="tab-content">
+      <div id="bars-index", class="tab-pane active">
+        <div id="bar-list">
+          <%= render "index", bars: @bars %>
+        </div>
 
-    <div class="d-flex justify-content-center">
-      <%= paginate @bars %>
+        <div class="d-flex justify-content-center">
+          <%= paginate @bars %>
+        </div>
+      </div>
+
+      <div id="shops-index", class="tab-pane">
+        <div id="shop-list">
+          <%= render "index", bars: @shops %>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <%= paginate @shops %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
+
+<div id="map"></div>
+<%= render "public/posts/bar_regist" %>

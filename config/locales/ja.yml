@@ -10,6 +10,10 @@ ja:
         can: "缶"
         bottle: "ボトル"
         others: "その他"
+    bar:
+      category:
+        bar: "飲んだお店"
+        shop: "買ったお店"
 
   errors:
     format: "%{attribute}%{message}"

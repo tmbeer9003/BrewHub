@@ -5,7 +5,7 @@ class CreateRelationships < ActiveRecord::Migration[6.1]
       t.references :follow, null: false, foreign_key: { to_table: :members }
 
       t.timestamps
-      
+
       t.index [:member_id, :follow_id], unique: true
     end
   end

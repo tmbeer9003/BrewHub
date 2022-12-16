@@ -11,8 +11,7 @@ class Admin::GroupPostCommentsController < ApplicationController
   end
 
   private
-
-  def group_post_comment_params
-    params.require(:group_post_comment).permit(:member_id, :group_post_id, :content)
-  end
+    def group_post_comment_params
+      params.require(:group_post_comment).permit(:member_id, :group_post_id, :content)
+    end
 end

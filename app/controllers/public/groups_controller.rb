@@ -6,10 +6,10 @@ class Public::GroupsController < ApplicationController
   def index
     group_search = params[:group_search]
     unless group_search
-      groups = Group.includes(:members).sort {|a,b| b.members.size <=> a.members.size}
+      groups = Group.includes(:members).sort { |a, b| b.members.size <=> a.members.size }
       @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)
     else
-      groups = Group.where("name like ?", "%#{group_search}%").includes(:members).sort {|a,b| b.members.size <=> a.members.size}
+      groups = Group.where("name like ?", "%#{group_search}%").includes(:members).sort { |a, b| b.members.size <=> a.members.size }
       @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)
     end
   end
@@ -46,19 +46,17 @@ class Public::GroupsController < ApplicationController
   end
 
   private
-
-  def group_params
-    params.require(:group).permit(:owner_id, :name, :description, :group_image)
-  end
-
-  def set_group
-    @group = Group.find(params[:id])
-  end
-
-  def ensure_owner
-    unless @group.owner == current_member
-    redirect_to group_path(@group), alert: "権限がありません"
+    def group_params
+      params.require(:group).permit(:owner_id, :name, :description, :group_image)
     end
-  end
 
+    def set_group
+      @group = Group.find(params[:id])
+    end
+
+    def ensure_owner
+      unless @group.owner == current_member
+        redirect_to group_path(@group), alert: "権限がありません"
+      end
+    end
 end

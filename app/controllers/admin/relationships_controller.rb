@@ -21,7 +21,7 @@ class Admin::RelationshipsController < ApplicationController
       @members = @member.followers.page(params[:page]).per(10)
     end
   end
-  
+
   def set_member
     @member = Member.find(params[:member_id])
   end

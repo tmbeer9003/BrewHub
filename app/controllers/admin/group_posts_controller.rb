@@ -23,16 +23,15 @@ class Admin::GroupPostsController < ApplicationController
   end
 
   private
+    def group_post_params
+      params.require(:group_post).permit(:member_id, :group_id, :title, :content)
+    end
 
-  def group_post_params
-    params.require(:group_post).permit(:member_id, :group_id, :title, :content)
-  end
+    def set_group
+      @group = Group.find(params[:group_id])
+    end
 
-  def set_group
-    @group = Group.find(params[:group_id])
-  end
-
-  def set_group_post
-    @group_post = GroupPost.find(params[:id])
-  end
+    def set_group_post
+      @group_post = GroupPost.find(params[:id])
+    end
 end

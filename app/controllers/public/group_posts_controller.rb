@@ -34,30 +34,28 @@ class Public::GroupPostsController < ApplicationController
   end
 
   private
-
-  def group_post_params
-    params.require(:group_post).permit(:member_id, :group_id, :title, :content)
-  end
-
-  def set_group
-    @group = Group.find(params[:group_id])
-  end
-
-  def set_group_post
-    @group_post = GroupPost.find(params[:id])
-  end
-
-  def ensure_group_member
-    unless current_member.joined_already?(@group)
-      redirect_to groups_path
+    def group_post_params
+      params.require(:group_post).permit(:member_id, :group_id, :title, :content)
     end
-  end
-  # グループに加入していない会員がURLからアクションを起こそうとしたとき、グループ一覧画面へリダイレクトさせる
 
-  def ensure_contributer
-    unless @group_post.member == current_member
-    redirect_to group_path(@group), alert: "権限がありません"
+    def set_group
+      @group = Group.find(params[:group_id])
     end
-  end
 
+    def set_group_post
+      @group_post = GroupPost.find(params[:id])
+    end
+
+    def ensure_group_member
+      unless current_member.joined_already?(@group)
+        redirect_to groups_path
+      end
+    end
+    # グループに加入していない会員がURLからアクションを起こそうとしたとき、グループ一覧画面へリダイレクトさせる
+
+    def ensure_contributer
+      unless @group_post.member == current_member
+        redirect_to group_path(@group), alert: "権限がありません"
+      end
+    end
 end

@@ -32,8 +32,7 @@ class Public::RelationshipsController < ApplicationController
   end
 
   private
-
-  def set_member
-    @member = Member.find(params[:member_id])
-  end
+    def set_member
+      @member = Member.find(params[:member_id])
+    end
 end

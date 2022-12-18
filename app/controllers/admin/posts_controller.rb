@@ -21,9 +21,8 @@ class Admin::PostsController < ApplicationController
   def edit
     @beer = @post.beer
     @bar = Bar.new
-    @shop = Shop.new
-    @bars = Bar.all
-    @shops = Shop.all
+    @bars = Bar.where(category: 0)
+    @shops = Bar.where(category: 1)
   end
 
   def update

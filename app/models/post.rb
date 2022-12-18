@@ -19,7 +19,7 @@ class Post < ApplicationRecord
       file_path = Rails.root.join("public/images/post-no-image.jpg")
       post_image.attach(io: File.open(file_path), filename: "post-default-image.jpg", content_type: "image/jpeg")
     end
-    post_image.variant(resize_to_limit: [width, height]).processed
+    post_image.variant(resize_to_fit: [width, height]).processed
   end
 
   def cheers_already?(member)

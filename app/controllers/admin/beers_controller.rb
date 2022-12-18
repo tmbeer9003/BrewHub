@@ -16,12 +16,12 @@ class Admin::BeersController < ApplicationController
   def index
     @breweries = Brewery.all
     @beer_styles = BeerStyle.all
-    @beer_search = params[:beer_search]
     # ビール（キーワード）検索で受け取った値を代入
-    @refine_brewery = params[:refine_brewery]
+    @beer_search = params[:beer_search]
     # ブルワリー検索で受け取った値を代入
-    @refine_beer_style = params[:refine_beer_style]
+    @refine_brewery = params[:refine_brewery]
     # ビアスタイル検索で受け取った値を代入
+    @refine_beer_style = params[:refine_beer_style]
     if @beer_search != nil
       @beers = Beer.where("name like ?", "%#{@beer_search}%").order(evaluation: :desc).page(params[:page]).per(10)
     elsif @refine_brewery != nil
@@ -38,10 +38,12 @@ class Admin::BeersController < ApplicationController
     @breweries = Brewery.all
     @beer_styles = BeerStyle.all
     @posts = @beer.posts.order(id: :desc).page(params[:page]).per(7)
-    @bars = @beer.drunk_bars.distinct.order(location: :asc)
+    @bars = @beer.drunk_bars.distinct.order(place_name: :asc)
     # @beerが飲まれた（紐づけられた）お店のデータを取得し重複を排除、所在地の昇順で並べ替える
-    @shops = @beer.purchased_shops.distinct.order(location: :asc)
+    @shops = @beer.purchased_shops.distinct.order(place_name: :asc)
     # @beerが買われた（紐づけられた）お店のデータを取得し重複を排除、所在地の昇順で並べ替える
+    gon.bars = @beer.drunk_bars.distinct
+    gon.shops = @beer.purchased_shops.distinct
   end
 
   def edit

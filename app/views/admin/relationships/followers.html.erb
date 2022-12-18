@@ -2,7 +2,7 @@
   <%= render "admin/members/show", member: @member %>
 
   <div class="form-row mt-3 d-flex justify-content-end mr-1">
-    <%= form_with url: admin_member_followers_path, method: :get do |f| %>
+    <%= form_with url: admin_member_followers_path, method: :get, local: false do |f| %>
     <div class="input-group border border-secondary rounded-pill bg-white mb-1">
       <%= f.text_field :member_search, placeholder: "アカウント名で検索", class: "form-control form-control-sm input-group-prepend border-0 bg-transparent" %>
       <span class="input-group-btn">
@@ -19,7 +19,9 @@
   </div>
 
   <% if @member.followers.exists? %>
+    <div id="followers-index">
       <%= render "admin/members/index", members: @members %>
+    </div>
 
   <% else %>
     <div class="text-center mt-3">

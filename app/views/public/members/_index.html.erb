@@ -1,43 +1,48 @@
-<% members.each do |member| %>
+<% if members.present? %>
 
-<div class="card border-dark mt-1 px-2">
-  <div class="card-body row">
+  <% members.each do |member| %>
+  <div class="card border-dark mt-1 px-2">
+    <div class="card-body row">
 
-    <div class="col-1 px-1 d-flex align-items-center">
-      <%= image_tag member.get_member_image(50,50), class: "rounded-circle image-fit" %>
-    </div>
+      <div class="col-1 px-1 d-flex align-items-center">
+        <%= image_tag member.get_member_image(50,50), class: "rounded-circle image-fit" %>
+      </div>
 
-    <div class="col-5 mb-0 pl-1">
-      <h5 class="font-weight-bold d-inline-block mb-0">
-        <%= link_to member_path(member), class: "text-reset" do %><%= member.display_name %><% end %></h5>
-      <span class="d-inline-block mb-0">@<%= member.account_name %></span>
-      <div><i class="fas fa-beer text-warning mr-1"></i><%= member.posts.count %> Beers</div>
-    </div>
+      <div class="col-5 mb-0 pl-1">
+        <h5 class="font-weight-bold d-inline-block mb-0">
+          <%= link_to member_path(member), class: "text-reset" do %><%= member.display_name %><% end %></h5>
+        <span class="d-inline-block mb-0">@<%= member.account_name %></span>
+        <div><i class="fas fa-beer text-warning mr-1"></i><%= member.posts.count %> Beers</div>
+      </div>
 
-
-
-    <div class="col-6 d-flex align-items-center justify-content-end pr-0">
-      <% unless member == current_member %>
-        <div>
-          <% if member.followed_me?(current_member) %>
-          <small class="text-secondary">フォローされています</small>
-          <% end %>
-        </div>
-        <div class="mx-2">
-          <% if current_member.followed_already?(member) %>
-            <%= link_to "フォロー解除", member_relationship_path(member), method: :delete, class: "btn btn-warning text-white" %>
-          <% elsif member.followed_me?(current_member) %>
-            <%= link_to "フォローバック", member_relationship_path(member), method: :post, class: "btn btn-info" %>
-          <% else %>
-            <%= link_to "フォローする", member_relationship_path(member), method: :post, class: "btn btn-info" %>
-          <% end %>
-        </div>
-      <% end %>
+      <div class="col-6 d-flex align-items-center justify-content-end pr-0">
+        <% unless member == current_member %>
+          <div>
+            <% if member.followed_me?(current_member) %>
+            <small class="text-secondary">フォローされています</small>
+            <% end %>
+          </div>
+          <div class="mx-2">
+            <% if current_member.followed_already?(member) %>
+              <%= link_to "フォロー解除", member_relationship_path(member), method: :delete, class: "btn btn-warning text-white" %>
+            <% elsif member.followed_me?(current_member) %>
+              <%= link_to "フォローバック", member_relationship_path(member), method: :post, class: "btn btn-info" %>
+            <% else %>
+              <%= link_to "フォローする", member_relationship_path(member), method: :post, class: "btn btn-info" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
-<% end %>
+  <% end %>
 
-<div class="d-flex justify-content-center mt-2">
-  <%= paginate members %>
-</div>
+  <div class="d-flex justify-content-center mt-2">
+    <%= paginate members %>
+  </div>
+
+<% else %>
+  <div class="text-center mt-3">
+    <span>ユーザーがいません</span>
+  </div>
+<% end %>

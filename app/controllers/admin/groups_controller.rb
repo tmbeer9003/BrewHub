@@ -4,8 +4,10 @@ class Admin::GroupsController < ApplicationController
   layout "application_no_sidebar"
 
   def index
+    # グループ検索で受け取った値を代入
     group_search = params[:group_search]
     unless group_search
+      # 参加者が多い順に並べる
       groups = Group.includes(:members).sort { |a, b| b.members.size <=> a.members.size }
       @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)
     else
@@ -15,6 +17,7 @@ class Admin::GroupsController < ApplicationController
   end
 
   def show
+    # トピック検索で受け取った値を代入
     group_post_search = params[:group_post_search]
     unless group_post_search
       @group_posts = @group.group_posts.all.order(id: :desc).page(params[:page]).per(5)

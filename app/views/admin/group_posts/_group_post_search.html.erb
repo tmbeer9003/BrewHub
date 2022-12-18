@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-end mb-2">
   <div class="mr-1">
-    <%= form_with url: admin_group_path(group.id), method: :get do |f| %>
+    <%= form_with url: admin_group_path(group.id), method: :get, local: false do |f| %>
       <div class="input-group border border-secondary rounded-pill bg-white mb-1">
         <%= f.text_field :group_post_search, placeholder: "トピック名で検索", class: "form-control form-control-sm input-group-prepend border-0 bg-transparent" %>
         <span class="input-group-btn">

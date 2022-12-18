@@ -1,23 +1,30 @@
-<% groups.each do |group| %>
+<% if groups.present? %>
 
-<div class="card border-dark mt-1 px-2">
-  <div class="card-body row">
+  <% groups.each do |group| %>
+  <div class="card border-dark mt-1 px-2">
+    <div class="card-body row">
 
-    <div class="col-1 px-1 d-flex align-items-center">
-      <%= image_tag group.get_group_image(50,50), class: "rounded image-fit" %>
-    </div>
+      <div class="col-1 px-1 d-flex align-items-center">
+        <%= image_tag group.get_group_image(50,50), class: "rounded image-fit" %>
+      </div>
 
-    <div class="card-title mb-0 pl-1">
-      <h5 class="font-weight-bold d-inline-block mb-0">
-        <%= link_to admin_group_path(group), class: "text-reset" do %><%= group.name %><% end %></h5>
-      <div>
-        <span><i class="fas fa-users mr-1"></i><%= group.members.count %>人のメンバー</span>
+      <div class="card-title mb-0 pl-1">
+        <h5 class="font-weight-bold d-inline-block mb-0">
+          <%= link_to admin_group_path(group), class: "text-reset" do %><%= group.name %><% end %></h5>
+        <div>
+          <span><i class="fas fa-users mr-1"></i><%= group.members.count %>人のメンバー</span>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<% end %>
+  <% end %>
 
-<div class="d-flex justify-content-center mt-2">
-  <%= paginate groups %>
-</div>
+  <div class="d-flex justify-content-center mt-2">
+    <%= paginate groups %>
+  </div>
+
+<% else %>
+  <div class="text-center mt-3">
+    <span>グループがありません<span>
+  </div>
+<% end %>

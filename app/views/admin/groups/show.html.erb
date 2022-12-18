@@ -3,9 +3,9 @@
 
   <%= render "admin/group_posts/group_post_search", group: @group %>
 
-  <% @group_posts.each do |group_post| %>
-    <%= render "admin/group_posts/index", group: @group, group_post: group_post %>
-  <% end %>
+  <div id="group-posts-index">
+    <%= render "admin/group_posts/index", group: @group, group_posts: @group_posts %>
+  </div>
 
   <div class="d-flex justify-content-center mt-2">
     <%= paginate @group_posts %>

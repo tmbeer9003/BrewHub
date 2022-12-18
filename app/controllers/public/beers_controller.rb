@@ -37,9 +37,9 @@ class Public::BeersController < ApplicationController
     @breweries = Brewery.all
     @beer_styles = BeerStyle.all
     @posts = @beer.posts.order(id: :desc).page(params[:page]).per(7)
-    @bars = @beer.drunk_bars.distinct.order(location: :asc)
+    @bars = @beer.drunk_bars.distinct.order(place_name: :asc)
     # @beerが飲まれた（紐づけられた）お店のデータを取得し重複を排除、所在地の昇順で並べ替える
-    @shops = @beer.purchased_shops.distinct.order(location: :asc)
+    @shops = @beer.purchased_shops.distinct.order(place_name: :asc)
     # @beerが買われた（紐づけられた）お店のデータを取得し重複を排除、所在地の昇順で並べ替える
     gon.bars = @beer.drunk_bars.distinct
     gon.shops = @beer.purchased_shops.distinct

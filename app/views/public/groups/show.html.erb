@@ -3,9 +3,9 @@
 <% if current_member.joined_already?(@group) %>
   <%= render "public/group_posts/group_post_search", group: @group %>
 
-  <% @group_posts.each do |group_post| %>
-    <%= render "public/group_posts/index", group: @group, group_post: group_post %>
-  <% end %>
+  <div id="group-posts-index">
+    <%= render "public/group_posts/index", group: @group, group_posts: @group_posts %>
+  </div>
 
   <% else %>
     <div class="text-center mt-2">

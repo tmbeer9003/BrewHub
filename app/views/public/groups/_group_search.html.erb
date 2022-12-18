@@ -4,7 +4,7 @@
   </span>
     
   <div class="mr-1">
-    <%= form_with url: groups_path, method: :get do |f| %>
+    <%= form_with url: groups_path, method: :get, local: false do |f| %>
       <div class="input-group border border-secondary rounded-pill bg-white mb-1">
         <%= f.text_field :group_search, placeholder: "グループ名で検索", class: "form-control form-control-sm input-group-prepend border-0 bg-transparent" %>
         <span class="input-group-btn">

@@ -1,5 +1,5 @@
 <div class="form-row mt-3 d-flex justify-content-end mr-1">
-  <%= form_with url: posts_path, method: :get do |f| %>
+  <%= form_with url: posts_path, method: :get, local: false do |f| %>
   <div class="input-group border border-secondary rounded-pill bg-white mb-1">
     <%= f.text_field :post_search, placeholder: "投稿を検索", class: "form-control form-control-sm input-group-prepend border-0 bg-transparent" %>
     <span class="input-group-btn">

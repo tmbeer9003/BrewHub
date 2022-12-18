@@ -2,7 +2,7 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~toastr/toastr';
 
-
+/*ページネーションのレイアウト*/
 .pagination>li>a {
   border: none;
   color: #696969;
@@ -21,36 +21,58 @@
 
 html {
   font-size: 15px;
+  /*フッター固定の為の設定*/
+  height: 100%;
 }
 
+/*フッター固定の為の設定*/
 body {
+  height: 100%;
+}
+
+/*背景画像固定の為の設定（iOSでのバグを防ぐ）*/
+body:before{
+  content: "";
+  position: fixed;
   background-image: url('../images/top_bg.jpg');
   background-color: rgba(255, 255, 255, 0.7);
   background-blend-mode:lighten;
   background-size:cover;
   height: 100vh;
+  width: 100%;
 }
 
-main {
-  padding-bottom:4rem
+/*フッター固定の為の設定*/
+footer{
+  position: sticky;
+  top: 100vh;
 }
 
 .table-white {
   background-color: #FFFFFF;
 }
 
+/*画像のレスポンシブ対応の為の設定*/
 .image-fit {
   max-width: 100%;
 }
 
+/*セーフサーチ適用時の画像縦横比調整*/
+.height-auto{
+  height: auto;
+}
+
+/*タブの背景色*/
 .nav-link {
   background-color: #d3d3d3
 }
 
+/*トップページのボタンサイズ*/
 .btn-login{
   width: 150px;
 }
 
-.height-auto{
-  height: auto;
+/*ランキング3位の王冠の色指定*/
+.color-orange{
+  color: orange;
 }

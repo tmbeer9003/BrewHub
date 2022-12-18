@@ -1,7 +1,7 @@
 class Public::GroupPostCommentsController < ApplicationController
-    before_action :authenticate_member!
-    before_action :set_group_post
-    before_action :ensure_group_member
+  before_action :authenticate_member!
+  before_action :set_group_post
+  before_action :ensure_group_member
 
   def create
     @group_post_comment = @group_post.group_post_comments.new(group_post_comment_params)
@@ -19,21 +19,19 @@ class Public::GroupPostCommentsController < ApplicationController
   end
 
   private
-
-  def group_post_comment_params
-    params.require(:group_post_comment).permit(:member_id, :group_post_id, :content)
-  end
-
-  def set_group_post
-    @group = Group.find(params[:group_id])
-    @group_post = GroupPost.find(params[:group_post_id])
-  end
-
-  def ensure_group_member
-    unless current_member.joined_already?(@group)
-      redirect_to groups_path, alert: "権限がありません"
+    def group_post_comment_params
+      params.require(:group_post_comment).permit(:member_id, :group_post_id, :content)
     end
-  end
-  # グループに加入していない会員がURLからアクションを起こそうとしたとき、グループ一覧画面へリダイレクトさせる
 
+    def set_group_post
+      @group = Group.find(params[:group_id])
+      @group_post = GroupPost.find(params[:group_post_id])
+    end
+
+    def ensure_group_member
+      unless current_member.joined_already?(@group)
+        redirect_to groups_path, alert: "権限がありません"
+      end
+    end
+  # グループに加入していない会員がURLからアクションを起こそうとしたとき、グループ一覧画面へリダイレクトさせる
 end

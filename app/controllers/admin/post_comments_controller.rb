@@ -7,5 +7,4 @@ class Admin::PostCommentsController < ApplicationController
     @post_comments = @post.post_comments.order("id DESC").page(params[:page]).per(5)
     @post_comment.destroy
   end
-
 end

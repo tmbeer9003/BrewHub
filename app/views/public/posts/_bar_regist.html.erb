@@ -1,5 +1,4 @@
 <script>
-  let map
   function initMap() {
     map = new google.maps.Map(document.getElementById("map"));
 
@@ -20,7 +19,8 @@
     document.getElementById('place-name_form').value = place.name;
     document.getElementById('latitude_form').value = place.geometry.location.lat();
     document.getElementById('longitude_form').value = place.geometry.location.lng();
-  });
+    });
   }
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap&libraries=places&v=weekly"defer></script>

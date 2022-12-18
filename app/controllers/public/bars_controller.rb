@@ -7,8 +7,7 @@ class Public::BarsController < ApplicationController
   end
 
   private
-
-  def bar_params
-    params.require(:bar).permit(:category, :place_name, :latitude, :longitude)
-  end
+    def bar_params
+      params.require(:bar).permit(:category, :place_name, :latitude, :longitude)
+    end
 end

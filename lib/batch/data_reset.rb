@@ -3,7 +3,7 @@ class Batch::DataReset
     unless Member.find_by(account_name: "guestuser")
       p "ゲストユーザーの情報がありません"
     else Member.find_by(account_name: "guestuser").destroy
-      p "ゲストユーザーをリセットしました"
+         p "ゲストユーザーをリセットしました"
     end
   end
 end

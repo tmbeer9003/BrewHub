@@ -21,9 +21,8 @@ class Admin::PostsController < ApplicationController
   def edit
     @beer = @post.beer
     @bar = Bar.new
-    @shop = Shop.new
-    @bars = Bar.all
-    @shops = Shop.all
+    @bars = Bar.where(category: 0)
+    @shops = Bar.where(category: 1)
   end
 
   def update
@@ -38,20 +37,19 @@ class Admin::PostsController < ApplicationController
 
   def destroy
     @post.update(evaluation: nil)
-    #削除する投稿のevaluationをnilにする（=この後の計算の分母・分子から除く）
+    # 削除する投稿のevaluationをnilにする（=この後の計算の分母・分子から除く）
     evaluation = @post.beer.beer_evaluation
     @post.beer.update(evaluation: evaluation)
     @post.destroy
     redirect_to admin_posts_path, alert: "管理者権限で投稿を削除しました"
   end
-  
+
   private
-  
-  def post_params
-    params.require(:post).permit(:member_id, :beer_id, :bar_id, :shop_id, :content, :evaluation, :serving_style, :post_image)
-  end
-  
-  def set_post
-    @post = Post.find(params[:id])
-  end
+    def post_params
+      params.require(:post).permit(:member_id, :beer_id, :bar_id, :shop_id, :content, :evaluation, :serving_style, :post_image)
+    end
+
+    def set_post
+      @post = Post.find(params[:id])
+    end
 end

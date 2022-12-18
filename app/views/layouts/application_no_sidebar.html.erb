@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= include_gon %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -73,7 +74,7 @@
       </div>
     </main>
 
-    <footer class="fixed-bottom bg-dark py-2">
+    <footer class="bg-dark py-2">
       <p class="text-center text-white">Copyright © 2022 Brew Hub All Rights Reserved.</p>
     </footer>
 

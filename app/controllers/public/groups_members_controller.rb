@@ -14,8 +14,7 @@ class Public::GroupsMembersController < ApplicationController
   end
 
   private
-
-  def set_group_member
-    @group = Group.find(params[:group_id])
-  end
+    def set_group_member
+      @group = Group.find(params[:group_id])
+    end
 end

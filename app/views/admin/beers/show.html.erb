@@ -45,12 +45,15 @@
     <%= link_to "戻る", admin_beers_path, class: "btn btn-primary px-4 rounded-pill" %>
   </div>
 
-  <ul class="nav nav-tabs nav-justified mt-3">
+  <ul class="nav nav-tabs nav-justified mt-3" >
     <li class="nav-item">
-      <a href="#beer-posts" class="nav-link active text-reset border-dark" data-toggle="tab">このビールについての投稿</a>
+      <a href="#beer-posts" class="nav-link active text-reset border-dark" data-toggle="tab">ビールについての投稿</a>
     </li>
     <li class="nav-item">
-      <a href="#shops-bars-list" class="nav-link text-reset border-dark" data-toggle="tab">お店情報</a>
+      <a href="#bars-list" class="nav-link text-reset border-dark" data-toggle="tab">飲まれたお店</a>
+    </li>
+    <li class="nav-item">
+      <a href="#shops-list" class="nav-link text-reset border-dark" data-toggle="tab">買われたお店</a>
     </li>
   </ul>
 
@@ -59,8 +62,14 @@
       <%= render "admin/posts/index", posts: @posts %>
     </div>
 
-    <div id="shops-bars-list", class="tab-pane mx-3">
-      <%= render "public/beers/shops_bars_list", bars: @bars, shops: @shops %>
+    <div id="bars-list", class="tab-pane">
+      <%= render "public/beers/bars_list", bars: @bars %>
+    </div>
+
+    <div id="shops-list", class="tab-pane">
+      <%= render "public/beers/shops_list", shops: @shops %>
     </div>
   </div>
 </div>
+
+<%= render "public/beers/bar_map" %>

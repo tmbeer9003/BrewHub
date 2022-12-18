@@ -7,7 +7,7 @@ class Admin::BarsController < ApplicationController
     render "error" unless @bar.save
     @bars = Bar.where(category: 0).page(params[:page]).per(10)
     @shops = Bar.where(category: 1).page(params[:page]).per(10)
-    #非同期通信処理後の一覧表示用の記述
+    # 非同期通信処理後の一覧表示用の記述
   end
 
   def index
@@ -20,18 +20,17 @@ class Admin::BarsController < ApplicationController
   def destroy
     @bar = Bar.find(params[:id])
     @bar.destroy
-    #以下は非同期通信のための処理
+    # 以下は非同期通信のための処理
     params[:id] = nil
     @bar_new = Bar.new
-    #フォームを新規登録に戻す
+    # フォームを新規登録に戻す
     @bars = Bar.where(category: 0).page(params[:page]).per(10)
     @shops = Bar.where(category: 1).page(params[:page]).per(10)
-    #一覧表示用の記述
+    # 一覧表示用の記述
   end
 
   private
-
-  def bar_params
-    params.require(:bar).permit(:category, :place_name, :latitude, :longitude)
-  end
+    def bar_params
+      params.require(:bar).permit(:category, :place_name, :latitude, :longitude)
+    end
 end

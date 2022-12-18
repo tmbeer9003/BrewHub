@@ -30,13 +30,13 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.member_id = current_member.id
     if @post.save
-      #投稿に紐づくビールの評価を再計算し、再代入
+      # 投稿に紐づくビールの評価を再計算し、再代入
       evaluation = @post.beer.beer_evaluation
       @post.beer.update(evaluation: evaluation)
-      #画像が投稿された場合のみセーフサーチの判定を行う
+      # 画像が投稿された場合のみセーフサーチの判定を行う
       if @post.post_image.attached?
         judge = Vision.get_image_data(@post.post_image)
-        @post.update(is_closed: true) if (judge.value?("VERY_LIKELY") || judge.value?("LIKELY"))
+        @post.update(is_closed: true) if judge.value?("VERY_LIKELY") || judge.value?("LIKELY")
       end
       redirect_to mypage_path, success: "投稿が完了しました"
     else
@@ -62,9 +62,9 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
-    #削除する投稿のevaluationをnilにする（=この後の計算の分母・分子から除く）
+    # 削除する投稿のevaluationをnilにする（=この後の計算の分母・分子から除く）
     @post.update(evaluation: nil)
-    #投稿に紐づくビールの評価を再計算し、再代入
+    # 投稿に紐づくビールの評価を再計算し、再代入
     evaluation = @post.beer.beer_evaluation
     @post.beer.update(evaluation: evaluation)
     @post.destroy
@@ -72,17 +72,15 @@ class Public::PostsController < ApplicationController
   end
 
   private
+    def post_params
+      params.require(:post).permit(:member_id, :beer_id, :bar_id, :shop_id, :content, :evaluation, :serving_style, :post_image, :is_closed)
+    end
 
-  def post_params
-    params.require(:post).permit(:member_id, :beer_id, :bar_id, :shop_id, :content, :evaluation, :serving_style, :post_image, :is_closed)
-  end
+    def set_post
+      @post = Post.find(params[:id])
+    end
 
-  def set_post
-    @post = Post.find(params[:id])
-  end
-
-  def ensure_correct_member
-    redirect_to mypage_path, alert: "権限がありません" unless @post.member == current_member
-  end
-
+    def ensure_correct_member
+      redirect_to mypage_path, alert: "権限がありません" unless @post.member == current_member
+    end
 end

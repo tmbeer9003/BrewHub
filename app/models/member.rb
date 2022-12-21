@@ -85,9 +85,9 @@ class Member < ApplicationRecord
 
   # ゲストユーザー作成
   def self.guest
-    find_or_create_by!(account_name: "guestuser", display_name: "ゲストユーザー", email: "guest@example.com", date_of_birth: "2000-01-01", introduction: "※ゲストユーザーで作成したデータ等は毎日12時と24時にリセットされます") do |user|
-      user.password = SecureRandom.urlsafe_base64
-      user.account_name = "guestuser"
+    find_or_create_by!(account_name: "guestuser", display_name: "ゲストユーザー", email: "guest@example.com", date_of_birth: "2000-01-01", introduction: "※ゲストユーザーで作成したデータ等は毎日12時と24時にリセットされます") do |member|
+      member.password = SecureRandom.urlsafe_base64
+      member.account_name = "guestuser"
     end
   end
 
@@ -96,9 +96,9 @@ class Member < ApplicationRecord
     rooms = member.message_rooms.ids
     self.message_rooms.find_by(id: rooms)
   end
-  
+
   def last_message(member)
     self.our_room(member).messages.last
   end
-  
+
 end

@@ -1,0 +1,2 @@
+$("#messages-index").html("<%= j(render "public/messages/messages_index", messages: @messages, message_room: @message_room) %>");
+$("#error-message").html("<%= j(render 'layouts/errors', obj: @message) %>");

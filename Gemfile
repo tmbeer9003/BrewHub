@@ -76,7 +76,6 @@ gem "net-imap"
 gem "devise"
 gem "enum_help"
 gem "kaminari", "~> 1.2.1"
-gem "toastr-rails"
 gem "devise-i18n"
 gem "whenever", require: false
 gem "gon"

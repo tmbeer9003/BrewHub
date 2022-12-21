@@ -12,8 +12,8 @@ class Public::RelationshipsController < ApplicationController
   end
 
   def followings
-    member_search = params[:member_search]
     # 会員検索で受け取った値を代入
+    member_search = params[:member_search]
     unless member_search.nil?
       @members = @member.followings.where("account_name like ?", "%#{member_search}%").page(params[:page]).per(10)
     else
@@ -22,8 +22,8 @@ class Public::RelationshipsController < ApplicationController
   end
 
   def followers
-    member_search = params[:member_search]
     # 会員検索で受け取った値を代入
+    member_search = params[:member_search]
     unless member_search.nil?
       @members = @member.followers.where("account_name like ?", "%#{member_search}%").page(params[:page]).per(10)
     else

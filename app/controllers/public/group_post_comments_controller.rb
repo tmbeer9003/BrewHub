@@ -28,10 +28,10 @@ class Public::GroupPostCommentsController < ApplicationController
       @group_post = GroupPost.find(params[:group_post_id])
     end
 
+    # グループに加入していない会員がURLからアクションを起こそうとしたとき、グループ一覧画面へリダイレクトさせる
     def ensure_group_member
       unless current_member.joined_already?(@group)
         redirect_to groups_path, alert: "権限がありません"
       end
     end
-  # グループに加入していない会員がURLからアクションを起こそうとしたとき、グループ一覧画面へリダイレクトさせる
 end

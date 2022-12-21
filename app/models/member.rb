@@ -21,6 +21,9 @@ class Member < ApplicationRecord
   has_many :own_groups, class_name: "Group", foreign_key: "owner_id", dependent: :destroy
   has_many :group_posts, dependent: :destroy
   has_many :group_post_comments, dependent: :destroy
+  has_many :entries, dependent: :destroy
+  has_many :message_rooms, through: :entries, source: :message_room
+  has_many :messages, dependent: :destroy
   belongs_to :my_beer_style1, class_name: "BeerStyle", optional: true
   belongs_to :my_beer_style2, class_name: "BeerStyle", optional: true
   belongs_to :my_beer_style3, class_name: "BeerStyle", optional: true
@@ -52,36 +55,50 @@ class Member < ApplicationRecord
     member_image.variant(resize_to_limit: [width, height]).processed
   end
 
+  # フォローする
   def follow(member)
     unless self == member
       self.relationships.find_or_create_by(follow_id: member.id)
     end
   end
 
+  # フォローを外す
   def unfollow(member)
     relationship = self.relationships.find_by(follow_id: member.id)
     relationship.destroy
   end
 
+  # 相手を既にフォローしているか確認する
   def followed_already?(member)
-    relationships.exists?(follow_id: member.id)
-  end
-  # 自分が相手を既にフォローしているか確認するメソッド
-
-  def followed_me?(member)
     self.relationships.exists?(follow_id: member.id)
   end
-  # 自分が相手からフォローされているか確認するメソッド
 
+  # 相互フォローか確認する
+  def followed_each_other?(member)
+    self.followed_already?(member) && member.followed_already?(self)
+  end
+
+  # グループに参加済か確認する
   def joined_already?(group)
     self.groups_members.exists?(group_id: group.id)
   end
-  # グループに参加済か確認するメソッド
 
+  # ゲストユーザー作成
   def self.guest
     find_or_create_by!(account_name: "guestuser", display_name: "ゲストユーザー", email: "guest@example.com", date_of_birth: "2000-01-01", introduction: "※ゲストユーザーで作成したデータ等は毎日12時と24時にリセットされます") do |user|
       user.password = SecureRandom.urlsafe_base64
       user.account_name = "guestuser"
     end
   end
+
+  # current_memberと対象ユーザーとのメッセージルームを取得する
+  def our_room(member)
+    rooms = member.message_rooms.ids
+    self.message_rooms.find_by(id: rooms)
+  end
+  
+  def last_message(member)
+    self.our_room(member).messages.last
+  end
+  
 end

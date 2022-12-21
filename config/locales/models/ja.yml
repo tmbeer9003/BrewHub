@@ -35,6 +35,8 @@ ja:
       beer_style:
         name: ビアスタイル名
         category: 区分
+      message:
+        content: メッセージ
       admin:
         email: メールアドレス
         password: パスワード

@@ -1,0 +1,35 @@
+<% messages.each do |message| %>
+  <% if message.member == current_member %>
+    <div class="row border-top mx-1 d-flex justify-content-end">
+  <% else %>
+    <div class="row border-top mx-1 d-flex">
+  <% end %>
+    <div class="border rounded-pill m-2 py-2 px-3 d-flex flex-row">
+      <div class="d-flex align-items-center justify-content-center d-inline-block mr-1">
+        <%= image_tag message.member.get_member_image(35,35), class: "rounded-circle" %>
+      </div>
+      <div class="d-inline-block pl-0 ml-0">
+        <span class="small border-bottom">
+          <span class="font-weight-bold">
+            <%= message.member.display_name %>
+          </span>
+          <span>
+            <%= message.created_at.to_s(:datetime_jp) %>
+          </span>
+        </span>
+        <span class="text-right small ml-1">
+          <% if message.member == current_member %>
+            <%= link_to "削除", message_room_message_path(message_room, message), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？", class: "text-secondary text-right" %>
+          <% end %>
+        </span>
+        <div>
+        <%= message.content %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="d-flex justify-content-center mt-2">
+  <%= paginate messages %>
+</div>

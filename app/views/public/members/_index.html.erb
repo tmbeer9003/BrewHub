@@ -18,14 +18,14 @@
       <div class="col-6 d-flex align-items-center justify-content-end pr-0">
         <% unless member == current_member %>
           <div>
-            <% if member.followed_me?(current_member) %>
+            <% if member.followed_already?(current_member) %>
             <small class="text-secondary">フォローされています</small>
             <% end %>
           </div>
           <div class="mx-2">
             <% if current_member.followed_already?(member) %>
               <%= link_to "フォロー解除", member_relationship_path(member), method: :delete, class: "btn btn-warning text-white" %>
-            <% elsif member.followed_me?(current_member) %>
+            <% elsif member.followed_already?(current_member) %>
               <%= link_to "フォローバック", member_relationship_path(member), method: :post, class: "btn btn-info" %>
             <% else %>
               <%= link_to "フォローする", member_relationship_path(member), method: :post, class: "btn btn-info" %>

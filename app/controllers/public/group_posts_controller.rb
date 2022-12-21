@@ -46,12 +46,12 @@ class Public::GroupPostsController < ApplicationController
       @group_post = GroupPost.find(params[:id])
     end
 
+    # グループに加入していない会員がURLからアクションを起こそうとしたとき、グループ一覧画面へリダイレクトさせる
     def ensure_group_member
       unless current_member.joined_already?(@group)
         redirect_to groups_path
       end
     end
-    # グループに加入していない会員がURLからアクションを起こそうとしたとき、グループ一覧画面へリダイレクトさせる
 
     def ensure_contributer
       unless @group_post.member == current_member

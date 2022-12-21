@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_18_060803) do
+ActiveRecord::Schema.define(version: 2022_12_21_025143) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -102,6 +102,15 @@ ActiveRecord::Schema.define(version: 2022_11_18_060803) do
     t.index ["post_id"], name: "index_cheers_on_post_id"
   end
 
+  create_table "entries", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "message_room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_entries_on_member_id"
+    t.index ["message_room_id"], name: "index_entries_on_message_room_id"
+  end
+
   create_table "group_post_comments", force: :cascade do |t|
     t.integer "group_post_id", null: false
     t.integer "member_id", null: false
@@ -168,6 +177,21 @@ ActiveRecord::Schema.define(version: 2022_11_18_060803) do
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
+  create_table "message_rooms", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "message_room_id", null: false
+    t.text "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_messages_on_member_id"
+    t.index ["message_room_id"], name: "index_messages_on_message_room_id"
+  end
+
   create_table "post_comments", force: :cascade do |t|
     t.integer "member_id", null: false
     t.integer "post_id", null: false
@@ -211,6 +235,8 @@ ActiveRecord::Schema.define(version: 2022_11_18_060803) do
   add_foreign_key "beers", "breweries"
   add_foreign_key "cheers", "members"
   add_foreign_key "cheers", "posts"
+  add_foreign_key "entries", "members"
+  add_foreign_key "entries", "message_rooms"
   add_foreign_key "group_post_comments", "group_posts"
   add_foreign_key "group_post_comments", "members"
   add_foreign_key "group_posts", "groups"
@@ -222,6 +248,8 @@ ActiveRecord::Schema.define(version: 2022_11_18_060803) do
   add_foreign_key "members", "beer_styles", column: "my_beer_style2_id"
   add_foreign_key "members", "beer_styles", column: "my_beer_style3_id"
   add_foreign_key "members", "beer_styles", column: "my_beer_style4_id"
+  add_foreign_key "messages", "members"
+  add_foreign_key "messages", "message_rooms"
   add_foreign_key "post_comments", "members"
   add_foreign_key "post_comments", "posts"
   add_foreign_key "posts", "bars"

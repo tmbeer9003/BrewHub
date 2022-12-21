@@ -46,6 +46,10 @@ Rails.application.routes.draw do
         resources :group_post_comments, only: [:create, :destroy]
       end
     end
+    resources :message_rooms, only: [:create, :show, :index] do
+     resource :entry, only: [:create]
+     resources :messages, only: [:create, :destroy]
+    end
     devise_scope :member do
       post "guest_sign_in", to: "members/sessions#guest_sign_in"
     end

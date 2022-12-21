@@ -28,9 +28,17 @@
           </div>
         <% end %>
           <div>
-            <!--<span class="btn btn-secondary">メッセージ</span>-->
+            <% if member.followed_each_other?(current_member) %>
+              <% if member.our_room(current_member).nil? %>
+                <%= link_to message_rooms_path(member_id: member.id), class:"btn btn-secondary ml-2 mt-2", method: :post do %><i class="far fa-envelope"></i>メッセージ<% end %>
+              <% else %>
+                <%= link_to message_room_path(member.our_room(current_member)), class:"btn btn-secondary ml-2 mt-2" do %><i class="far fa-envelope"></i>メッセージ<% end %>
+              <% end %>
+            <% elsif member != current_member %>
+                <small class="text-secondary">相互フォローになるとメッセージが送信できます</small>
+            <% end %>
             <% if member == current_member %>
-              <%= link_to mypage_edit_path, class:"btn btn-secondary ml-2" do %><i class="fas fa-wrench"></i>設定<% end %>
+              <%= link_to mypage_edit_path, class:"btn btn-secondary ml-2 mt-2" do %><i class="fas fa-wrench"></i>設定<% end %>
             <% end %>
           </div>
       </div>
@@ -41,7 +49,7 @@
         <div>
           <% if current_member.followed_already?(member) %>
             <%= link_to "フォロー解除", member_relationship_path(member), method: :delete, class: "btn btn-warning text-white" %>
-          <% elsif member.followed_me?(current_member) %>
+          <% elsif member.followed_already?(current_member) %>
             <%= link_to "フォローバック", member_relationship_path(member), method: :post, class: "btn btn-info" %>
           <% else %>
             <%= link_to "フォローする", member_relationship_path(member), method: :post, class: "btn btn-info" %>
@@ -49,7 +57,7 @@
         </div>
 
         <div>
-          <% if member.followed_me?(current_member) %>
+          <% if member.followed_already?(current_member) %>
           <small class="text-secondary">フォローされています</small>
           <% end %>
         </div>

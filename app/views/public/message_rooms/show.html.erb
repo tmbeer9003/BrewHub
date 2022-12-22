@@ -28,12 +28,14 @@
   </div>
 
   <%= form_with model: [@message_room, @message], local: false do |f| %>
-    <div class="row border rounded-pill m-1">
-      <div class="col-11 pr-0">
-        <%= f.text_area :content, autofocus: true, placeholder: "メッセージを追加", class: "form-control bg-transparent border-0 mr-0", style: "resize: none" %>
-      </div>
-      <div class="col-1 d-flex align-items-center pl-0">
-        <%= f.submit "送信", class: "btn btn-secondary rounded-pill px-2 py-1" %>
+    <div class="border-bottom py-1">
+      <div class="row border rounded-pill m-1">
+        <div class="col-11 pr-0">
+          <%= f.text_area :content, autofocus: true, placeholder: "メッセージを追加", class: "form-control bg-transparent border-0 mr-0", style: "resize: none" %>
+        </div>
+        <div class="col-1 d-flex align-items-center pl-0">
+          <%= f.submit "送信", class: "btn btn-secondary rounded-pill px-2 py-1" %>
+        </div>
       </div>
     </div>
   <% end %>

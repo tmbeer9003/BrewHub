@@ -76,3 +76,18 @@ footer{
 .color-orange{
   color: orange;
 }
+
+/*画面幅に関わらず改行させない*/
+.no-wrap{
+  white-space: nowrap;
+}
+
+/*sm以下で非表示*/
+@media only screen and (max-width: 576px) {
+  .sm-none { display: none !important; }
+}
+
+/*sm以下で拡大*/
+@media only screen and (max-width: 576px) {
+  .btn-expand-sm {font-size:1.5em; }
+}

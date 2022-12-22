@@ -1,5 +1,6 @@
 class Public::HomesController < ApplicationController
   before_action :authenticate_member!, except: [:top]
+  layout "application_mypage", except: [:top]
 
   def top
     render layout: "application_no_sidebar"

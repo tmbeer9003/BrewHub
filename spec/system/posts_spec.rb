@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe "投稿のテスト", selenium: true do
+describe "投稿のテスト", selenium: true do
   let!(:member){ FactoryBot.create(:member) }
   let!(:beer){ FactoryBot.create(:beer) }
   let!(:post){ FactoryBot.create(:post) }
@@ -12,7 +12,7 @@ RSpec.describe "投稿のテスト", selenium: true do
       visit new_post_path(selected_beer: beer.id)
     end
     context '投稿処理に関するテスト' do
-      it '投稿に成功しサクセスメッセージが表示されるか' do
+      it '投稿に成功しサクセスメッセージが表示される' do
         click_button '投稿'
         expect(page).to have_content '完了'
       end
@@ -22,7 +22,7 @@ RSpec.describe "投稿のテスト", selenium: true do
         expect(page).to have_content '確認してください'
         expect(current_path).to eq(new_post_path)
       end
-      it '投稿後のリダイレクト先は正しいか' do
+      it '投稿後、マイページに遷移する' do
         click_button '投稿'
         expect(page).to have_current_path mypage_path
       end

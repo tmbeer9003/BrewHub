@@ -14,21 +14,23 @@ class Public::RelationshipsController < ApplicationController
   def followings
     # 会員検索で受け取った値を代入
     member_search = params[:member_search]
-    unless member_search.nil?
-      @members = @member.followings.where("account_name like ?", "%#{member_search}%").page(params[:page]).per(10)
+    if member_search.present?
+      members = @member.followings.where("account_name like ?", "%#{member_search}%")
     else
-      @members = @member.followings.page(params[:page]).per(10)
+      members = @member.followings
     end
+    @members = members.page(params[:page]).per(10)
   end
 
   def followers
     # 会員検索で受け取った値を代入
     member_search = params[:member_search]
-    unless member_search.nil?
-      @members = @member.followers.where("account_name like ?", "%#{member_search}%").page(params[:page]).per(10)
+    if member_search.present?
+      members = @member.followers.where("account_name like ?", "%#{member_search}%")
     else
-      @members = @member.followers.page(params[:page]).per(10)
+      members = @member.followers
     end
+    @members = members.page(params[:page]).per(10)
   end
 
   private

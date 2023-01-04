@@ -21,15 +21,16 @@ class Public::BeersController < ApplicationController
     # ブルワリー検索で受け取った値を代入
     @refine_beer_style = params[:refine_beer_style]
     # ビアスタイル検索で受け取った値を代入
-    if @beer_search != nil
-      @beers = Beer.where("name like ?", "%#{@beer_search}%").order(evaluation: :desc).page(params[:page]).per(10)
-    elsif @refine_brewery != nil
-      @beers = Beer.where(brewery_id: @refine_brewery).order(evaluation: :desc).page(params[:page]).per(10)
-    elsif @refine_beer_style != nil
-      @beers = Beer.where(beer_style_id: @refine_beer_style).order(evaluation: :desc).page(params[:page]).per(10)
+    if @beer_search.present?
+      beers = Beer.where("name like ?", "%#{@beer_search}%")
+    elsif @refine_brewery.present?
+      beers = Beer.where(brewery_id: @refine_brewery)
+    elsif @refine_beer_style.present?
+      beers = Beer.where(beer_style_id: @refine_beer_style)
     else
-      @beers = Beer.order(evaluation: :desc).page(params[:page]).per(10)
+      beers = Beer.all
     end
+    @beers = beers.order(evaluation: :desc).page(params[:page]).per(10)
   end
 
   def show

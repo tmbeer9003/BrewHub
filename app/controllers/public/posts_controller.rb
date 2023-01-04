@@ -6,11 +6,12 @@ class Public::PostsController < ApplicationController
   def index
     # 投稿検索で受け取った値を代入
     post_search = params[:post_search]
-    unless post_search.nil?
-      @posts = Post.where("content like ?", "%#{post_search}%").order(id: :desc).page(params[:page]).per(7)
+    if post_search.present?
+      posts = Post.where("content like ?", "%#{post_search}%")
     else
-      @posts = Post.all.order(id: :desc).page(params[:page]).per(7)
+      posts = Post.all
     end
+    @posts = posts.order(id: :desc).page(params[:page]).per(7)
   end
 
   def show

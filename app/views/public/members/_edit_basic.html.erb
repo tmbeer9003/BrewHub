@@ -4,7 +4,12 @@
       <h5 class="card-title mb-0">会員情報編集（基本情報）</h5>
       <span class="small text-danger mb-0 ml-1">*は必須項目です</span>
     </div>
-    <%= form_with model: member do |f| %>
+
+    <div id="error-message">
+      <%= render "layouts/errors", obj: member %>
+    </div>
+
+    <%= form_with model: member, local: false do |f| %>
       <div class="form-group row my-2">
         <div class="col-4">
           <label class="col-form-label" for="member_account_name">

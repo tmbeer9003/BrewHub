@@ -13,7 +13,7 @@
     <%# ビール名部分 %>
     <h5 class="font-weight-bold d-inline-block mb-0">
       <%= link_to post.beer.name, admin_beer_path(post.beer), class: "text-reset" %></h5>
-      
+
 
     <%# ブルワリー名部分 %>
     <h6 class="d-inline-block mb-0">
@@ -43,11 +43,11 @@
       <% end %>
     </span>
     <span>
-      <% if post.serving_style == "draft" %>
+      <% if post.serving_style_draft? %>
         <i class="fas fa-beer"></i>ドラフト）
-      <% elsif post.serving_style == "can" %>
+      <% elsif post.serving_style_can? %>
         <i class="fas fa-database"></i>缶）
-      <% elsif post.serving_style == "bottle" %>
+      <% elsif post.serving_style_bottle? %>
         <i class="fas fa-wine-bottle"></i>ボトル）
       <% else %>
         <i class="fas fa-question"></i></i>その他）
@@ -93,7 +93,7 @@
       <% end %>
     </span>
   </div>
-  
+
   <%# お店情報部分 %>
   <% unless post.bar.nil? %>
     <span class="ml-1">|</span>

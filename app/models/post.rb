@@ -12,7 +12,7 @@ class Post < ApplicationRecord
   validates :content, length: { maximum: 500 }
   validates :serving_style, presence: true
 
-  enum serving_style: { draft: 0, can: 1, bottle: 2, others: 3 }
+  enum serving_style: { draft: 0, can: 1, bottle: 2, others: 3 }, _prefix: true
 
   def get_post_image(width, height)
     unless post_image.attached?

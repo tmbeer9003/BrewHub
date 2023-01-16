@@ -22,7 +22,13 @@ class Post < ApplicationRecord
     post_image.variant(resize_to_fit: [width, height]).processed
   end
 
+  # 既にcheersしているかを
   def cheers_already?(member)
     cheers.exists?(member_id: member.id)
+  end
+
+  # 投稿に紐づくビールの評価を再計算し、再代入
+  def reevaluate_beer
+    self.beer.update(evaluation: self.beer.beer_evaluation)
   end
 end

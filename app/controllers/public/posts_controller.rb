@@ -6,11 +6,12 @@ class Public::PostsController < ApplicationController
   def index
     # 投稿検索で受け取った値を代入
     post_search = params[:post_search]
-    unless post_search.nil?
-      @posts = Post.where("content like ?", "%#{post_search}%").order(id: :desc).page(params[:page]).per(7)
+    if post_search.present?
+      posts = Post.where("content like ?", "%#{post_search}%")
     else
-      @posts = Post.all.order(id: :desc).page(params[:page]).per(7)
+      posts = Post.all
     end
+    @posts = posts.order(id: :desc).page(params[:page]).per(7)
   end
 
   def show
@@ -30,9 +31,7 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.member_id = current_member.id
     if @post.save
-      # 投稿に紐づくビールの評価を再計算し、再代入
-      evaluation = @post.beer.beer_evaluation
-      @post.beer.update(evaluation: evaluation)
+      @post.reevaluate_beer
       # 画像が投稿された場合のみセーフサーチの判定を行う
       if @post.post_image.attached?
         judge = Vision.get_image_data(@post.post_image)
@@ -53,8 +52,7 @@ class Public::PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      evaluation = @post.beer.beer_evaluation
-      @post.beer.update(evaluation: evaluation)
+      @post.reevaluate_beer
       redirect_to mypage_path, success: "投稿を更新しました"
     else
       render "error"
@@ -64,9 +62,7 @@ class Public::PostsController < ApplicationController
   def destroy
     # 削除する投稿のevaluationをnilにする（=この後の計算の分母・分子から除く）
     @post.update(evaluation: nil)
-    # 投稿に紐づくビールの評価を再計算し、再代入
-    evaluation = @post.beer.beer_evaluation
-    @post.beer.update(evaluation: evaluation)
+    @post.reevaluate_beer
     @post.destroy
     redirect_to mypage_path, alert: "投稿を削除しました"
   end

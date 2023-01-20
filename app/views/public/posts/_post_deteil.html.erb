@@ -54,11 +54,11 @@
         <% end %>
       </span>
       <span>
-        <% if post.serving_style == "draft" %>
+        <% if post.serving_style_draft? %>
           <i class="fas fa-beer"></i>ドラフト）
-        <% elsif post.serving_style == "can" %>
+        <% elsif post.serving_style_can? %>
           <i class="fas fa-database"></i>缶）
-        <% elsif post.serving_style == "bottle" %>
+        <% elsif post.serving_style_bottle? %>
           <i class="fas fa-wine-bottle"></i>ボトル）
         <% else %>
           <i class="fas fa-question"></i></i>その他）

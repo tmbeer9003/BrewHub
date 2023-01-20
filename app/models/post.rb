@@ -12,7 +12,7 @@ class Post < ApplicationRecord
   validates :content, length: { maximum: 500 }
   validates :serving_style, presence: true
 
-  enum serving_style: { draft: 0, can: 1, bottle: 2, others: 3 }
+  enum serving_style: { draft: 0, can: 1, bottle: 2, others: 3 }, _prefix: true
 
   def get_post_image(width, height)
     unless post_image.attached?
@@ -22,7 +22,13 @@ class Post < ApplicationRecord
     post_image.variant(resize_to_fit: [width, height]).processed
   end
 
+  # 既にcheersしているかを
   def cheers_already?(member)
     cheers.exists?(member_id: member.id)
+  end
+
+  # 投稿に紐づくビールの評価を再計算し、再代入
+  def reevaluate_beer
+    self.beer.update(evaluation: self.beer.beer_evaluation)
   end
 end

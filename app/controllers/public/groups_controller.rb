@@ -5,13 +5,13 @@ class Public::GroupsController < ApplicationController
 
   def index
     group_search = params[:group_search]
-    unless group_search
-      groups = Group.includes(:members).sort { |a, b| b.members.size <=> a.members.size }
-      @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)
+    if group_search.present?
+      groups = Group.where("name like ?", "%#{group_search}%")
     else
-      groups = Group.where("name like ?", "%#{group_search}%").includes(:members).sort { |a, b| b.members.size <=> a.members.size }
-      @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)
+      groups = Group.all
     end
+    groups_sort = groups.includes(:members).sort { |a, b| b.members.size <=> a.members.size }
+    @groups = Kaminari.paginate_array(groups_sort).page(params[:page]).per(10)
   end
 
   def create
@@ -22,11 +22,12 @@ class Public::GroupsController < ApplicationController
 
   def show
     group_post_search = params[:group_post_search]
-    unless group_post_search
-      @group_posts = @group.group_posts.all.order(id: :desc).page(params[:page]).per(5)
+    if group_post_search.present?
+      group_posts = @group.group_posts.where("title like ?", "%#{group_post_search}%")
     else
-      @group_posts = @group.group_posts.where("title like ?", "%#{group_post_search}%").order(id: :desc).page(params[:page]).per(5)
+      group_posts = @group.group_posts
     end
+    @group_posts = group_posts.order(id: :desc).page(params[:page]).per(5)
   end
 
   def new

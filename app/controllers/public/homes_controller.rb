@@ -12,12 +12,13 @@ class Public::HomesController < ApplicationController
     # 投稿一覧をフォローしているユーザーと自分の投稿に絞り込み
     post_search = params[:post_search]
     # 投稿検索で受け取った値を代入
-    unless post_search.nil?
+    if post_search.present?
       # 検索から遷移したら
-      @posts = timeline_posts.where("content like ?", "%#{post_search}%").order(id: :desc).page(params[:page]).per(7)
+      posts = timeline_posts.where("content like ?", "%#{post_search}%")
     else
-      @posts = timeline_posts.order(id: :desc).page(params[:page]).per(7)
+      posts = timeline_posts
     end
+    @posts = posts.order(id: :desc).page(params[:page]).per(7)
   end
 
   def cheers_list
@@ -25,24 +26,25 @@ class Public::HomesController < ApplicationController
     # 投稿一覧を自分がCheersしている投稿に絞り込み
     post_search = params[:post_search]
     # 投稿検索で受け取った値を代入
-    unless post_search.nil?
+    if post_search.present?
       # 検索から遷移したら
-      @posts = cheers_posts.where("content like ?", "%#{post_search}%").order(id: :desc).page(params[:page]).per(7)
+      posts = cheers_posts.where("content like ?", "%#{post_search}%")
     else
-      @posts = cheers_posts.order(id: :desc).page(params[:page]).per(7)
+      posts = cheers_posts
     end
+    @posts = posts.order(id: :desc).page(params[:page]).per(7)
   end
 
   def group_list
     group_search = params[:group_search]
     # グループ検索で受け取った値を代入
-    unless group_search.nil?
+    if group_search.present?
       # 検索から遷移したら
-      groups = current_member.groups.where("name like ?", "%#{group_search}%").includes(:members).sort { |a, b| b.members.size <=> a.members.size }
-      @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)
+      groups = current_member.groups.where("name like ?", "%#{group_search}%")
     else
-      groups = current_member.groups.includes(:members).sort { |a, b| b.members.size <=> a.members.size }
-      @groups = Kaminari.paginate_array(groups).page(params[:page]).per(10)
+      groups = current_member.groups
     end
+    groups_sort = groups.includes(:members).sort { |a, b| b.members.size <=> a.members.size }
+    @groups = Kaminari.paginate_array(groups_sort).page(params[:page]).per(10)
   end
 end

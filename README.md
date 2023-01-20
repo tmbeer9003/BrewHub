@@ -2,7 +2,7 @@
 
 ## サイト概要
 ### サイトテーマ
-飲んだビールの写真や感想、飲んだお店等を記録できるSNS。  
+飲んだビールの写真や感想、飲んだお店等を記録できるSNS。
 ランキング形式でブルワリー（醸造所）やビアスタイル（種類）ごとの人気ビールを探す事もできる。
 他のユーザーの投稿を閲覧したり、気になるユーザーをフォローできるSNS機能に加え、お店等を指定して飲み会を企画できるコミュニティ機能も持つ。
 
@@ -42,7 +42,8 @@
 - フォロー機能
 - Cheers（いいね）機能
 - グループ機能
-- 投稿・グループ内トピックに対するコメント機能
+- 投稿、グループ内トピックに対するコメント機能
+- 相互フォローユーザー同士のメッセージ(DM)機能
 - 検索機能
 - お店の地図表示機能（Google Maps APIを利用）
 - 投稿画像のセーフサーチ機能（Google Cloud Vision AI APIを利用）
@@ -53,11 +54,16 @@
 https://drive.google.com/file/d/1Djhw-tFunMPjGh9vai5UNgZB1AelHpKq/view?usp=sharing
 
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Amazon Linux 2
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
+
+## その他使用技術
+- GitHub Actionsを用いた自動デプロイ
+- RuboCopを用いた静的コード解析
+- wheneverを用いた定時処理（ゲストログイン情報をリセット）
 
 ## 使用素材
 - 背景画像：Brent Hofacker/stock.adobe.com

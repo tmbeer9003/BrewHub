@@ -4,22 +4,16 @@ class Public::MembersController < ApplicationController
   def index
     member_search = params[:member_search]
     # 会員検索で受け取った値を代入
-    unless member_search.nil?
-      @members = Member.where("account_name like ?", "%#{member_search}%").page(params[:page]).per(10)
-    else
-      @members = Member.all.page(params[:page]).per(10)
-    end
+    member_search.present? ? (members = Member.where("account_name like ?", "%#{member_search}%")) : (members = Member.all)
+    @members = members.page(params[:page]).per(10)
   end
 
   def show
     @member = Member.find(params[:id])
     post_search = params[:post_search]
     # 投稿検索で受け取った値を代入
-    unless post_search.nil?
-      @posts = @member.posts.where("content like ?", "%#{post_search}%").order(id: :desc).page(params[:page]).per(7)
-    else
-      @posts = @member.posts.order(id: :desc).page(params[:page]).per(7)
-    end
+    post_search.present? ? (posts = @member.posts.where("content like ?", "%#{post_search}%")) : (posts = @member.posts)
+    @posts = posts.order(id: :desc).page(params[:page]).per(7)
   end
 
   def edit
@@ -30,7 +24,7 @@ class Public::MembersController < ApplicationController
   def update
     @member = current_member
     @beer_styles = BeerStyle.all
-    (redirect_to mypage_edit_path, notice: "会員情報を変更しました") if @member.update(member_params)
+    @member.update(member_params) ? (redirect_to mypage_edit_path, notice: "会員情報を変更しました") : (render "error")
   end
 
   private

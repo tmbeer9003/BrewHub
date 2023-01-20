@@ -2,7 +2,6 @@ class Public::GroupsMembersController < ApplicationController
   before_action :set_group_member
   before_action :authenticate_member!
 
-
   def create
     groups_member = @group.groups_members.new(member_id: current_member.id)
     redirect_to group_path(@group), notice: "グループに参加しました" if groups_member.save
